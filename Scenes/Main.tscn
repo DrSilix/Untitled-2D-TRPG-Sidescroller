@@ -317,63 +317,64 @@ position = Vector2(0, 29.705)
 scale = Vector2(0.67, 0.41)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="Boxes" type="Node2D" parent="BackgroundObjects"]
+[node name="Boxes1" type="Node2D" parent="BackgroundObjects"]
+position = Vector2(387, 424)
 metadata/_edit_group_ = true
 
-[node name="Box1" type="StaticBody2D" parent="BackgroundObjects/Boxes"]
+[node name="Box1" type="StaticBody2D" parent="BackgroundObjects/Boxes1"]
 z_index = 354
-position = Vector2(383, 396)
+position = Vector2(-12.395, -26.955)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes/Box1"]
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes1/Box1"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes/Box1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes1/Box1"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="Box3" type="StaticBody2D" parent="BackgroundObjects/Boxes"]
+[node name="Box2" type="StaticBody2D" parent="BackgroundObjects/Boxes1"]
 z_index = 354
-position = Vector2(407, 396)
+position = Vector2(15.57, -27.19)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes/Box3"]
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes1/Box2"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes/Box3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes1/Box2"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="Box4" type="StaticBody2D" parent="BackgroundObjects/Boxes" node_paths=PackedStringArray("parentZNode")]
+[node name="Box3" type="StaticBody2D" parent="BackgroundObjects/Boxes1" node_paths=PackedStringArray("parentZNode")]
 z_index = 354
-position = Vector2(395, 374)
+position = Vector2(0.525, -49.295)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
-parentZNode = NodePath("../Box3")
+parentZNode = NodePath("../Box2")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes/Box4"]
-position = Vector2(0, 20)
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes1/Box3"]
+position = Vector2(0, 21)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes/Box4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes1/Box3"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 disabled = true
 
 [node name="Boxes2" type="Node2D" parent="BackgroundObjects"]
-position = Vector2(283, -65)
+position = Vector2(679, 358)
 metadata/_edit_group_ = true
 
 [node name="Box1" type="StaticBody2D" parent="BackgroundObjects/Boxes2"]
 z_index = 354
-position = Vector2(383, 396)
+position = Vector2(-12.395, -26.955)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
@@ -386,33 +387,84 @@ position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="Box3" type="StaticBody2D" parent="BackgroundObjects/Boxes2"]
+[node name="Box2" type="StaticBody2D" parent="BackgroundObjects/Boxes2"]
 z_index = 354
-position = Vector2(407, 396)
+position = Vector2(15.57, -27.19)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes2/Box3"]
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes2/Box2"]
 position = Vector2(0, 20)
+texture = ExtResource("13_bviol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes2/Box2"]
+position = Vector2(0, 26.935)
+scale = Vector2(1.54, 0.545)
+shape = SubResource("RectangleShape2D_kthqr")
+
+[node name="Box3" type="StaticBody2D" parent="BackgroundObjects/Boxes2" node_paths=PackedStringArray("parentZNode")]
+z_index = 354
+position = Vector2(0.525, -49.295)
+physics_material_override = SubResource("PhysicsMaterial_7xmqh")
+script = ExtResource("12_3w3n6")
+parentZNode = NodePath("../../Boxes1/Box2")
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes2/Box3"]
+position = Vector2(0, 21)
 texture = ExtResource("13_bviol")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes2/Box3"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
+disabled = true
 
-[node name="Box4" type="StaticBody2D" parent="BackgroundObjects/Boxes2" node_paths=PackedStringArray("parentZNode")]
+[node name="Boxes3" type="Node2D" parent="BackgroundObjects"]
+position = Vector2(985, 379)
+metadata/_edit_group_ = true
+
+[node name="Box1" type="StaticBody2D" parent="BackgroundObjects/Boxes3"]
 z_index = 354
-position = Vector2(395, 374)
+position = Vector2(-12.395, -26.955)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
-parentZNode = NodePath("../../Boxes/Box3")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes2/Box4"]
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes3/Box1"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes2/Box4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes3/Box1"]
+position = Vector2(0, 26.935)
+scale = Vector2(1.54, 0.545)
+shape = SubResource("RectangleShape2D_kthqr")
+
+[node name="Box2" type="StaticBody2D" parent="BackgroundObjects/Boxes3"]
+z_index = 354
+position = Vector2(7.22, -28.71)
+physics_material_override = SubResource("PhysicsMaterial_7xmqh")
+script = ExtResource("12_3w3n6")
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes3/Box2"]
+position = Vector2(0, 20)
+texture = ExtResource("13_bviol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes3/Box2"]
+position = Vector2(0, 26.935)
+scale = Vector2(1.54, 0.545)
+shape = SubResource("RectangleShape2D_kthqr")
+
+[node name="Box3" type="StaticBody2D" parent="BackgroundObjects/Boxes3" node_paths=PackedStringArray("parentZNode")]
+z_index = 354
+position = Vector2(-11.14, -49.295)
+physics_material_override = SubResource("PhysicsMaterial_7xmqh")
+script = ExtResource("12_3w3n6")
+parentZNode = NodePath("../Box1")
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes3/Box3"]
+position = Vector2(0, 21)
+texture = ExtResource("13_bviol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes3/Box3"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")

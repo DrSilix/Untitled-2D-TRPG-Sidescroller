@@ -282,6 +282,30 @@ tracks/9/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Biker_Sprites/Gun:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Biker_Sprites/Arms:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_n0b28"]
 length = 0.001
@@ -607,6 +631,30 @@ tracks/9/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Biker_Sprites/Arms:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Biker_Sprites/Gun:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w6inl"]
 _data = {
@@ -635,6 +683,7 @@ texture = ExtResource("6_bcchn")
 hframes = 4
 
 [node name="MuzzleBlast" type="Sprite2D" parent="Biker_Sprites"]
+visible = false
 position = Vector2(39, -19.435)
 texture = ExtResource("3_rvkst")
 hframes = 6
@@ -648,10 +697,10 @@ texture = ExtResource("4_ro1di")
 position = Vector2(5, -17)
 texture = ExtResource("5_rpwvx")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Biker_Sprites"]
+[node name="BikerAnimationPlayer" type="AnimationPlayer" parent="Biker_Sprites"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_w6inl")
 }
 
-[connection signal="animation_finished" from="Biker_Sprites/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Biker_Sprites/BikerAnimationPlayer" to="." method="_on_animation_player_animation_finished"]
