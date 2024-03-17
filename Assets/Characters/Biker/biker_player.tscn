@@ -160,7 +160,7 @@ tracks/11/keys = {
 
 [sub_resource type="Animation" id="Animation_bb4tp"]
 resource_name = "Idle"
-length = 0.4
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -169,7 +169,7 @@ tracks/0/path = NodePath("Biker_Sprites/Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -181,7 +181,7 @@ tracks/1/path = NodePath("Biker_Sprites/Arms:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
+"times": PackedFloat32Array(0, 0.2, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2(5, -17), Vector2(4, -17), Vector2(5, -17)]
@@ -193,7 +193,7 @@ tracks/2/path = NodePath("Biker_Sprites/Gun:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
+"times": PackedFloat32Array(0, 0.2, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2(6, -18), Vector2(5, -18), Vector2(6, -18)]

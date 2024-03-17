@@ -11,6 +11,7 @@ extends CharacterBody2D
 var moveClickableArea : Area2D
 var isAttacking : bool = false
 var moveTarget : Vector2
+var previousPosition : Vector2
 var isMoving : bool = false
 
 func _ready():
@@ -35,7 +36,9 @@ func _physics_process(delta):
 			var temp = position.direction_to(moveTarget) * speed
 			var temp2 = moveTarget.x - position.x
 			print(str(temp.x) + "," + str(temp.y) + " - " + str(position.distance_squared_to(moveTarget)) + " - " + str(temp2))
-			if abs(moveTarget.x - position.x) < 1 || abs(moveTarget.y - position.y) < 1:
+			if position.distance_squared_to(moveTarget) < 80 && (abs(moveTarget.x - position.x) < 1 || abs(moveTarget.y - position.y) < 1):
+			#var distanceToTarget = position.distance_squared_to(moveTarget)
+			#if distanceToTarget < 1 || previousPosition.distance_squared_to(moveTarget) < distanceToTarget:
 				isMoving = false
 		elif xDirection || yDirection:
 			velocity = Vector2(xDirection, yDirection).normalized() * speed
@@ -56,6 +59,7 @@ func _physics_process(delta):
 
 	#if move_and_slide() && isMoving:
 		#isMoving = false;
+	previousPosition = position
 	move_and_slide()
 	z_index = (position.y as int) - 30
 
@@ -70,3 +74,4 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
 		print(get_canvas_transform().affine_inverse() * event.position)
 		moveTarget = get_canvas_transform().affine_inverse() * event.position
 		isMoving = true
+		previousPosition = Vector2.ZERO
