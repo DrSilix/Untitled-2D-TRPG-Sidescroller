@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=54 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cw2rbkqy76m1m" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/4.png" id="5_io8rk"]
 [ext_resource type="PackedScene" uid="uid://ttrqvpi4epxd" path="res://Assets/Characters/Biker/biker_player.tscn" id="6_jfi8u"]
 [ext_resource type="Texture2D" uid="uid://cf4qcos1w416a" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/5.png" id="6_yecpb"]
+[ext_resource type="Script" path="res://Assets/Scripts/player_character.gd" id="7_8vc5g"]
 [ext_resource type="TileSet" uid="uid://3tmr3cqlpbsp" path="res://Assets/Spritesheets/FullTileset.tres" id="8_60lmi"]
 [ext_resource type="Texture2D" uid="uid://pac5y7ivdynl" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Arch.png" id="9_0v5go"]
 [ext_resource type="Texture2D" uid="uid://dbdmxhiunr7n6" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Decoration7.png" id="9_2f2yh"]
@@ -154,6 +155,7 @@ position = Vector2(198, 344)
 wall_min_slide_angle = 0.0872665
 platform_on_leave = 2
 safe_margin = 2.0
+script = ExtResource("7_8vc5g")
 
 [node name="Camera2D" type="Camera2D" parent="Biker_Player"]
 process_callback = 0

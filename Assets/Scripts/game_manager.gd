@@ -5,4 +5,3 @@ extends Node
 @export var enemy1 : CharacterBody2D
 @export var enemy2 : CharacterBody2D
 @export var enemy3 : CharacterBody2D
-

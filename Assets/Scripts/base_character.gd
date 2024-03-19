@@ -1,3 +1,4 @@
+class_name BaseCharacter
 extends CharacterBody2D
 
 @export var moveSpeed = 6
@@ -18,64 +19,59 @@ var currentHealth = maxHealth
 var moveTarget
 
 func _ready():
-	get_node("../MovableArea").connect("input_event", _on_input_event, )
+    pass
 
 func MoveTo(location :Vector2):
-	pass
+    moveTarget = location
+    activeState = WALKING
 
 func MoveVelocity(velocity :Vector2):
-	pass
+    pass
 
 func TakeCover():
-	pass
+    pass
 
 func LeaveCover():
-	pass
+    pass
 
 func ChanceToHit(accuracy: int):
-	pass
+    pass
 
 func CalculateDamageToDeal():
-	pass
+    pass
 
 func AvoidDamage(accuracy: int):
-	pass
+    pass
 
 func ResistDamage(damage: int):
-	pass
+    pass
 
 func TakeDamage(damage: int):
-	pass
+    pass
 
 
 func _physics_process(delta):
 
-	match activeState:
-		IDLE:
-			animationPlayer.play("Idle")
-			velocity = Vector2.ZERO
-		WALKING:
-			animationPlayer.play("Walk")
-			velocity = position.direction_to(moveTarget) * moveSpeed * 10
-			spriteRootNode.scale.x = 1 if velocity.x > 0 else -1
-			move_and_slide()
-			z_index = (position.y as int) - 30
-			if position.distance_squared_to(moveTarget) < 80:
-					activeState = IDLE
-		RUNNING:
-			pass
-		ATTACKING:
-			animationPlayer.play("FireGun")
-			velocity = Vector2.ZERO
-		HURT:
-			pass
-		DEATH:
-			pass
-		_:
-			pass
-
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
-	if event.is_action_pressed("Move"):
-		print(get_canvas_transform().affine_inverse() * event.position)
-		moveTarget = get_canvas_transform().affine_inverse() * event.position
-		activeState = WALKING
+    match activeState:
+        IDLE:
+            animationPlayer.play("Idle")
+            velocity = Vector2.ZERO
+        WALKING:
+            animationPlayer.play("Walk")
+            velocity = position.direction_to(moveTarget) * moveSpeed * 10
+            spriteRootNode.scale.x = 1 if velocity.x > 0 else -1
+            move_and_slide()
+            z_index = (position.y as int) - 30
+            if position.distance_squared_to(moveTarget) < 80:
+                    activeState = IDLE
+        RUNNING:
+            pass
+        ATTACKING:
+            animationPlayer.play("FireGun")
+            velocity = Vector2.ZERO
+        HURT:
+            pass
+        DEATH:
+            pass
+        _:
+            pass
