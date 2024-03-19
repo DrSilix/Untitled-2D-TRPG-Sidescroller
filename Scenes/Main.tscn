@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=53 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -40,11 +40,13 @@
 [ext_resource type="Texture2D" uid="uid://cp5yb82eaem46" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/4 Animated objects/Fan.png" id="38_y4gpu"]
 [ext_resource type="Texture2D" uid="uid://dq6bmewx3o0tf" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/15.png" id="39_ik5m1"]
 [ext_resource type="Texture2D" uid="uid://bupacdml8hstv" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/17.png" id="40_v6oh5"]
+[ext_resource type="PackedScene" uid="uid://bbbpdf2yli53k" path="res://Scenes/hud.tscn" id="41_lftf4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7xmqh"]
 friction = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kthqr"]
+size = Vector2(20.4478, 20.4117)
 
 [sub_resource type="Gradient" id="Gradient_dmxuo"]
 interpolation_mode = 1
@@ -95,7 +97,7 @@ animations = [{
 size = Vector2(314.722, 28.333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ossp"]
-size = Vector2(200, 200)
+size = Vector2(78, 200)
 
 [node name="Node2D" type="Node2D"]
 
@@ -149,9 +151,9 @@ metadata/_edit_lock_ = true
 
 [node name="Biker_Player" parent="." instance=ExtResource("6_jfi8u")]
 position = Vector2(198, 344)
+wall_min_slide_angle = 0.0872665
 platform_on_leave = 2
-safe_margin = 0.001
-moveClickableAreaNodePath = NodePath("../MovableArea")
+safe_margin = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="Biker_Player"]
 process_callback = 0
@@ -312,8 +314,8 @@ texture = ExtResource("14_p1j1o")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel2"]
-position = Vector2(0, 26.935)
-scale = Vector2(0.85, 0.545)
+position = Vector2(-0.305, 29.855)
+scale = Vector2(1.24, 0.525)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
@@ -350,8 +352,8 @@ texture = ExtResource("14_p1j1o")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel4"]
-position = Vector2(0, 26.935)
-scale = Vector2(0.85, 0.545)
+position = Vector2(1.63, 26.935)
+scale = Vector2(1.01, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
@@ -388,8 +390,8 @@ texture = ExtResource("14_p1j1o")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel6"]
-position = Vector2(0, 26.935)
-scale = Vector2(0.85, 0.545)
+position = Vector2(-3.76, 26.935)
+scale = Vector2(1.25, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
@@ -452,8 +454,8 @@ texture = ExtResource("13_bviol")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Box4"]
-position = Vector2(0, 26.935)
-scale = Vector2(1.54, 0.545)
+position = Vector2(0, 25.84)
+scale = Vector2(1.54, 0.565)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
@@ -471,8 +473,8 @@ texture = ExtResource("13_bviol")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Box5"]
-position = Vector2(0, 26.935)
-scale = Vector2(1.54, 0.545)
+position = Vector2(0, 28.115)
+scale = Vector2(1.54, 0.385)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
@@ -525,8 +527,8 @@ texture = ExtResource("12_onkwc")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Pillar3"]
-position = Vector2(0, 29.705)
-scale = Vector2(0.67, 0.41)
+position = Vector2(0.15, 28.193)
+scale = Vector2(0.685, 0.525)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
@@ -1099,17 +1101,24 @@ collision_mask = 128
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovableArea"]
+visible = false
 position = Vector2(147.361, 7.131)
 shape = SubResource("RectangleShape2D_lnui5")
 
 [node name="CombatArea" type="Area2D" parent="."]
-position = Vector2(900, 300)
+position = Vector2(899, 300)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea"]
-position = Vector2(56, 87)
+position = Vector2(49, 87)
 shape = SubResource("RectangleShape2D_2ossp")
 
 [node name="GameManagerNode" type="Node" parent="." node_paths=PackedStringArray("combatArea", "player")]
 script = ExtResource("15_vo7jb")
 combatArea = NodePath("../CombatArea")
 player = NodePath("../Biker_Player")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("41_lftf4")]
+anchors_preset = 15
+mouse_filter = 1

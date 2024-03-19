@@ -35,9 +35,10 @@ func _physics_process(delta):
 			animationPlayer.play("Walk")
 			var temp = position.direction_to(moveTarget) * speed
 			var temp2 = moveTarget.x - position.x
-			print(str(temp.x) + "," + str(temp.y) + " - " + str(position.distance_squared_to(moveTarget)) + " - " + str(temp2))
-			if position.distance_squared_to(moveTarget) < 80 && (abs(moveTarget.x - position.x) < 1 || abs(moveTarget.y - position.y) < 1):
-			#var distanceToTarget = position.distance_squared_to(moveTarget)
+			#print(str(temp.x) + "," + str(temp.y) + " - " + str(position.distance_squared_to(moveTarget)) + " - " + str(temp2))
+			var distanceToTarget = position.distance_squared_to(moveTarget)
+			print(get_position_delta().length())
+			if position.distance_squared_to(moveTarget) < 80: #&& (abs(moveTarget.x - position.x) < 1 || abs(moveTarget.y - position.y) < 1)) || previousPosition.distance_squared_to(moveTarget) <= distanceToTarget:
 			#if distanceToTarget < 1 || previousPosition.distance_squared_to(moveTarget) < distanceToTarget:
 				isMoving = false
 		elif xDirection || yDirection:
@@ -59,8 +60,8 @@ func _physics_process(delta):
 
 	#if move_and_slide() && isMoving:
 		#isMoving = false;
-	previousPosition = position
-	move_and_slide()
+	#previousPosition = position
+	#move_and_slide()
 	z_index = (position.y as int) - 30
 
 
