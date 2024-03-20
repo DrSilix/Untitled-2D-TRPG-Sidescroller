@@ -48,7 +48,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_jjj5m"]
 resource_name = "Idle"
-length = 0.4
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -81,7 +81,7 @@ tracks/2/path = NodePath("Body:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -184,14 +184,14 @@ position = Vector2(0, 0.34)
 scale = Vector2(0.81, 0.45)
 shape = SubResource("CircleShape2D_a4myl")
 
-[node name="Enemy_Sprites" type="Node2D" parent="."]
+[node name="SpriteRoot" type="Node2D" parent="."]
 
-[node name="Body" type="Sprite2D" parent="Enemy_Sprites"]
+[node name="Body" type="Sprite2D" parent="SpriteRoot"]
 position = Vector2(10, -22)
 texture = ExtResource("1_ej44u")
 hframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy_Sprites"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteRoot"]
 libraries = {
 "": SubResource("AnimationLibrary_05sqg")
 }

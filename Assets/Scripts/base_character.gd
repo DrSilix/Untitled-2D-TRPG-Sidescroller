@@ -29,25 +29,26 @@ func MoveVelocity(velocity :Vector2):
     pass
 
 func TakeCover():
-    pass
+    hasCover = true
 
 func LeaveCover():
-    pass
+    hasCover = false
 
-func ChanceToHit(accuracy: int):
+func RollToHit(accuracy: int):
     pass
 
 func CalculateDamageToDeal():
+    return weaponDamage
+
+func RollToAvoidDamage(accuracy: int):
     pass
 
-func AvoidDamage(accuracy: int):
-    pass
-
-func ResistDamage(damage: int):
+func RollToResistDamage(damage: int):
     pass
 
 func TakeDamage(damage: int):
-    pass
+    currentHealth -= damage
+    activeState = HURT
 
 
 func _physics_process(delta):
@@ -65,7 +66,13 @@ func _physics_process(delta):
             if position.distance_squared_to(moveTarget) < 80:
                     activeState = IDLE
         RUNNING:
-            pass
+            animationPlayer.play("Run")
+            velocity = position.direction_to(moveTarget) * moveSpeed * 20
+            spriteRootNode.scale.x = 1 if velocity.x > 0 else -1
+            move_and_slide()
+            z_index = (position.y as int) - 30
+            if position.distance_squared_to(moveTarget) < 80:
+                    activeState = IDLE
         ATTACKING:
             animationPlayer.play("FireGun")
             velocity = Vector2.ZERO

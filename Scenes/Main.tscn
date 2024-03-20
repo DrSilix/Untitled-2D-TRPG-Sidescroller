@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=55 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -42,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://dq6bmewx3o0tf" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/15.png" id="39_ik5m1"]
 [ext_resource type="Texture2D" uid="uid://bupacdml8hstv" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/17.png" id="40_v6oh5"]
 [ext_resource type="PackedScene" uid="uid://bbbpdf2yli53k" path="res://Scenes/hud.tscn" id="41_lftf4"]
+[ext_resource type="PackedScene" uid="uid://16cbe3kx3src" path="res://Assets/Characters/Enemy1/Enemy1.tscn" id="43_e7uyp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7xmqh"]
 friction = 0.0
@@ -151,22 +152,12 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="Biker_Player" parent="." instance=ExtResource("6_jfi8u")]
+visible = false
 position = Vector2(198, 344)
 wall_min_slide_angle = 0.0872665
 platform_on_leave = 2
 safe_margin = 2.0
 script = ExtResource("7_8vc5g")
-
-[node name="Camera2D" type="Camera2D" parent="Biker_Player"]
-process_callback = 0
-limit_left = 0
-limit_top = 0
-limit_right = 1300
-limit_bottom = 460
-limit_smoothed = true
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 
 [node name="BackgroundTileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)
@@ -1124,3 +1115,19 @@ player = NodePath("../Biker_Player")
 [node name="Control" parent="CanvasLayer" instance=ExtResource("41_lftf4")]
 anchors_preset = 15
 mouse_filter = 1
+
+[node name="Enemy1" parent="." instance=ExtResource("43_e7uyp")]
+position = Vector2(199, 344)
+script = ExtResource("7_8vc5g")
+
+[node name="Camera2D" type="Camera2D" parent="Enemy1"]
+position = Vector2(-1, 0)
+process_callback = 0
+limit_left = 0
+limit_top = 0
+limit_right = 1300
+limit_bottom = 460
+limit_smoothed = true
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
