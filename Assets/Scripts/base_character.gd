@@ -27,6 +27,11 @@ func MoveTo(location :Vector2):
     moveTarget = location
     activeState = WALKING
 
+func HaltActions():
+    moveTarget = null
+    velocity = Vector2.ZERO
+    activeState = IDLE
+
 func MoveVelocity(velocity :Vector2):
     pass
 

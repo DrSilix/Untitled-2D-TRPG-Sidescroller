@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=59 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -40,9 +40,11 @@
 [ext_resource type="Texture2D" uid="uid://c7r3eyald2whq" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Lamp_post.png" id="37_wax4g"]
 [ext_resource type="Texture2D" uid="uid://cp5yb82eaem46" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/4 Animated objects/Fan.png" id="38_y4gpu"]
 [ext_resource type="Texture2D" uid="uid://dq6bmewx3o0tf" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/15.png" id="39_ik5m1"]
+[ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="40_m8kxh"]
 [ext_resource type="Texture2D" uid="uid://bupacdml8hstv" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/17.png" id="40_v6oh5"]
 [ext_resource type="PackedScene" uid="uid://bbbpdf2yli53k" path="res://Scenes/hud.tscn" id="41_lftf4"]
 [ext_resource type="PackedScene" uid="uid://16cbe3kx3src" path="res://Assets/Characters/Enemy1/Enemy1.tscn" id="43_e7uyp"]
+[ext_resource type="Script" path="res://Assets/Scripts/enemy_character.gd" id="45_ca32d"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7xmqh"]
 friction = 0.0
@@ -101,6 +103,14 @@ size = Vector2(314.722, 28.333)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ossp"]
 size = Vector2(78, 200)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj06k"]
+atlas = ExtResource("40_m8kxh")
+region = Rect2(176, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wd64"]
+atlas = ExtResource("40_m8kxh")
+region = Rect2(64, 32, 16, 16)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -151,13 +161,23 @@ texture = ExtResource("6_yecpb")
 centered = false
 metadata/_edit_lock_ = true
 
-[node name="Biker_Player" parent="." instance=ExtResource("6_jfi8u")]
-visible = false
-position = Vector2(198, 344)
+[node name="Biker_Player" parent="." groups=["Player"] instance=ExtResource("6_jfi8u")]
+position = Vector2(784, 413)
 wall_min_slide_angle = 0.0872665
 platform_on_leave = 2
 safe_margin = 2.0
-script = null
+script = ExtResource("7_8vc5g")
+
+[node name="Camera2D" type="Camera2D" parent="Biker_Player"]
+process_callback = 0
+limit_left = 0
+limit_top = 0
+limit_right = 1300
+limit_bottom = 460
+limit_smoothed = true
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="BackgroundTileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)
@@ -1105,29 +1125,30 @@ position = Vector2(899, 300)
 position = Vector2(49, 87)
 shape = SubResource("RectangleShape2D_2ossp")
 
-[node name="GameManagerNode" type="Node" parent="." node_paths=PackedStringArray("combatArea", "player")]
+[node name="EnemySpawn" type="Sprite2D" parent="CombatArea"]
+position = Vector2(150, 43)
+skew = -0.710349
+texture = SubResource("AtlasTexture_bj06k")
+
+[node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn"]
+position = Vector2(-61.4615, 14.5093)
+texture = SubResource("AtlasTexture_5wd64")
+
+[node name="GameManagerNode" type="Node" parent="." node_paths=PackedStringArray("combatArea", "player", "enemy1")]
 script = ExtResource("15_vo7jb")
 combatArea = NodePath("../CombatArea")
 player = NodePath("../Biker_Player")
+enemy1 = NodePath("../Enemy1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("41_lftf4")]
 anchors_preset = 15
 mouse_filter = 1
+metadata/_edit_lock_ = true
 
 [node name="Enemy1" parent="." instance=ExtResource("43_e7uyp")]
-position = Vector2(199, 344)
-script = ExtResource("7_8vc5g")
-
-[node name="Camera2D" type="Camera2D" parent="Enemy1"]
-position = Vector2(-1, 0)
-process_callback = 0
-limit_left = 0
-limit_top = 0
-limit_right = 1300
-limit_bottom = 460
-limit_smoothed = true
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
+position = Vector2(1077, 344)
+wall_min_slide_angle = 0.0872665
+safe_margin = 2.0
+script = ExtResource("45_ca32d")
