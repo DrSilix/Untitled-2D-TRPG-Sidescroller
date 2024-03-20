@@ -157,7 +157,7 @@ position = Vector2(198, 344)
 wall_min_slide_angle = 0.0872665
 platform_on_leave = 2
 safe_margin = 2.0
-script = ExtResource("7_8vc5g")
+script = null
 
 [node name="BackgroundTileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)

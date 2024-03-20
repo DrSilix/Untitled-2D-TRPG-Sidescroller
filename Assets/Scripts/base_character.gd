@@ -1,12 +1,13 @@
 class_name BaseCharacter
 extends CharacterBody2D
 
-@export var moveSpeed = 6
-@export var maxHealth = 9
-@export var armor = 10
-@export var chanceToHitModifier = 0
-@export var weaponSkill = 12
-@export var weaponDamage = 6
+@export var moveSpeed : int = 6
+@export var maxHealth : int = 9
+@export var armor : int = 10
+@export var chanceToHitModifier : int = 0
+@export var weaponSkill : int = 12
+@export var weaponDamage : int = 6
+@export var actionPoints : int = 6
 
 @onready var spriteRootNode : Node2D = $SpriteRoot
 @onready var animationPlayer : AnimationPlayer = $SpriteRoot/AnimationPlayer
@@ -15,11 +16,12 @@ enum {IDLE, WALKING, RUNNING, ATTACKING, HURT, DEATH}
 var activeState = IDLE
 
 var hasCover = false
-var currentHealth = maxHealth
+var currentHealth : int = maxHealth
+var currentActionPoints : int = actionPoints
 var moveTarget
 
 func _ready():
-    pass
+    animationPlayer.connect("animation_finished", _on_AnimationPlayer_animation_finished,)
 
 func MoveTo(location :Vector2):
     moveTarget = location
@@ -28,27 +30,52 @@ func MoveTo(location :Vector2):
 func MoveVelocity(velocity :Vector2):
     pass
 
+
 func TakeCover():
     hasCover = true
+    chanceToHitModifier = -3
 
 func LeaveCover():
     hasCover = false
+    chanceToHitModifier = 0
 
-func RollToHit(accuracy: int):
-    pass
 
-func CalculateDamageToDeal():
-    return weaponDamage
+# -2 for every 3, e.g:
+# 7 8 9 = -0
+# 4 5 6 = -2
+# 1 2 3 = -4
+func getHealthPenalty():
+    return ((maxHealth - currentHealth) / 3) * -2
 
-func RollToAvoidDamage(accuracy: int):
-    pass
+func getHealthBonus():
+    return getHealthPenalty() + maxHealth
 
-func RollToResistDamage(damage: int):
-    pass
+
+func AttackTarget(target : BaseCharacter):
+    var toHit : int = RollToHit()
+    var toAvoid : int = target.RollToAvoidAttack()
+    if toAvoid >= toHit: return -1
+    var damageToDeal : int = CalculateDamageToDeal(toHit - toAvoid)
+    var damagetToResist : int = target.RollToResistDamage()
+    if damagetToResist >= damageToDeal: return -2
+    target.TakeDamage(damageToDeal - damagetToResist)
+    return damageToDeal - damagetToResist
+
+func RollToHit():
+    return RollUtil.GetRoll(weaponSkill + getHealthBonus())
+
+func CalculateDamageToDeal(netHits : int):
+    return weaponDamage + netHits
+
+func RollToAvoidAttack():
+    return RollUtil.GetRoll(moveSpeed + getHealthBonus()) + chanceToHitModifier
+
+func RollToResistDamage():
+    return RollUtil.GetRoll(armor + getHealthBonus())
 
 func TakeDamage(damage: int):
     currentHealth -= damage
-    activeState = HURT
+    activeState = HURT if currentHealth > 0 else DEATH
 
 
 func _physics_process(delta):
@@ -74,11 +101,16 @@ func _physics_process(delta):
             if position.distance_squared_to(moveTarget) < 80:
                     activeState = IDLE
         ATTACKING:
-            animationPlayer.play("FireGun")
+            if animationPlayer.current_animation != "Attack1": animationPlayer.play("Attack1")
+            #print(animationPlayer.current_animation)
             velocity = Vector2.ZERO
         HURT:
-            pass
+            animationPlayer.play("Hurt")
+            velocity = Vector2.ZERO
         DEATH:
-            pass
+            animationPlayer.play("Death")
         _:
             pass
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+    activeState = IDLE
