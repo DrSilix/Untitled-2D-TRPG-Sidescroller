@@ -23,8 +23,8 @@ RollUtil="*res://Assets/Scripts/roll_util.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/always_on_top=true
 window/stretch/mode="canvas_items"
-window/stretch/scale=4.0
 window/handheld/orientation=4
 
 [editor]

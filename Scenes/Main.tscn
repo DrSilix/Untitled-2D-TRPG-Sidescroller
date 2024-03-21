@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=60 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -44,6 +44,7 @@
 [ext_resource type="Texture2D" uid="uid://bupacdml8hstv" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/17.png" id="40_v6oh5"]
 [ext_resource type="PackedScene" uid="uid://bbbpdf2yli53k" path="res://Scenes/hud.tscn" id="41_lftf4"]
 [ext_resource type="PackedScene" uid="uid://16cbe3kx3src" path="res://Assets/Characters/Enemy1/Enemy1.tscn" id="43_e7uyp"]
+[ext_resource type="PackedScene" uid="uid://crl3xnu4uelc1" path="res://Assets/UI/stop_speech_bubble.tscn" id="44_k18i6"]
 [ext_resource type="Script" path="res://Assets/Scripts/enemy_character.gd" id="45_ca32d"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7xmqh"]
@@ -114,6 +115,9 @@ region = Rect2(64, 32, 16, 16)
 [node name="Node2D" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(-400, -800)
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, -400, -800)
 scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -169,6 +173,7 @@ safe_margin = 2.0
 script = ExtResource("7_8vc5g")
 
 [node name="Camera2D" type="Camera2D" parent="Biker_Player"]
+zoom = Vector2(4, 4)
 process_callback = 0
 limit_left = 0
 limit_top = 0
@@ -1119,14 +1124,14 @@ position = Vector2(147.361, 7.131)
 shape = SubResource("RectangleShape2D_lnui5")
 
 [node name="CombatArea" type="Area2D" parent="."]
-position = Vector2(899, 300)
+position = Vector2(934, 381)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea"]
-position = Vector2(49, 87)
+position = Vector2(-26, 6)
 shape = SubResource("RectangleShape2D_2ossp")
 
 [node name="EnemySpawn" type="Sprite2D" parent="CombatArea"]
-position = Vector2(150, 43)
+position = Vector2(115, -38)
 skew = -0.710349
 texture = SubResource("AtlasTexture_bj06k")
 
@@ -1142,10 +1147,12 @@ enemy1 = NodePath("../Enemy1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" parent="CanvasLayer" instance=ExtResource("41_lftf4")]
-anchors_preset = 15
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("41_lftf4")]
 mouse_filter = 1
 metadata/_edit_lock_ = true
+
+[node name="Stop!" parent="CanvasLayer" instance=ExtResource("44_k18i6")]
+mouse_filter = 1
 
 [node name="Enemy1" parent="." instance=ExtResource("43_e7uyp")]
 position = Vector2(1077, 344)

@@ -60,6 +60,7 @@ bg_color = Color(0.658824, 0.517647, 0.952941, 1)
 
 [node name="Control" type="Control"]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -67,6 +68,7 @@ grow_vertical = 2
 
 [node name="Nameplate1" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 0
 offset_right = 183.0
 offset_bottom = 40.0
 grow_horizontal = 2
@@ -117,6 +119,7 @@ show_percentage = false
 
 [node name="Nameplate2" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 0
 offset_top = 14.0
 offset_right = 183.0
 offset_bottom = 54.0
@@ -168,6 +171,7 @@ show_percentage = false
 
 [node name="Nameplate3" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 0
 offset_top = 28.0
 offset_right = 183.0
 offset_bottom = 68.0
