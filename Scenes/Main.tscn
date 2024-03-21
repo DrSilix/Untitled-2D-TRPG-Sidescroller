@@ -1,12 +1,10 @@
-[gd_scene load_steps=60 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=59 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
 [ext_resource type="Texture2D" uid="uid://qduasm25tjax" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/3.png" id="4_o38kj"]
 [ext_resource type="Texture2D" uid="uid://cw2rbkqy76m1m" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/4.png" id="5_io8rk"]
-[ext_resource type="PackedScene" uid="uid://ttrqvpi4epxd" path="res://Assets/Characters/Biker/biker_player.tscn" id="6_jfi8u"]
 [ext_resource type="Texture2D" uid="uid://cf4qcos1w416a" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/5.png" id="6_yecpb"]
-[ext_resource type="Script" path="res://Assets/Scripts/player_character.gd" id="7_8vc5g"]
 [ext_resource type="TileSet" uid="uid://3tmr3cqlpbsp" path="res://Assets/Spritesheets/FullTileset.tres" id="8_60lmi"]
 [ext_resource type="Texture2D" uid="uid://pac5y7ivdynl" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Arch.png" id="9_0v5go"]
 [ext_resource type="Texture2D" uid="uid://dbdmxhiunr7n6" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Decoration7.png" id="9_2f2yh"]
@@ -17,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://dxwod5pieama" path="res://Assets/Sprites/Sourcefiles/cracks_spritesheet.png" id="13_pc5h0"]
 [ext_resource type="Texture2D" uid="uid://cakkphjpqrm03" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Barrel.png" id="14_p1j1o"]
 [ext_resource type="Texture2D" uid="uid://cli52ao32qk42" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Decoration1.png" id="15_latxf"]
-[ext_resource type="Script" path="res://Assets/Scripts/game_manager.gd" id="15_vo7jb"]
 [ext_resource type="Texture2D" uid="uid://dq15nddghqkqi" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Decoration2.png" id="16_83u01"]
 [ext_resource type="Texture2D" uid="uid://b82hrxjf231wh" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Decoration3.png" id="17_05iwa"]
 [ext_resource type="Texture2D" uid="uid://sx6qusgrydw" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Decoration4.png" id="18_8bnkk"]
@@ -43,9 +40,10 @@
 [ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="40_m8kxh"]
 [ext_resource type="Texture2D" uid="uid://bupacdml8hstv" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/17.png" id="40_v6oh5"]
 [ext_resource type="PackedScene" uid="uid://bbbpdf2yli53k" path="res://Scenes/hud.tscn" id="41_lftf4"]
+[ext_resource type="Script" path="res://Assets/Scripts/combat_area.gd" id="41_ovlr0"]
 [ext_resource type="PackedScene" uid="uid://16cbe3kx3src" path="res://Assets/Characters/Enemy1/Enemy1.tscn" id="43_e7uyp"]
+[ext_resource type="Script" path="res://Assets/Scripts/enemy_spawn.gd" id="43_nnltu"]
 [ext_resource type="PackedScene" uid="uid://crl3xnu4uelc1" path="res://Assets/UI/stop_speech_bubble.tscn" id="44_k18i6"]
-[ext_resource type="Script" path="res://Assets/Scripts/enemy_character.gd" id="45_ca32d"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7xmqh"]
 friction = 0.0
@@ -112,12 +110,17 @@ region = Rect2(176, 16, 16, 16)
 atlas = ExtResource("40_m8kxh")
 region = Rect2(64, 32, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_btrtx"]
+atlas = ExtResource("40_m8kxh")
+region = Rect2(176, 416, 16, 16)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-offset = Vector2(-400, -800)
+offset = Vector2(0, 88.49)
 scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, -400, -800)
+transform = Transform2D(2, 0, 0, 2, 0, 88.49)
+scroll_base_scale = Vector2(2, 2)
 scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -165,14 +168,8 @@ texture = ExtResource("6_yecpb")
 centered = false
 metadata/_edit_lock_ = true
 
-[node name="Biker_Player" parent="." groups=["Player"] instance=ExtResource("6_jfi8u")]
+[node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(784, 413)
-wall_min_slide_angle = 0.0872665
-platform_on_leave = 2
-safe_margin = 2.0
-script = ExtResource("7_8vc5g")
-
-[node name="Camera2D" type="Camera2D" parent="Biker_Player"]
 zoom = Vector2(4, 4)
 process_callback = 0
 limit_left = 0
@@ -1123,27 +1120,47 @@ visible = false
 position = Vector2(147.361, 7.131)
 shape = SubResource("RectangleShape2D_lnui5")
 
-[node name="CombatArea" type="Area2D" parent="."]
+[node name="CombatArea" type="Area2D" parent="." node_paths=PackedStringArray("spawns")]
 position = Vector2(934, 381)
+script = ExtResource("41_ovlr0")
+spawns = [NodePath("EnemySpawn1"), NodePath("EnemySpawn2"), NodePath("EnemySpawn3")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea"]
 position = Vector2(-26, 6)
 shape = SubResource("RectangleShape2D_2ossp")
 
-[node name="EnemySpawn" type="Sprite2D" parent="CombatArea"]
+[node name="EnemySpawn1" type="Sprite2D" parent="CombatArea"]
 position = Vector2(115, -38)
 skew = -0.710349
 texture = SubResource("AtlasTexture_bj06k")
+script = ExtResource("43_nnltu")
+enemyTemplate = ExtResource("43_e7uyp")
 
-[node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn"]
+[node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn1"]
 position = Vector2(-61.4615, 14.5093)
 texture = SubResource("AtlasTexture_5wd64")
 
-[node name="GameManagerNode" type="Node" parent="." node_paths=PackedStringArray("combatArea", "player", "enemy1")]
-script = ExtResource("15_vo7jb")
-combatArea = NodePath("../CombatArea")
-player = NodePath("../Biker_Player")
-enemy1 = NodePath("../Enemy1")
+[node name="EnemySpawn2" type="Sprite2D" parent="CombatArea"]
+position = Vector2(122, 2)
+skew = -0.710349
+texture = SubResource("AtlasTexture_bj06k")
+script = ExtResource("43_nnltu")
+enemyTemplate = ExtResource("43_e7uyp")
+
+[node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn2"]
+position = Vector2(-42.1399, -1.31903)
+texture = SubResource("AtlasTexture_5wd64")
+
+[node name="EnemySpawn3" type="Sprite2D" parent="CombatArea"]
+position = Vector2(161, 43)
+skew = -0.710349
+texture = SubResource("AtlasTexture_bj06k")
+script = ExtResource("43_nnltu")
+enemyTemplate = ExtResource("43_e7uyp")
+
+[node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn3"]
+position = Vector2(-85.2797, -2.63806)
+texture = SubResource("AtlasTexture_5wd64")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1154,8 +1171,9 @@ metadata/_edit_lock_ = true
 [node name="Stop!" parent="CanvasLayer" instance=ExtResource("44_k18i6")]
 mouse_filter = 1
 
-[node name="Enemy1" parent="." instance=ExtResource("43_e7uyp")]
-position = Vector2(1077, 344)
-wall_min_slide_angle = 0.0872665
-safe_margin = 2.0
-script = ExtResource("45_ca32d")
+[node name="PlayerSpawn" type="Sprite2D" parent="."]
+modulate = Color(0.2, 1, 0.0588235, 1)
+position = Vector2(734, 421)
+scale = Vector2(2, 2)
+skew = -0.773181
+texture = SubResource("AtlasTexture_btrtx")

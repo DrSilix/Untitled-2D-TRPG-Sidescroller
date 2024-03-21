@@ -1,43 +1,20 @@
 extends Node
 
-@export var combatArea : Area2D
-@export var player : BaseCharacter
-@export var enemy1 : BaseCharacter
+@onready var rootNode : Node2D = $/root/Node2D
+@onready var player_spawn : Sprite2D = $/root/Node2D/PlayerSpawn
+@onready var camera_2d : Camera2D = $/root/Node2D/Camera2D
 
-@onready var camera_2d = $"../Biker_Player/Camera2D"
+var player1PackedScene : PackedScene = preload("res://Assets/Characters/Biker/biker_player.tscn")
 
-var spawnAreas : Array
+var biker_player
 
 func _ready():
-	#Handling Enemy Spawn
-	combatArea.connect("body_entered", _on_CombatArea_body_entered,)
-	var spawns = combatArea.find_children("EnemySpawn*")
-	for spawn in spawns:
-		spawnAreas.append(SpawnArea.new(spawn, spawn.get_child(0)))
-
-func PlayCutscene():
-	await get_tree().create_timer(2).timeout
-	enemy1.MoveTo(spawnAreas[0].moveTarget.global_position)
-	var tween = get_tree().create_tween()
-	tween.tween_property(camera_2d, "global_position", combatArea.global_position, 1)
-	await get_tree().create_timer(2).timeout
-
-func BeginCombat():
-	pass
-
-#Handle combat area enter
-func _on_CombatArea_body_entered(body):
-	if body.is_in_group("Player"):
-		player.isInputDisabled = true
-		player.HaltActions()
-		print(spawnAreas[0].moveTarget.name)
-		PlayCutscene()
-
-
-class SpawnArea:
-	var spawnArea : Sprite2D
-	var moveTarget : Sprite2D
-
-	func _init(spawn, target):
-		spawnArea = spawn
-		moveTarget = target
+	player_spawn.visible = false
+	var biker_player = player1PackedScene.instantiate()
+	rootNode.add_child(biker_player)
+	biker_player.global_position = player_spawn.global_position
+	camera_2d.position_smoothing_enabled = false
+	camera_2d.reparent(biker_player)
+	camera_2d.position = Vector2.ZERO
+	await get_tree().create_timer(0.1).timeout
+	camera_2d.position_smoothing_enabled = true

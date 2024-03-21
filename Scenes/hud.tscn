@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bbbpdf2yli53k"]
+[gd_scene load_steps=12 format=3 uid="uid://bbbpdf2yli53k"]
 
 [ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="1_sxhih"]
 
@@ -35,29 +35,6 @@ bg_color = Color(0.301961, 0.301961, 0.301961, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jm31u"]
 bg_color = Color(0.568627, 0.858824, 0.411765, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ssyhk"]
-atlas = ExtResource("1_sxhih")
-region = Rect2(352, 80, 16, 16)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7lqp6"]
-texture = SubResource("AtlasTexture_ssyhk")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7hsx"]
-bg_color = Color(0.94902, 0.717647, 0.00392157, 1)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qmuav"]
-load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jvyi5"]
-atlas = SubResource("CompressedTexture2D_qmuav")
-region = Rect2(528, 288, 16, 16)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3i52c"]
-texture = SubResource("AtlasTexture_jvyi5")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oc0ai"]
-bg_color = Color(0.658824, 0.517647, 0.952941, 1)
-
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -71,9 +48,7 @@ layout_mode = 1
 anchors_preset = 0
 offset_right = 183.0
 offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.38, 0.422)
+scale = Vector2(1.76934, 2.1655)
 
 [node name="Panel" type="Panel" parent="Nameplate1"]
 layout_mode = 0
@@ -115,108 +90,4 @@ theme_override_styles/background = SubResource("StyleBoxFlat_kinyf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jm31u")
 step = 1.0
 value = 48.0
-show_percentage = false
-
-[node name="Nameplate2" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 0
-offset_top = 14.0
-offset_right = 183.0
-offset_bottom = 54.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.38, 0.422)
-
-[node name="Panel" type="Panel" parent="Nameplate2"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_7lqp6")
-
-[node name="Panel2" type="Panel" parent="Nameplate2"]
-layout_mode = 0
-offset_left = 40.0
-offset_right = 142.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_afd7u")
-
-[node name="Panel3" type="Panel" parent="Nameplate2"]
-layout_mode = 0
-offset_left = 142.0
-offset_right = 183.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_b1i70")
-
-[node name="Label" type="Label" parent="Nameplate2"]
-layout_mode = 0
-offset_left = 36.8518
-offset_top = 16.8273
-offset_right = 83.8518
-offset_bottom = 39.8273
-text = "Player 2"
-label_settings = SubResource("LabelSettings_0dspq")
-
-[node name="ProgressBar" type="ProgressBar" parent="Nameplate2"]
-layout_mode = 0
-offset_left = 22.7384
-offset_top = 8.53691
-offset_right = 168.738
-offset_bottom = 15.5369
-theme_override_font_sizes/font_size = 10
-theme_override_styles/background = SubResource("StyleBoxFlat_kinyf")
-theme_override_styles/fill = SubResource("StyleBoxFlat_b7hsx")
-step = 1.0
-value = 95.0
-show_percentage = false
-
-[node name="Nameplate3" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 0
-offset_top = 28.0
-offset_right = 183.0
-offset_bottom = 68.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.38, 0.422)
-
-[node name="Panel" type="Panel" parent="Nameplate3"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_3i52c")
-
-[node name="Panel2" type="Panel" parent="Nameplate3"]
-layout_mode = 0
-offset_left = 40.0
-offset_right = 142.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_afd7u")
-
-[node name="Panel3" type="Panel" parent="Nameplate3"]
-layout_mode = 0
-offset_left = 142.0
-offset_right = 183.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_b1i70")
-
-[node name="Label" type="Label" parent="Nameplate3"]
-layout_mode = 0
-offset_left = 36.8518
-offset_top = 16.8273
-offset_right = 83.8518
-offset_bottom = 39.8273
-text = "Player 3"
-label_settings = SubResource("LabelSettings_0dspq")
-
-[node name="ProgressBar" type="ProgressBar" parent="Nameplate3"]
-layout_mode = 0
-offset_left = 22.7384
-offset_top = 8.53691
-offset_right = 168.738
-offset_bottom = 15.5369
-theme_override_font_sizes/font_size = 10
-theme_override_styles/background = SubResource("StyleBoxFlat_kinyf")
-theme_override_styles/fill = SubResource("StyleBoxFlat_oc0ai")
-step = 1.0
-value = 78.0
 show_percentage = false

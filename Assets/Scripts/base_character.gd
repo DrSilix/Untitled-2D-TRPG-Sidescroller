@@ -36,6 +36,10 @@ func MoveVelocity(velocity :Vector2):
 	pass
 
 
+func ChooseCombatAction():
+	pass
+
+
 func TakeCover():
 	hasCover = true
 	chanceToHitModifier = -3
