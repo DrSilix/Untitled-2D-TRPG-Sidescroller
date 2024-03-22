@@ -9,7 +9,6 @@ const MAX_NODE_WEIGHT : int = 7
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(rng.randi_range(0,1))
 	connect("area_shape_entered", _on_area_shape_entered)
 	await get_tree().create_timer(0.4).timeout
 	find_child("Sprite2D").self_modulate = Color().from_hsv(weight/8.0, 1, 1, 1)
@@ -27,12 +26,12 @@ func _ready():
 # >16 backwards
 func GetMoveToNode() -> PathNode:
 	var connectedNodesCombinedWeight : int = 0
+	# TODO: optimize this so that there isn't two similar loops through the path nodes
 	for pnode in connectedPathNodes:
 		if pnode.occupied: continue
 		var modifiedPnodeWeight = pnode.weight
 		if pnode.position.x - position.x > 16: modifiedPnodeWeight += 2
 		connectedNodesCombinedWeight += MAX_NODE_WEIGHT - modifiedPnodeWeight
-	print(connectedPathNodes)
 	var counter = rng.randi_range(0, connectedNodesCombinedWeight-1)
 	for pnode in connectedPathNodes:
 		if pnode.occupied: continue

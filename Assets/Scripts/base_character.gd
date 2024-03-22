@@ -13,12 +13,15 @@ extends CharacterBody2D
 @onready var animationPlayer : AnimationPlayer = $SpriteRoot/AnimationPlayer
 
 enum {IDLE, WALKING, RUNNING, ATTACKING, HURT, DEATH}
-var activeState = IDLE
+var activeState := IDLE
+
+enum CombatActions {ATTACK, SHOOTSINGLE, SHOOTBURST, GRENADE, MOVE, RELOAD, FLEE, PASS}
+var currentChosenAction : CombatActions
 
 var hasCover = false
 var currentHealth : int = maxHealth
 var currentActionPoints : int = MaxActionPoints
-var moveTarget
+var moveTarget : Vector2
 
 func _ready():
 	animationPlayer.connect("animation_finished", _on_AnimationPlayer_animation_finished,)
@@ -28,7 +31,6 @@ func MoveTo(location :Vector2):
 	activeState = WALKING
 
 func HaltActions():
-	moveTarget = null
 	velocity = Vector2.ZERO
 	activeState = IDLE
 
@@ -39,6 +41,8 @@ func MoveVelocity(velocity :Vector2):
 func ChooseCombatAction():
 	pass
 
+func CompleteChosenAction():
+	pass
 
 func TakeCover():
 	hasCover = true
