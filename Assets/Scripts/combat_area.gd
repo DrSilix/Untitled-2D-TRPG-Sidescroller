@@ -26,10 +26,12 @@ func PlayCutscene():
 	await get_tree().create_timer(2).timeout
 	stop_.visible = false
 	for spawn in spawns:
-		var enemy = spawn.enemyTemplate.instantiate()
+		var enemy : BaseCharacter = spawn.enemyTemplate.instantiate()
 		enemy.global_position = spawn.global_position
 		get_parent().add_child(enemy)
 		enemy.MoveTo(spawn.move_to.global_position)
+		enemy.associatedPathNode = spawn.startingPathNode
+		enemy.associatedPathNode.occupied = true
 		enemies.append(enemy)
 	var tween = get_tree().create_tween()
 	tween.tween_property(camera_2d, "global_position", global_position, 1)

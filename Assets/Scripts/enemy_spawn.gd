@@ -2,6 +2,7 @@ class_name EnemySpawn
 extends Sprite2D
 
 @export var enemyTemplate : Resource
+@export var startingPathNode : PathNode
 
 @onready var move_to = $MoveTo
 

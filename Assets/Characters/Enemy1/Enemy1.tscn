@@ -177,6 +177,8 @@ _data = {
 }
 
 [node name="Enemy1" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0

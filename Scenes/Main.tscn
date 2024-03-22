@@ -1137,34 +1137,37 @@ spawns = [NodePath("EnemySpawn1"), NodePath("EnemySpawn2"), NodePath("EnemySpawn
 position = Vector2(-26, 6)
 shape = SubResource("RectangleShape2D_2ossp")
 
-[node name="EnemySpawn1" type="Sprite2D" parent="CombatArea"]
+[node name="EnemySpawn1" type="Sprite2D" parent="CombatArea" node_paths=PackedStringArray("startingPathNode")]
 position = Vector2(115, -38)
 skew = -0.710349
 texture = SubResource("AtlasTexture_bj06k")
 script = ExtResource("43_nnltu")
 enemyTemplate = ExtResource("43_e7uyp")
+startingPathNode = NodePath("../EnemyPathing/PathNode4")
 
 [node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn1"]
 position = Vector2(-62.0419, 18.4664)
 texture = SubResource("AtlasTexture_5wd64")
 
-[node name="EnemySpawn2" type="Sprite2D" parent="CombatArea"]
+[node name="EnemySpawn2" type="Sprite2D" parent="CombatArea" node_paths=PackedStringArray("startingPathNode")]
 position = Vector2(122, 2)
 skew = -0.710349
 texture = SubResource("AtlasTexture_bj06k")
 script = ExtResource("43_nnltu")
 enemyTemplate = ExtResource("43_e7uyp")
+startingPathNode = NodePath("../EnemyPathing/PathNode2")
 
 [node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn2"]
 position = Vector2(-45.4405, 5.27611)
 texture = SubResource("AtlasTexture_5wd64")
 
-[node name="EnemySpawn3" type="Sprite2D" parent="CombatArea"]
+[node name="EnemySpawn3" type="Sprite2D" parent="CombatArea" node_paths=PackedStringArray("startingPathNode")]
 position = Vector2(161, 43)
 skew = -0.710349
 texture = SubResource("AtlasTexture_bj06k")
 script = ExtResource("43_nnltu")
 enemyTemplate = ExtResource("43_e7uyp")
+startingPathNode = NodePath("../EnemyPathing/PathNode")
 
 [node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn3"]
 position = Vector2(-85.2797, -2.63806)
@@ -1187,12 +1190,71 @@ texture = SubResource("AtlasTexture_h2elo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode"]
 shape = SubResource("CircleShape2D_sxwgc")
 
+[node name="PathNode25" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(103, 55)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode25"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode25"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode26" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(104, 23)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode26"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode26"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode27" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(111, -10)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode27"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode27"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode28" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(94, -44)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode28"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode28"]
+shape = SubResource("CircleShape2D_sxwgc")
+
 [node name="PathNode2" type="Area2D" parent="CombatArea/EnemyPathing"]
 position = Vector2(80, 6)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
-weight = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode2"]
 self_modulate = Color(0.0156863, 1, 0, 1)
@@ -1222,7 +1284,6 @@ position = Vector2(64, -24)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
-weight = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode4"]
 self_modulate = Color(0.0156863, 1, 0, 1)
@@ -1252,7 +1313,7 @@ position = Vector2(42, 61)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
-weight = 2
+weight = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode6"]
 self_modulate = Color(0.0156863, 1, 0, 1)
@@ -1267,7 +1328,7 @@ position = Vector2(26, -52)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
-weight = 2
+weight = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode7"]
 self_modulate = Color(0.0156863, 1, 0, 1)
@@ -1297,7 +1358,7 @@ position = Vector2(51, 10)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
-weight = 3
+weight = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode9"]
 self_modulate = Color(0.0156863, 1, 0, 1)
@@ -1312,7 +1373,7 @@ position = Vector2(15, 9)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
-weight = 2
+weight = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode10"]
 self_modulate = Color(0.0156863, 1, 0, 1)
@@ -1342,7 +1403,6 @@ position = Vector2(26, -18)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
-weight = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode12"]
 self_modulate = Color(0.0156863, 1, 0, 1)
