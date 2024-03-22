@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=62 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://bupacdml8hstv" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/17.png" id="40_v6oh5"]
 [ext_resource type="PackedScene" uid="uid://bbbpdf2yli53k" path="res://Scenes/hud.tscn" id="41_lftf4"]
 [ext_resource type="Script" path="res://Assets/Scripts/combat_area.gd" id="41_ovlr0"]
+[ext_resource type="Script" path="res://Assets/Scripts/path_node.gd" id="43_a7d7h"]
 [ext_resource type="PackedScene" uid="uid://16cbe3kx3src" path="res://Assets/Characters/Enemy1/Enemy1.tscn" id="43_e7uyp"]
 [ext_resource type="Script" path="res://Assets/Scripts/enemy_spawn.gd" id="43_nnltu"]
 [ext_resource type="PackedScene" uid="uid://crl3xnu4uelc1" path="res://Assets/UI/stop_speech_bubble.tscn" id="44_k18i6"]
@@ -109,6 +110,13 @@ region = Rect2(176, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5wd64"]
 atlas = ExtResource("40_m8kxh")
 region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2elo"]
+atlas = ExtResource("40_m8kxh")
+region = Rect2(52, 452, 8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sxwgc"]
+radius = 20.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_btrtx"]
 atlas = ExtResource("40_m8kxh")
@@ -1137,7 +1145,7 @@ script = ExtResource("43_nnltu")
 enemyTemplate = ExtResource("43_e7uyp")
 
 [node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn1"]
-position = Vector2(-61.4615, 14.5093)
+position = Vector2(-62.0419, 18.4664)
 texture = SubResource("AtlasTexture_5wd64")
 
 [node name="EnemySpawn2" type="Sprite2D" parent="CombatArea"]
@@ -1148,7 +1156,7 @@ script = ExtResource("43_nnltu")
 enemyTemplate = ExtResource("43_e7uyp")
 
 [node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn2"]
-position = Vector2(-42.1399, -1.31903)
+position = Vector2(-45.4405, 5.27611)
 texture = SubResource("AtlasTexture_5wd64")
 
 [node name="EnemySpawn3" type="Sprite2D" parent="CombatArea"]
@@ -1162,6 +1170,368 @@ enemyTemplate = ExtResource("43_e7uyp")
 position = Vector2(-85.2797, -2.63806)
 texture = SubResource("AtlasTexture_5wd64")
 
+[node name="EnemyPathing" type="Node2D" parent="CombatArea"]
+
+[node name="PathNode" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(73, 41)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode2" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(80, 6)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode2"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode2"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode3" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(80, -15)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode3"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode3"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode4" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(64, -24)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode4"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode4"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode5" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(62, -56)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode5"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode5"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode6" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(42, 61)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode6"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode6"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode7" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(26, -52)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode7"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode7"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode8" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(37, 32)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode8"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode8"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode9" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(51, 10)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode9"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode9"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode10" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(15, 9)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode10"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode10"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode11" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(8, 45)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode11"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode11"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode12" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(26, -18)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode12"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode12"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode13" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-6, -35)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode13"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode13"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode14" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-10, -7)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode14"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode14"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode15" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-16, 25)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode15"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode15"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode16" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-25, 55)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode16"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode16"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode17" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-51, 31)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode17"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode17"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode22" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-80, 55)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode22"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode22"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode23" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-87, 25)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode23"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode23"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode24" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-124, 27)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode24"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode24"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode18" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-42, 1)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode18"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode18"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode19" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-39, -28)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode19"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode19"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode20" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-29, -56)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode20"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode20"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode21" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-64, -52)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode21"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode21"]
+shape = SubResource("CircleShape2D_sxwgc")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("41_lftf4")]
@@ -1169,6 +1539,7 @@ mouse_filter = 1
 metadata/_edit_lock_ = true
 
 [node name="Stop!" parent="CanvasLayer" instance=ExtResource("44_k18i6")]
+visible = false
 mouse_filter = 1
 
 [node name="PlayerSpawn" type="Sprite2D" parent="."]

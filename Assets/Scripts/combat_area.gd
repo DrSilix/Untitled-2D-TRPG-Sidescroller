@@ -39,8 +39,9 @@ func BeginCombat():
 	pass
 
 func TakeTurn(actor : BaseCharacter):
-	while actor.actionPoints > 0:
-		pass
+	while actor.currentActionPoints > 0:
+		actor.ChooseCombatAction()
+		
 
 #Handle combat area enter
 func _on_body_entered(body):

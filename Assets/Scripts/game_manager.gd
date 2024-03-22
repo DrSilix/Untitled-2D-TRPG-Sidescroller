@@ -5,12 +5,11 @@ extends Node
 @onready var camera_2d : Camera2D = $/root/Node2D/Camera2D
 
 var player1PackedScene : PackedScene = preload("res://Assets/Characters/Biker/biker_player.tscn")
-
 var biker_player
 
 func _ready():
 	player_spawn.visible = false
-	var biker_player = player1PackedScene.instantiate()
+	biker_player = player1PackedScene.instantiate()
 	rootNode.add_child(biker_player)
 	biker_player.global_position = player_spawn.global_position
 	camera_2d.position_smoothing_enabled = false

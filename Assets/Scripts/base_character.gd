@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var chanceToHitModifier : int = 0
 @export var weaponSkill : int = 12
 @export var weaponDamage : int = 6
-@export var actionPoints : int = 6
+@export var MaxActionPoints : int = 6
 
 @onready var spriteRootNode : Node2D = $SpriteRoot
 @onready var animationPlayer : AnimationPlayer = $SpriteRoot/AnimationPlayer
@@ -17,7 +17,7 @@ var activeState = IDLE
 
 var hasCover = false
 var currentHealth : int = maxHealth
-var currentActionPoints : int = actionPoints
+var currentActionPoints : int = MaxActionPoints
 var moveTarget
 
 func _ready():
@@ -70,6 +70,7 @@ func AttackTarget(target : BaseCharacter):
 	target.TakeDamage(damageToDeal - damagetToResist)
 	return damageToDeal - damagetToResist
 
+# ??Factor in distance to shoot??
 func RollToHit():
 	return RollUtil.GetRoll(weaponSkill + getHealthBonus())
 
