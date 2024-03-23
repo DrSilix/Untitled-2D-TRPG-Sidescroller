@@ -123,7 +123,7 @@ func CompleteChosenAction():
 			currentWeaponAmmo = maxWeaponAmmo
 		CombatActions.MOVE:
 			print("Moving")
-			#moveA.weight -= 2 if moveA.weight > 1 else 1
+			moveA.weight -= 1
 			associatedPathNode.occupied = false
 			associatedPathNode = associatedPathNode.GetMoveToNode()
 			associatedPathNode.occupied = true

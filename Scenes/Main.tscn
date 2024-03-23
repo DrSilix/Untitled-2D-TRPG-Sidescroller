@@ -50,7 +50,7 @@
 friction = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kthqr"]
-size = Vector2(20.4478, 20.4117)
+size = Vector2(17.838, 12.117)
 
 [sub_resource type="Gradient" id="Gradient_dmxuo"]
 interpolation_mode = 1
@@ -425,6 +425,26 @@ rotation = 1.17602
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
+[node name="Barrel7" type="StaticBody2D" parent="BackgroundObjects"]
+z_index = 354
+position = Vector2(887, 326)
+physics_material_override = SubResource("PhysicsMaterial_7xmqh")
+script = ExtResource("12_3w3n6")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Barrel7"]
+position = Vector2(0, 20)
+rotation = 1.5708
+texture = ExtResource("14_p1j1o")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel7"]
+position = Vector2(0, 25.95)
+scale = Vector2(1.25, 0.545)
+shape = SubResource("RectangleShape2D_kthqr")
+metadata/_edit_lock_ = true
+
 [node name="Box2" type="StaticBody2D" parent="BackgroundObjects"]
 z_index = 354
 position = Vector2(270, 323)
@@ -478,6 +498,25 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Box4"]
 position = Vector2(0, 25.84)
+scale = Vector2(1.54, 0.565)
+shape = SubResource("RectangleShape2D_kthqr")
+metadata/_edit_lock_ = true
+
+[node name="Box6" type="StaticBody2D" parent="BackgroundObjects"]
+z_index = 354
+position = Vector2(914, 394.52)
+physics_material_override = SubResource("PhysicsMaterial_7xmqh")
+script = ExtResource("12_3w3n6")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Box6"]
+position = Vector2(0, 20)
+texture = ExtResource("13_bviol")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Box6"]
+position = Vector2(0, 28.3)
 scale = Vector2(1.54, 0.565)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
@@ -1192,7 +1231,7 @@ texture = SubResource("AtlasTexture_h2elo")
 shape = SubResource("CircleShape2D_sxwgc")
 
 [node name="PathNode18" type="Area2D" parent="CombatArea/EnemyPathing"]
-position = Vector2(134, 40)
+position = Vector2(121, 40)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
@@ -1207,7 +1246,7 @@ texture = SubResource("AtlasTexture_h2elo")
 shape = SubResource("CircleShape2D_sxwgc")
 
 [node name="PathNode19" type="Area2D" parent="CombatArea/EnemyPathing"]
-position = Vector2(130, -9)
+position = Vector2(123, -9)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
@@ -1222,7 +1261,7 @@ texture = SubResource("AtlasTexture_h2elo")
 shape = SubResource("CircleShape2D_sxwgc")
 
 [node name="PathNode20" type="Area2D" parent="CombatArea/EnemyPathing"]
-position = Vector2(127, -52)
+position = Vector2(118, -53)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
@@ -1368,12 +1407,71 @@ texture = SubResource("AtlasTexture_h2elo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode9"]
 shape = SubResource("CircleShape2D_sxwgc")
 
-[node name="PathNode15" type="Area2D" parent="CombatArea/EnemyPathing"]
-position = Vector2(-7, 33)
+[node name="PathNode24" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(46, 24)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
 weight = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode24"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode24"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode25" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(47, 60)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode25"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode25"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode26" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(51, -55)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode26"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode26"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode27" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-6, -56)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
+weight = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode27"]
+self_modulate = Color(0.0156863, 1, 0, 1)
+z_index = 999
+texture = SubResource("AtlasTexture_h2elo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode27"]
+shape = SubResource("CircleShape2D_sxwgc")
+
+[node name="PathNode15" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-1, 33)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("43_a7d7h")
 
 [node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode15"]
 self_modulate = Color(0.0156863, 1, 0, 1)
@@ -1383,23 +1481,22 @@ texture = SubResource("AtlasTexture_h2elo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode15"]
 shape = SubResource("CircleShape2D_sxwgc")
 
-[node name="PathNode10" type="Area2D" parent="CombatArea/EnemyPathing"]
-position = Vector2(-36, 60)
+[node name="PathNode21" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(0, 52)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
-weight = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode10"]
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode21"]
 self_modulate = Color(0.0156863, 1, 0, 1)
 z_index = 999
 texture = SubResource("AtlasTexture_h2elo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode10"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode21"]
 shape = SubResource("CircleShape2D_sxwgc")
 
 [node name="PathNode11" type="Area2D" parent="CombatArea/EnemyPathing"]
-position = Vector2(-37, 13)
+position = Vector2(-18, 5)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
@@ -1414,11 +1511,10 @@ texture = SubResource("AtlasTexture_h2elo")
 shape = SubResource("CircleShape2D_sxwgc")
 
 [node name="PathNode12" type="Area2D" parent="CombatArea/EnemyPathing"]
-position = Vector2(-35, -49)
+position = Vector2(-34, -42)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
-weight = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode12"]
 self_modulate = Color(0.0156863, 1, 0, 1)
@@ -1428,49 +1524,18 @@ texture = SubResource("AtlasTexture_h2elo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode12"]
 shape = SubResource("CircleShape2D_sxwgc")
 
-[node name="PathNode17" type="Area2D" parent="CombatArea/EnemyPathing"]
-position = Vector2(-52, -16)
+[node name="PathNode22" type="Area2D" parent="CombatArea/EnemyPathing"]
+position = Vector2(-33, -21)
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("43_a7d7h")
-weight = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode17"]
+[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode22"]
 self_modulate = Color(0.0156863, 1, 0, 1)
 z_index = 999
 texture = SubResource("AtlasTexture_h2elo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode17"]
-shape = SubResource("CircleShape2D_sxwgc")
-
-[node name="PathNode13" type="Area2D" parent="CombatArea/EnemyPathing"]
-position = Vector2(-108, -44)
-collision_layer = 16
-collision_mask = 16
-script = ExtResource("43_a7d7h")
-weight = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode13"]
-self_modulate = Color(0.0156863, 1, 0, 1)
-z_index = 999
-texture = SubResource("AtlasTexture_h2elo")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode13"]
-shape = SubResource("CircleShape2D_sxwgc")
-
-[node name="PathNode14" type="Area2D" parent="CombatArea/EnemyPathing"]
-position = Vector2(-100, 41)
-collision_layer = 16
-collision_mask = 16
-script = ExtResource("43_a7d7h")
-weight = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="CombatArea/EnemyPathing/PathNode14"]
-self_modulate = Color(0.0156863, 1, 0, 1)
-z_index = 999
-texture = SubResource("AtlasTexture_h2elo")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode14"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatArea/EnemyPathing/PathNode22"]
 shape = SubResource("CircleShape2D_sxwgc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var chanceToHitModifier : int = 0
 @export var weaponSkill : int = 12
 @export var weaponDamage : int = 6
-@export var maxWeaponAmmo : int = 3
+@export var maxWeaponAmmo : int = 6
 @export var maxActionPoints : int = 6
 
 @onready var spriteRootNode : Node2D = $SpriteRoot
