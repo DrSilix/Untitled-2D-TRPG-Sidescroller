@@ -42,7 +42,7 @@ func PlayCutscene():
 
 func BeginCombat():
 	print("Beginning Combat")
-	for i in 8:
+	for i in 100:
 		print("Round ",i+1 ," Starting")
 		await CombatRound()
 		print("Round ",i+1 ," Complete")

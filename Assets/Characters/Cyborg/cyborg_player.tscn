@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://cqb2ap066ohga"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/player_character.gd" id="1_25wh6"]
+[ext_resource type="Script" path="res://Assets/Characters/enemy_character.gd" id="1_nkmkw"]
 [ext_resource type="Texture2D" uid="uid://bppw7d22ppws1" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/3 Cyborg/Idle2.png" id="2_a5s80"]
 [ext_resource type="Texture2D" uid="uid://bmpcoxwgds66x" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/4 Shoot_effects/2_1.png" id="3_un1j1"]
 [ext_resource type="Texture2D" uid="uid://7vbdy8qxfvgr" path="res://Assets/Sprites/Sourcefiles/free-guns-pack-2-for-main-characters-pixel-art/2 Guns/9_1.png" id="4_wv8yw"]
@@ -1379,16 +1379,17 @@ _data = {
 "Walk": SubResource("Animation_dsgr0")
 }
 
-[node name="Cyborg_Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Cyborg_Player" type="CharacterBody2D" groups=["Enemy"]]
 motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
-script = ExtResource("1_25wh6")
+script = ExtResource("1_nkmkw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.34)
 scale = Vector2(0.81, 0.45)
 shape = SubResource("CircleShape2D_a4myl")
+disabled = true
 
 [node name="SpriteRoot" type="Node2D" parent="."]
 

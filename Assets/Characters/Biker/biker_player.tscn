@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://ttrqvpi4epxd"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/player_character.gd" id="1_xutg7"]
+[ext_resource type="Script" path="res://Assets/Characters/player_character.gd" id="1_xutg7"]
 [ext_resource type="Texture2D" uid="uid://boj1xwc1bl5lu" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/4 Shoot_effects/1_1.png" id="3_rvkst"]
 [ext_resource type="Texture2D" uid="uid://k8ad3y0gnvub" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/2 Guns/8_1.png" id="4_ro1di"]
 [ext_resource type="Texture2D" uid="uid://bn8ladmoxt0c1" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/3 Hands/1 Biker/8.png" id="5_rpwvx"]

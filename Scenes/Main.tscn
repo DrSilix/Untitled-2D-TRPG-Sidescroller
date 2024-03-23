@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=64 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://pac5y7ivdynl" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Arch.png" id="9_0v5go"]
 [ext_resource type="Texture2D" uid="uid://dbdmxhiunr7n6" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Decoration7.png" id="9_2f2yh"]
 [ext_resource type="Texture2D" uid="uid://cbuk7ydwxo3m5" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Fence2.png" id="9_kkxld"]
-[ext_resource type="Script" path="res://Scenes/StaticBGObject.gd" id="12_3w3n6"]
+[ext_resource type="Script" path="res://Assets/Scripts/StaticBGObject.gd" id="12_3w3n6"]
 [ext_resource type="Texture2D" uid="uid://cbwu1t35cjfuc" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Pillar2.png" id="12_onkwc"]
 [ext_resource type="Texture2D" uid="uid://p5fw73h12sd1" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/3 Objects/Box.png" id="13_bviol"]
 [ext_resource type="Texture2D" uid="uid://dxwod5pieama" path="res://Assets/Sprites/Sourcefiles/cracks_spritesheet.png" id="13_pc5h0"]
@@ -39,12 +39,14 @@
 [ext_resource type="Texture2D" uid="uid://dq6bmewx3o0tf" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/15.png" id="39_ik5m1"]
 [ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="40_m8kxh"]
 [ext_resource type="Texture2D" uid="uid://bupacdml8hstv" path="res://Assets/Spritesheets/Sourcefiles/residential-area-tileset-pixel-art/3 Objects/Symbols/17.png" id="40_v6oh5"]
-[ext_resource type="PackedScene" uid="uid://bbbpdf2yli53k" path="res://Scenes/hud.tscn" id="41_lftf4"]
+[ext_resource type="PackedScene" uid="uid://bbbpdf2yli53k" path="res://Assets/UI/hud.tscn" id="41_lftf4"]
 [ext_resource type="Script" path="res://Assets/Scripts/combat_area.gd" id="41_ovlr0"]
 [ext_resource type="Script" path="res://Assets/Scripts/path_node.gd" id="43_a7d7h"]
 [ext_resource type="PackedScene" uid="uid://16cbe3kx3src" path="res://Assets/Characters/Enemy1/Enemy1.tscn" id="43_e7uyp"]
 [ext_resource type="Script" path="res://Assets/Scripts/enemy_spawn.gd" id="43_nnltu"]
+[ext_resource type="PackedScene" uid="uid://cjbguv36aqb2n" path="res://Assets/Characters/Punk/punk_player.tscn" id="43_xoomj"]
 [ext_resource type="PackedScene" uid="uid://crl3xnu4uelc1" path="res://Assets/UI/stop_speech_bubble.tscn" id="44_k18i6"]
+[ext_resource type="PackedScene" uid="uid://cqb2ap066ohga" path="res://Assets/Characters/Cyborg/cyborg_player.tscn" id="44_x1t4m"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7xmqh"]
 friction = 0.0
@@ -1193,7 +1195,7 @@ position = Vector2(122, 2)
 skew = -0.710349
 texture = SubResource("AtlasTexture_bj06k")
 script = ExtResource("43_nnltu")
-enemyTemplate = ExtResource("43_e7uyp")
+enemyTemplate = ExtResource("43_xoomj")
 startingPathNode = NodePath("../EnemyPathing/PathNode2")
 
 [node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn2"]
@@ -1205,7 +1207,7 @@ position = Vector2(161, 43)
 skew = -0.710349
 texture = SubResource("AtlasTexture_bj06k")
 script = ExtResource("43_nnltu")
-enemyTemplate = ExtResource("43_e7uyp")
+enemyTemplate = ExtResource("44_x1t4m")
 startingPathNode = NodePath("../EnemyPathing/PathNode")
 
 [node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn3"]
