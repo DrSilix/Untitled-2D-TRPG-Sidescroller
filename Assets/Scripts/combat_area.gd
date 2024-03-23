@@ -8,16 +8,11 @@ var camera_2d : Camera2D
 var player : BaseCharacter
 
 var enemies : Array[BaseCharacter]
+var players : Array[BaseCharacter]
 
 func _ready():
 	stop_.visible = false
-	#Handling Enemy Spawn
 	connect("body_entered", _on_body_entered,)
-	#var spawns = find_children("EnemySpawn*")
-	#for spawn in spawns:
-		#spawnAreas.append(SpawnArea.new(spawn, spawn.get_child(0)))
-		#spawn.visible = false
-		#spawn.get_child(0).visible = false
 
 func PlayCutscene():
 	camera_2d = GameManager.camera_2d
@@ -42,6 +37,7 @@ func PlayCutscene():
 
 func BeginCombat():
 	print("Beginning Combat")
+	GameManager.current_enemies = enemies
 	for i in 100:
 		print("Round ",i+1 ," Starting")
 		await CombatRound()
@@ -49,8 +45,11 @@ func BeginCombat():
 
 func CombatRound():
 	for enemy in enemies:
-			print(enemy.name, "'s turn")
-			await TakeTurn(enemy)
+		print(enemy.name, "'s turn")
+		await TakeTurn(enemy)
+	for player in players:
+		print(player.name, "'s turn")
+		await TakeTurn(player)
 
 func TakeTurn(actor : BaseCharacter):
 	while actor.currentActionPoints > 0:

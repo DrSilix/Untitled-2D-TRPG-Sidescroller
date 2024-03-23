@@ -6,6 +6,7 @@ extends Node
 
 var player1PackedScene : PackedScene = preload("res://Assets/Characters/Biker/biker_player.tscn")
 var biker_player
+var current_enemies
 
 func _ready():
 	player_spawn.visible = false

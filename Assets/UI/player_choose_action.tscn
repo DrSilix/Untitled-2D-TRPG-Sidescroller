@@ -1,0 +1,220 @@
+[gd_scene load_steps=12 format=3 uid="uid://x1j2btwuvqub"]
+
+[ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="1_4oasa"]
+[ext_resource type="Script" path="res://Assets/UI/player_choose_action.gd" id="1_brwui"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loubr"]
+bg_color = Color(0.2, 0.2, 0.2, 0.941176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp4c4"]
+atlas = ExtResource("1_4oasa")
+region = Rect2(736, 448, 64, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nde4c"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = SubResource("AtlasTexture_jp4c4")
+modulate_color = Color(0.815686, 0.815686, 0.815686, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eoquf"]
+load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cbw6"]
+atlas = SubResource("CompressedTexture2D_eoquf")
+region = Rect2(736, 448, 64, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8jua6"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = SubResource("AtlasTexture_0cbw6")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gd43w"]
+load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqwst"]
+atlas = SubResource("CompressedTexture2D_gd43w")
+region = Rect2(736, 448, 64, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_duxmc"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = SubResource("AtlasTexture_oqwst")
+modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
+
+[node name="PlayerChooseAction" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_brwui")
+
+[node name="Main" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 59.0
+offset_top = 253.0
+offset_right = 60.0
+offset_bottom = 254.0
+
+[node name="Panel" type="PanelContainer" parent="Main"]
+layout_mode = 0
+offset_right = 236.0
+offset_bottom = 408.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_loubr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 42
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 42
+theme_override_constants/margin_bottom = 26
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 32
+
+[node name="Attack" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
+text = "Attack"
+
+[node name="Move" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
+text = "Move"
+
+[node name="Pass" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
+text = "Pass"
+
+[node name="Flee" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
+disabled = true
+text = "Flee	"
+
+[node name="SubAttack" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 302.0
+offset_top = 253.0
+offset_right = 303.0
+offset_bottom = 254.0
+
+[node name="Panel" type="PanelContainer" parent="SubAttack"]
+layout_mode = 0
+offset_right = 236.0
+offset_bottom = 408.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_loubr")
+
+[node name="MarginContainer" type="MarginContainer" parent="SubAttack/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 42
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 42
+theme_override_constants/margin_bottom = 26
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubAttack/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 32
+
+[node name="SingleShot" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
+text = "Single
+Shot"
+
+[node name="BurstShot" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
+text = "Burst
+Shot"
+
+[node name="Grenade" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
+text = "Grenade"
+
+[node name="Reload" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
+text = "Reload"
+
+[node name="Targets" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 546.0
+offset_top = 253.0
+offset_right = 547.0
+offset_bottom = 254.0
+
+[node name="Panel" type="PanelContainer" parent="Targets"]
+layout_mode = 0
+offset_right = 236.0
+offset_bottom = 408.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_loubr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Targets/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 42
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 42
+theme_override_constants/margin_bottom = 26
+
+[node name="TargetsVBoxContainer" type="VBoxContainer" parent="Targets/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[connection signal="pressed" from="Main/Panel/MarginContainer/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
+[connection signal="pressed" from="Main/Panel/MarginContainer/VBoxContainer/Move" to="." method="_on_move_pressed"]
+[connection signal="pressed" from="Main/Panel/MarginContainer/VBoxContainer/Pass" to="." method="_on_pass_pressed"]
+[connection signal="pressed" from="Main/Panel/MarginContainer/VBoxContainer/Flee" to="." method="_on_flee_pressed"]
+[connection signal="pressed" from="SubAttack/Panel/MarginContainer/VBoxContainer/SingleShot" to="." method="_on_single_shot_pressed"]
+[connection signal="pressed" from="SubAttack/Panel/MarginContainer/VBoxContainer/BurstShot" to="." method="_on_burst_shot_pressed"]
+[connection signal="pressed" from="SubAttack/Panel/MarginContainer/VBoxContainer/Grenade" to="." method="_on_grenade_pressed"]
+[connection signal="pressed" from="SubAttack/Panel/MarginContainer/VBoxContainer/Reload" to="." method="_on_reload_pressed"]

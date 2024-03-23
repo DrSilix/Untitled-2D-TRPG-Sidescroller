@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://16cbe3kx3src"]
 
 [ext_resource type="Texture2D" uid="uid://cgnjrp6wydebj" path="res://Assets/Sprites/Sourcefiles/police-cyberpunk-characters-pixel-art/2 Sergeant/Idle.png" id="1_ej44u"]
-[ext_resource type="Script" path="res://Assets/Characters/enemy_character.gd" id="1_xqqal"]
+[ext_resource type="Script" path="res://Assets/Characters/enemy_character.gd" id="1_roqyh"]
 [ext_resource type="Texture2D" uid="uid://cbsu72t6j8y7p" path="res://Assets/Sprites/Sourcefiles/police-cyberpunk-characters-pixel-art/2 Sergeant/Walk.png" id="2_bi84v"]
 [ext_resource type="Texture2D" uid="uid://b4kwe2s17txm3" path="res://Assets/Sprites/Sourcefiles/police-cyberpunk-characters-pixel-art/2 Sergeant/Attack3.png" id="3_k056f"]
 [ext_resource type="Texture2D" uid="uid://lqe3l81myats" path="res://Assets/Sprites/Sourcefiles/police-cyberpunk-characters-pixel-art/2 Sergeant/Attack1.png" id="3_lo0xd"]
@@ -290,7 +290,7 @@ collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
-script = ExtResource("1_xqqal")
+script = ExtResource("1_roqyh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.34)

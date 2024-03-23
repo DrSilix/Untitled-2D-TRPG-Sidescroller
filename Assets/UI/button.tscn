@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://cghwhb7ybxf2e"]
+
+[ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="1_hr3px"]
+[ext_resource type="Script" path="res://Assets/UI/target_button.gd" id="2_prfe3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp4c4"]
+atlas = ExtResource("1_hr3px")
+region = Rect2(736, 448, 64, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nde4c"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = SubResource("AtlasTexture_jp4c4")
+modulate_color = Color(0.815686, 0.815686, 0.815686, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eoquf"]
+load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cbw6"]
+atlas = SubResource("CompressedTexture2D_eoquf")
+region = Rect2(736, 448, 64, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8jua6"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = SubResource("AtlasTexture_0cbw6")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gd43w"]
+load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqwst"]
+atlas = SubResource("CompressedTexture2D_gd43w")
+region = Rect2(736, 448, 64, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_duxmc"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = SubResource("AtlasTexture_oqwst")
+modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(0, 62)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
+text = "Single
+Shot"
+script = ExtResource("2_prfe3")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

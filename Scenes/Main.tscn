@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=65 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -47,6 +47,7 @@
 [ext_resource type="PackedScene" uid="uid://cjbguv36aqb2n" path="res://Assets/Characters/Punk/punk_player.tscn" id="43_xoomj"]
 [ext_resource type="PackedScene" uid="uid://crl3xnu4uelc1" path="res://Assets/UI/stop_speech_bubble.tscn" id="44_k18i6"]
 [ext_resource type="PackedScene" uid="uid://cqb2ap066ohga" path="res://Assets/Characters/Cyborg/cyborg_player.tscn" id="44_x1t4m"]
+[ext_resource type="PackedScene" uid="uid://x1j2btwuvqub" path="res://Assets/UI/player_choose_action.tscn" id="48_6fmxg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7xmqh"]
 friction = 0.0
@@ -1549,6 +1550,8 @@ metadata/_edit_lock_ = true
 [node name="Stop!" parent="CanvasLayer" instance=ExtResource("44_k18i6")]
 visible = false
 mouse_filter = 1
+
+[node name="PlayerChooseAction" parent="CanvasLayer" instance=ExtResource("48_6fmxg")]
 
 [node name="PlayerSpawn" type="Sprite2D" parent="."]
 modulate = Color(0.2, 1, 0.0588235, 1)
