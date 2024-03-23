@@ -2,19 +2,13 @@ extends BaseCharacter
 
 @export var attackWeight := 5
 @export var moveWeight := 3
-@export var moveCost := 3
 @export var fleeWeight := 0
-@export var fleeCost := 0
 
 @export_group("Attacks")
 @export var singleShotWeight := 9
-@export var singleShotCost := 3
 @export var burstShotWeight := 5
-@export var burstShotCost := 6
 @export var grenadeWeight := 0
-@export var grenadeCost := 6
 
-@export var reloadCost := 3
 
 var associatedPathNode : PathNode
 var rng := RandomNumberGenerator.new()
@@ -43,7 +37,9 @@ func _ready():
 
 #action weights, when using an action the weight is reduced, when event
 #weight can be increased. e.g. movement reduces as used, when hit gets raised
-func ChooseCombatAction():
+func ChooseCombatAction(combatArea : CombatArea):
+	currentCombatArea = combatArea
+	await get_tree().create_timer(1).timeout
 	var combinedWeightActions := 0
 	var possibleActions : Array[CAction]
 	if attackA.cost <= currentActionPoints and attackA.weight > 0:
@@ -57,9 +53,9 @@ func ChooseCombatAction():
 		possibleActions.append(fleeA)
 	
 	if possibleActions.size() == 0 and combinedWeightActions == 0:
-		currentActionPoints = 0
 		currentChosenAction = CombatActions.PASS
 		print(CombatActions.keys()[currentChosenAction])
+		CompleteChosenAction()
 		return
 
 	var chosenWeight = rng.randi_range(0, combinedWeightActions-1)
@@ -86,9 +82,9 @@ func ChooseCombatAction():
 			possibleActions.append(grenadeA)
 		
 		if possibleActions.size() == 0 and combinedWeightActions == 0:
-			currentActionPoints -= reloadCost if currentActionPoints >= reloadCost else currentActionPoints
 			currentChosenAction = CombatActions.RELOAD
 			print(CombatActions.keys()[currentChosenAction])
+			CompleteChosenAction()
 			return
 
 		chosenWeight = rng.randi_range(0, combinedWeightActions-1)
@@ -101,39 +97,21 @@ func ChooseCombatAction():
 				break
 
 	currentChosenAction = chosenPossibleAction.combatAction
-	currentActionPoints -= chosenPossibleAction.cost
 	print(CombatActions.keys()[currentChosenAction])
+	CompleteChosenAction()
 
 
 func CompleteChosenAction():
-	#do this if moving
-	match currentChosenAction:
-		CombatActions.SHOOTSINGLE:
-			currentWeaponAmmo -= 1
-			activeState = ATTACKING
-			print("Shooting Single")
-		CombatActions.SHOOTBURST:
-			currentWeaponAmmo -= 3 if currentWeaponAmmo >= 3 else currentWeaponAmmo
-			activeState = ATTACKING_TWO
-			print("Shooting Burst")
-		CombatActions.GRENADE:
-			print("Throwing Grenade")
-		CombatActions.RELOAD:
-			activeState = RELOADING
-			currentWeaponAmmo = maxWeaponAmmo
-		CombatActions.MOVE:
-			print("Moving")
-			moveA.weight -= 1
-			associatedPathNode.occupied = false
-			associatedPathNode = associatedPathNode.GetMoveToNode()
-			associatedPathNode.occupied = true
-			MoveTo(associatedPathNode.global_position)
-			# TODO: somehow wait for move to finish. signals??
-		CombatActions.FLEE:
-			print("Fleeing")
-		CombatActions.PASS:
-			print("Passing Turn")
-	print("Actions points: ", currentActionPoints)
+	await get_tree().create_timer(1).timeout
+	super.CompleteChosenAction()
+	
+func MoveAction():
+	print("Moving")
+	moveA.weight -= 1
+	associatedPathNode.occupied = false
+	associatedPathNode = associatedPathNode.GetMoveToNode()
+	associatedPathNode.occupied = true
+	MoveTo(associatedPathNode.global_position)
 
 func _process(delta):
 	pass

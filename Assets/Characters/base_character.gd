@@ -10,6 +10,14 @@ extends CharacterBody2D
 @export var maxWeaponAmmo : int = 6
 @export var maxActionPoints : int = 6
 
+@export_group("Action Costs")
+@export var moveCost := 3
+@export var fleeCost := 0
+@export var singleShotCost := 3
+@export var burstShotCost := 6
+@export var grenadeCost := 6
+@export var reloadCost := 3
+
 @onready var spriteRootNode : Node2D = $SpriteRoot
 @onready var animationPlayer : AnimationPlayer = $SpriteRoot/AnimationPlayer
 
@@ -24,6 +32,8 @@ var currentHealth : int = maxHealth
 var currentActionPoints : int = maxActionPoints
 var currentWeaponAmmo : int = maxWeaponAmmo
 var moveTarget : Vector2
+
+var currentCombatArea : CombatArea
 
 func _ready():
 	animationPlayer.connect("animation_finished", _on_AnimationPlayer_animation_finished,)
@@ -40,11 +50,69 @@ func MoveVelocity(velocity :Vector2):
 	pass
 
 
-func ChooseCombatAction():
+func ChooseCombatAction(combatArea : CombatArea):
+	currentCombatArea = combatArea
 	pass
 
 func CompleteChosenAction():
-	pass
+	#do this if moving
+	match currentChosenAction:
+		CombatActions.SHOOTSINGLE:
+			ShootSingleAction()
+		CombatActions.SHOOTBURST:
+			ShootBurstAction()
+		CombatActions.GRENADE:
+			GrenadeAction()
+		CombatActions.RELOAD:
+			ReloadAction()
+		CombatActions.MOVE:
+			MoveAction()
+			# TODO: somehow wait for move to finish. signals??
+		CombatActions.FLEE:
+			FleeAction()
+		CombatActions.PASS:
+			PassAction()
+			
+	print("Actions points: ", currentActionPoints)
+	if currentActionPoints > 0: ChooseCombatAction(currentCombatArea)
+	else:
+		currentActionPoints = maxActionPoints
+		currentCombatArea.CallNextCombatantToTakeTurn()
+		
+	
+func ShootSingleAction():
+	currentActionPoints -= singleShotCost
+	currentWeaponAmmo -= 1
+	activeState = ATTACKING
+	print("Shooting Single")
+
+func ShootBurstAction():
+	currentActionPoints -= burstShotCost
+	currentWeaponAmmo -= 3 if currentWeaponAmmo >= 3 else currentWeaponAmmo
+	activeState = ATTACKING_TWO
+	print("Shooting Burst")
+
+func GrenadeAction():
+	currentActionPoints -= grenadeCost
+	print("Throwing Grenade")
+
+func ReloadAction():
+	currentActionPoints -= reloadCost if currentActionPoints >= reloadCost else currentActionPoints
+	activeState = RELOADING
+	currentWeaponAmmo = maxWeaponAmmo
+
+func MoveAction():
+	currentActionPoints -= moveCost
+	print("Moving")
+
+func FleeAction():
+	currentActionPoints = 0
+	print("Fleeing")
+
+func PassAction():
+	currentActionPoints = 0
+	print("Passing Turn")
+
 
 func TakeCover():
 	hasCover = true

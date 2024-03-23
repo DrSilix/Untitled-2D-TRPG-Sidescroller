@@ -6,14 +6,15 @@ signal action_chosen(action : String, data)
 @onready var targets : Control = $Targets
 @onready var targets_v_box_container = $Targets/Panel/MarginContainer/TargetsVBoxContainer
 
-@onready var attack := $Main/Panel/Attack
-@onready var move := $Main/Panel/Move
-@onready var passB := $Main/Panel/Pass
-@onready var flee := $Main/Panel/Flee
-@onready var reload := $SubAttack/Panel/Reload
-@onready var single_shot := $SubAttack/Panel/SingleShot
-@onready var burst_shot := $SubAttack/Panel/BurstShot
-@onready var grenade := $SubAttack/Panel/Grenade
+
+@onready var attack := $Main/Panel/MarginContainer/VBoxContainer/Attack
+@onready var move := $Main/Panel/MarginContainer/VBoxContainer/Move
+@onready var passB := $Main/Panel/MarginContainer/VBoxContainer/Pass
+@onready var flee := $Main/Panel/MarginContainer/VBoxContainer/Flee
+@onready var reload := $SubAttack/Panel/MarginContainer/VBoxContainer/Reload
+@onready var single_shot := $SubAttack/Panel/MarginContainer/VBoxContainer/SingleShot
+@onready var burst_shot := $SubAttack/Panel/MarginContainer/VBoxContainer/BurstShot
+@onready var grenade := $SubAttack/Panel/MarginContainer/VBoxContainer/Grenade
 
 const BUTTON = preload("res://Assets/UI/button.tscn")
 
@@ -35,19 +36,27 @@ func Initialize(character : BaseCharacter):
 	_character = character
 	_enemies = GameManager.current_enemies
 	FleeDisabledCheck(false)
+	if _character.currentActionPoints >= _character.singleShotCost:
+		attack.disabled = false
+	else: attack.disabled = true
+	move.disabled = false
+	passB.disabled = false
+	ConstructTargetMenu()
 	sub_attack.visible = false
 	targets.visible = false
 	
 
 func ActionChosen(action : String, data):
-	action_chosen.emit(action, data)
+	DeconstructTargetMenu()
 	visible = false
+	action_chosen.emit(action, data)
 
 func FleeDisabledCheck(value : bool):
 	if _character.currentHealth > _character.maxHealth / 2:
 		flee.disabled = true
 	else:
 		flee.disabled = value
+		
 
 func ConstructTargetMenu():
 	for i in range(_enemies.size()):
@@ -70,16 +79,22 @@ func _on_attack_pressed():
 		attack.text = "Attack"
 		move.disabled = false
 		passB.disabled = false
-		#FleeDisabledCheck(false)
+		FleeDisabledCheck(false)
 	else:
 		sub_attack.visible = true
 		attack.text = "Cancel"
 		move.disabled = true
 		passB.disabled = true
-		#FleeDisabledCheck(true)
-		reload.disabled = false if _character.currentWeaponAmmo <= 3 else true
-		single_shot.disabled = false if _character.currentWeaponAmmo >= 1 else true
-		burst_shot.disabled = false if _character.currentWeaponAmmo >= 3 else true
+		FleeDisabledCheck(true)
+		if _character.currentWeaponAmmo <= 3 and _character.currentActionPoints >= _character.reloadCost:
+			reload.disabled = false
+		else: reload.disabled = true
+		if _character.currentWeaponAmmo >= 1 and _character.currentActionPoints >= _character.singleShotCost:
+			single_shot.disabled = false
+		else: single_shot.disabled = true
+		if _character.currentWeaponAmmo >= 3 and _character.currentActionPoints >= _character.burstShotCost:
+			burst_shot.disabled = false
+		else: burst_shot.disabled = true
 		single_shot.text = "Single\nShot"
 		burst_shot.text = "Burst\nShot"
 		grenade.text = "Grenade"
@@ -154,6 +169,15 @@ func _on_grenade_pressed():
 
 func _on_reload_pressed():
 	ActionChosen("reload", null)
+	attack.text = "Attack"
+	move.disabled = false
+	passB.disabled = false
+	FleeDisabledCheck(false)
 	
 func _on_enemy_target_pressed_with_info(button : Button):
+	sub_attack.visible = false
+	attack.text = "Attack"
+	move.disabled = false
+	passB.disabled = false
+	FleeDisabledCheck(false)
 	ActionChosen(attackType, button.targetId)

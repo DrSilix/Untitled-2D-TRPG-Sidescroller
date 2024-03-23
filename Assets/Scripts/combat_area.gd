@@ -1,4 +1,4 @@
-extends Area2D
+class_name CombatArea extends Area2D
 
 @export var spawns : Array[EnemySpawn]
 
@@ -9,6 +9,10 @@ var player : BaseCharacter
 
 var enemies : Array[BaseCharacter]
 var players : Array[BaseCharacter]
+
+var _numberOfCombatParticipants : int
+var _currentActiveCombatantIndex : int
+var _round : int
 
 func _ready():
 	stop_.visible = false
@@ -32,36 +36,42 @@ func PlayCutscene():
 		enemies.append(enemy)
 	var tween = get_tree().create_tween()
 	tween.tween_property(camera_2d, "global_position", global_position, 1)
+	GameManager.punk_player.visible = true
+	GameManager.cyborg_player.visible = true
 	await get_tree().create_timer(2).timeout
 	BeginCombat()
 
 func BeginCombat():
 	print("Beginning Combat")
+	_round = 1
 	GameManager.current_enemies = enemies
-	for i in 100:
-		print("Round ",i+1 ," Starting")
-		await CombatRound()
-		print("Round ",i+1 ," Complete")
+	players = GameManager.current_players
+	CombatRound()
 
 func CombatRound():
-	for enemy in enemies:
-		print(enemy.name, "'s turn")
-		await TakeTurn(enemy)
-	for player in players:
-		print(player.name, "'s turn")
-		await TakeTurn(player)
+	if _round > 1: print("Round ",_round ," Complete")
+	print("Round ",_round ," Starting")
+	_numberOfCombatParticipants = players.size() + enemies.size()
+	_currentActiveCombatantIndex = -1
+	_round += 1
+	CallNextCombatantToTakeTurn()
+
+func CallNextCombatantToTakeTurn():
+	_currentActiveCombatantIndex += 1
+	if _currentActiveCombatantIndex >= _numberOfCombatParticipants:
+		CombatRound()
+		return
+	if _currentActiveCombatantIndex < players.size():
+		TakeTurn(players[_currentActiveCombatantIndex])
+	else:
+		TakeTurn(enemies[_currentActiveCombatantIndex - players.size()])
 
 func TakeTurn(actor : BaseCharacter):
-	while actor.currentActionPoints > 0:
-		await get_tree().create_timer(1).timeout
-		actor.ChooseCombatAction()
-		await get_tree().create_timer(1).timeout
-		actor.CompleteChosenAction()
-		await get_tree().create_timer(2).timeout
-	actor.currentActionPoints = actor.maxActionPoints
+	actor.ChooseCombatAction(self)
 
 #Handle combat area enter
 func _on_body_entered(body):
+	# TODO: disconnect this after it's entered first time
 	if body.is_in_group("Player"):
 		player = body
 		player.isInputDisabled = true

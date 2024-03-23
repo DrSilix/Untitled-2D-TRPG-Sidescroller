@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=63 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -44,9 +44,7 @@
 [ext_resource type="Script" path="res://Assets/Scripts/path_node.gd" id="43_a7d7h"]
 [ext_resource type="PackedScene" uid="uid://16cbe3kx3src" path="res://Assets/Characters/Enemy1/Enemy1.tscn" id="43_e7uyp"]
 [ext_resource type="Script" path="res://Assets/Scripts/enemy_spawn.gd" id="43_nnltu"]
-[ext_resource type="PackedScene" uid="uid://cjbguv36aqb2n" path="res://Assets/Characters/Punk/punk_player.tscn" id="43_xoomj"]
 [ext_resource type="PackedScene" uid="uid://crl3xnu4uelc1" path="res://Assets/UI/stop_speech_bubble.tscn" id="44_k18i6"]
-[ext_resource type="PackedScene" uid="uid://cqb2ap066ohga" path="res://Assets/Characters/Cyborg/cyborg_player.tscn" id="44_x1t4m"]
 [ext_resource type="PackedScene" uid="uid://x1j2btwuvqub" path="res://Assets/UI/player_choose_action.tscn" id="48_6fmxg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7xmqh"]
@@ -1196,7 +1194,7 @@ position = Vector2(122, 2)
 skew = -0.710349
 texture = SubResource("AtlasTexture_bj06k")
 script = ExtResource("43_nnltu")
-enemyTemplate = ExtResource("43_xoomj")
+enemyTemplate = ExtResource("43_e7uyp")
 startingPathNode = NodePath("../EnemyPathing/PathNode2")
 
 [node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn2"]
@@ -1208,7 +1206,7 @@ position = Vector2(161, 43)
 skew = -0.710349
 texture = SubResource("AtlasTexture_bj06k")
 script = ExtResource("43_nnltu")
-enemyTemplate = ExtResource("44_x1t4m")
+enemyTemplate = ExtResource("43_e7uyp")
 startingPathNode = NodePath("../EnemyPathing/PathNode")
 
 [node name="MoveTo" type="Sprite2D" parent="CombatArea/EnemySpawn3"]
@@ -1552,10 +1550,25 @@ visible = false
 mouse_filter = 1
 
 [node name="PlayerChooseAction" parent="CanvasLayer" instance=ExtResource("48_6fmxg")]
+visible = false
 
 [node name="PlayerSpawn" type="Sprite2D" parent="."]
 modulate = Color(0.2, 1, 0.0588235, 1)
 position = Vector2(734, 421)
+scale = Vector2(2, 2)
+skew = -0.773181
+texture = SubResource("AtlasTexture_btrtx")
+
+[node name="PlayerSpawn2" type="Sprite2D" parent="."]
+modulate = Color(0.2, 1, 0.0588235, 1)
+position = Vector2(827, 342)
+scale = Vector2(2, 2)
+skew = -0.773181
+texture = SubResource("AtlasTexture_btrtx")
+
+[node name="PlayerSpawn3" type="Sprite2D" parent="."]
+modulate = Color(0.2, 1, 0.0588235, 1)
+position = Vector2(827, 436)
 scale = Vector2(2, 2)
 skew = -0.773181
 texture = SubResource("AtlasTexture_btrtx")
