@@ -75,10 +75,10 @@ func ChooseCombatAction():
 	if chosenPossibleAction.combatAction == CombatActions.ATTACK:
 		combinedWeightActions = 0
 		possibleActions.clear()
-		if singleSA.cost <= currentActionPoints:
+		if singleSA.cost <= currentActionPoints and currentWeaponAmmo >= 1:
 			combinedWeightActions += singleSA.weight
 			possibleActions.append(singleSA)
-		if burstSA.cost <= currentActionPoints:
+		if burstSA.cost <= currentActionPoints and currentWeaponAmmo >= 3:
 			combinedWeightActions += burstSA.weight
 			possibleActions.append(burstSA)
 		if grenadeA.cost <= currentActionPoints and grenadeA.weight > 0:
@@ -110,17 +110,20 @@ func CompleteChosenAction():
 	match currentChosenAction:
 		CombatActions.SHOOTSINGLE:
 			currentWeaponAmmo -= 1
+			activeState = ATTACKING
 			print("Shooting Single")
 		CombatActions.SHOOTBURST:
 			currentWeaponAmmo -= 3 if currentWeaponAmmo >= 3 else currentWeaponAmmo
+			activeState = ATTACKING_TWO
 			print("Shooting Burst")
 		CombatActions.GRENADE:
 			print("Throwing Grenade")
 		CombatActions.RELOAD:
+			activeState = RELOADING
 			currentWeaponAmmo = maxWeaponAmmo
 		CombatActions.MOVE:
 			print("Moving")
-			moveA.weight -= 2 if moveA.weight > 1 else 1
+			#moveA.weight -= 2 if moveA.weight > 1 else 1
 			associatedPathNode.occupied = false
 			associatedPathNode = associatedPathNode.GetMoveToNode()
 			associatedPathNode.occupied = true

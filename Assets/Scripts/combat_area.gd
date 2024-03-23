@@ -42,10 +42,10 @@ func PlayCutscene():
 
 func BeginCombat():
 	print("Beginning Combat")
-	for i in 5:
-		print("Round ",i ," Starting")
+	for i in 8:
+		print("Round ",i+1 ," Starting")
 		await CombatRound()
-		print("Round ",i ," Complete")
+		print("Round ",i+1 ," Complete")
 
 func CombatRound():
 	for enemy in enemies:
@@ -54,11 +54,11 @@ func CombatRound():
 
 func TakeTurn(actor : BaseCharacter):
 	while actor.currentActionPoints > 0:
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(1).timeout
 		actor.ChooseCombatAction()
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(1).timeout
 		actor.CompleteChosenAction()
-		await get_tree().create_timer(4).timeout
+		await get_tree().create_timer(2).timeout
 	actor.currentActionPoints = actor.maxActionPoints
 
 #Handle combat area enter

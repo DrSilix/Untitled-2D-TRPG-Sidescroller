@@ -7,13 +7,13 @@ extends CharacterBody2D
 @export var chanceToHitModifier : int = 0
 @export var weaponSkill : int = 12
 @export var weaponDamage : int = 6
-@export var maxWeaponAmmo : int = 30
+@export var maxWeaponAmmo : int = 3
 @export var maxActionPoints : int = 6
 
 @onready var spriteRootNode : Node2D = $SpriteRoot
 @onready var animationPlayer : AnimationPlayer = $SpriteRoot/AnimationPlayer
 
-enum {IDLE, WALKING, RUNNING, ATTACKING, HURT, DEATH}
+enum {IDLE, WALKING, RUNNING, ATTACKING, ATTACKING_TWO, RELOADING, HURT, DEATH}
 var activeState := IDLE
 
 enum CombatActions {ATTACK, SHOOTSINGLE, SHOOTBURST, GRENADE, MOVE, RELOAD, FLEE, PASS}
@@ -119,6 +119,12 @@ func _physics_process(delta):
 		ATTACKING:
 			if animationPlayer.current_animation != "Attack1": animationPlayer.play("Attack1")
 			#print(animationPlayer.current_animation)
+			velocity = Vector2.ZERO
+		ATTACKING_TWO:
+			if animationPlayer.current_animation != "Attack2": animationPlayer.play("Attack2")
+			velocity = Vector2.ZERO
+		RELOADING:
+			if animationPlayer.current_animation != "Reloading": animationPlayer.play("Reloading")
 			velocity = Vector2.ZERO
 		HURT:
 			animationPlayer.play("Hurt")
