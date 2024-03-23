@@ -7,7 +7,8 @@ extends CharacterBody2D
 @export var chanceToHitModifier : int = 0
 @export var weaponSkill : int = 12
 @export var weaponDamage : int = 6
-@export var MaxActionPoints : int = 6
+@export var maxWeaponAmmo : int = 30
+@export var maxActionPoints : int = 6
 
 @onready var spriteRootNode : Node2D = $SpriteRoot
 @onready var animationPlayer : AnimationPlayer = $SpriteRoot/AnimationPlayer
@@ -20,7 +21,8 @@ var currentChosenAction : CombatActions
 
 var hasCover = false
 var currentHealth : int = maxHealth
-var currentActionPoints : int = MaxActionPoints
+var currentActionPoints : int = maxActionPoints
+var currentWeaponAmmo : int = maxWeaponAmmo
 var moveTarget : Vector2
 
 func _ready():

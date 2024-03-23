@@ -59,7 +59,7 @@ func TakeTurn(actor : BaseCharacter):
 		await get_tree().create_timer(2).timeout
 		actor.CompleteChosenAction()
 		await get_tree().create_timer(4).timeout
-	actor.currentActionPoints = actor.MaxActionPoints
+	actor.currentActionPoints = actor.maxActionPoints
 
 #Handle combat area enter
 func _on_body_entered(body):
