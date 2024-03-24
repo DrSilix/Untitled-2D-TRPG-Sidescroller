@@ -79,7 +79,7 @@ func CompleteChosenAction():
 		currentActionPoints = maxActionPoints
 		currentCombatArea.CallNextCombatantToTakeTurn()
 		
-	
+#region Action Processing	
 func ShootSingleAction():
 	currentActionPoints -= singleShotCost
 	currentWeaponAmmo -= 1
@@ -112,7 +112,7 @@ func FleeAction():
 func PassAction():
 	currentActionPoints = 0
 	print("Passing Turn")
-
+#endregion
 
 func TakeCover():
 	hasCover = true
@@ -122,7 +122,7 @@ func LeaveCover():
 	hasCover = false
 	chanceToHitModifier = 0
 
-
+#region Attack Methods
 # -2 for every 3, e.g:
 # 7 8 9 = -0
 # 4 5 6 = -2
@@ -160,7 +160,7 @@ func RollToResistDamage():
 func TakeDamage(damage: int):
 	currentHealth -= damage
 	activeState = HURT if currentHealth > 0 else DEATH
-
+#endregion
 
 func _physics_process(delta):
 
