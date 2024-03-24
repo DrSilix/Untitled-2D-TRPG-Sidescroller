@@ -21,6 +21,7 @@ const BUTTON = preload("res://Assets/UI/button.tscn")
 var _character : BaseCharacter
 var _enemies : Array[BaseCharacter]
 var attackType : String
+var moveable_area : Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -147,8 +148,28 @@ func AttackMenuOpenState(isOpen : bool):
 	grenade.text = "Grenade"
 
 func _on_move_pressed():
-	pass # Replace with function body.
+	moveable_area = _character.find_child("MovableArea")
+	moveable_area.visible = true
+	visible = false
+	get_node("../../MovableArea").connect("input_event", _on_move_location_chosen)
 
+func _on_move_location_chosen(viewport: Node, event: InputEvent, shape_idx: int):
+	if event.is_action_pressed("Move"):
+		var moveTo : Vector2 = _character.get_canvas_transform().affine_inverse() * event.position
+		var physics = get_world_2d().get_direct_space_state()
+		var query = PhysicsPointQueryParameters2D.new()
+		query.position = moveTo
+		query.collide_with_areas = true
+		query.collide_with_bodies = false
+		query.collision_mask = 0b00000000_00000000_00000000_00000010
+		var points : Array[Dictionary] = physics.intersect_point(query)
+		if points.size() > 0:
+			print(points[0]["collider"].name)
+			moveable_area.visible = false
+			get_node("../../MovableArea").disconnect("input_event", _on_move_location_chosen)
+			ActionChosen("move", moveTo)
+			
+	
 
 func _on_pass_pressed():
 	ActionChosen("pass", null)

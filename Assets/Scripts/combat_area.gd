@@ -46,6 +46,8 @@ func BeginCombat():
 	_round = 1
 	GameManager.current_enemies = enemies
 	players = GameManager.current_players
+	for player in players:
+		player.DisconnectFromMovableArea()
 	CombatRound()
 
 func CombatRound():

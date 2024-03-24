@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ttrqvpi4epxd"]
+[gd_scene load_steps=20 format=3 uid="uid://ttrqvpi4epxd"]
 
 [ext_resource type="Script" path="res://Assets/Characters/player_character.gd" id="1_2gc5v"]
 [ext_resource type="Texture2D" uid="uid://boj1xwc1bl5lu" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/4 Shoot_effects/1_1.png" id="3_rvkst"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bn8ladmoxt0c1" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/3 Hands/1 Biker/8.png" id="5_rpwvx"]
 [ext_resource type="Texture2D" uid="uid://bjp45ax0pkt4u" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/1 Biker/Idle2.png" id="6_bcchn"]
 [ext_resource type="Texture2D" uid="uid://cxsd2y2dtk157" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/1 Biker/Run1.png" id="7_3d47h"]
+[ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="8_15jq6"]
 [ext_resource type="Texture2D" uid="uid://cqawe5b6v86ap" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/1 Biker/Walk2.png" id="8_rg37n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4myl"]
@@ -1035,6 +1036,13 @@ _data = {
 "Walk": SubResource("Animation_dsgr0")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fts7g"]
+radius = 60.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2h78"]
+atlas = ExtResource("8_15jq6")
+region = Rect2(464, 304, 32, 32)
+
 [node name="Biker_Player" type="CharacterBody2D" groups=["Player"]]
 motion_mode = 1
 wall_min_slide_angle = 0.0872665
@@ -1074,5 +1082,23 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_w6inl")
 }
+
+[node name="MovableArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovableArea"]
+scale = Vector2(1, 0.56)
+shape = SubResource("CircleShape2D_fts7g")
+
+[node name="Sprite2D" type="Sprite2D" parent="MovableArea"]
+scale = Vector2(2.91, 1.615)
+texture = SubResource("AtlasTexture_w2h78")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MovableArea/Sprite2D"]
+rotation = 0.785398
+texture = SubResource("AtlasTexture_w2h78")
 
 [connection signal="animation_finished" from="SpriteRoot/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -3,12 +3,20 @@ extends BaseCharacter
 @export var isOverworldControllable = false;
 
 @onready var player_choose_action_menu := $/root/Node2D/CanvasLayer/PlayerChooseAction
+
 var isInputDisabled = false
 
 func _ready():
+	ConnectToMovableArea()
+	super._ready()
+
+func ConnectToMovableArea():
 	if isOverworldControllable:
 		get_node("../MovableArea").connect("input_event", _on_input_event)
-	super._ready()
+
+func DisconnectFromMovableArea():
+	if isOverworldControllable:
+		get_node("../MovableArea").disconnect("input_event", _on_input_event)
 
 func ChooseCombatAction(combatArea : CombatArea):
 	currentCombatArea = combatArea
@@ -29,6 +37,7 @@ func _on_action_chosen(action : String, data):
 			currentChosenAction = CombatActions.RELOAD
 		"move":
 			currentChosenAction = CombatActions.MOVE
+			moveTarget = data as Vector2
 		"pass":
 			currentChosenAction = CombatActions.PASS
 		"flee":

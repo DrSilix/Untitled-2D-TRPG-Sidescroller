@@ -103,6 +103,7 @@ func ReloadAction():
 
 func MoveAction():
 	currentActionPoints -= moveCost
+	MoveTo(moveTarget)
 	print("Moving")
 
 func FleeAction():

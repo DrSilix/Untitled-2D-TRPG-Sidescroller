@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cqb2ap066ohga"]
+[gd_scene load_steps=28 format=3 uid="uid://cqb2ap066ohga"]
 
 [ext_resource type="Script" path="res://Assets/Characters/player_character.gd" id="1_nld74"]
 [ext_resource type="Texture2D" uid="uid://bppw7d22ppws1" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/3 Cyborg/Idle2.png" id="2_a5s80"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://buivoeulhujdx" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/3 Hands/3 Cyborg/6.png" id="12_or8e7"]
 [ext_resource type="Texture2D" uid="uid://dmbd6f5l4jliy" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/3 Hands/3 Cyborg/7.png" id="13_rp3by"]
 [ext_resource type="Texture2D" uid="uid://cabgwmyolpqxr" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/3 Cyborg/Walk2.png" id="15_tyu37"]
+[ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="16_q6wvs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4myl"]
 
@@ -1379,6 +1380,13 @@ _data = {
 "Walk": SubResource("Animation_dsgr0")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_f37wl"]
+radius = 60.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0asv"]
+atlas = ExtResource("16_q6wvs")
+region = Rect2(464, 304, 32, 32)
+
 [node name="Cyborg_Player" type="CharacterBody2D"]
 motion_mode = 1
 wall_min_slide_angle = 0.0872665
@@ -1420,5 +1428,23 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_w6inl")
 }
+
+[node name="MovableArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovableArea"]
+scale = Vector2(1, 0.56)
+shape = SubResource("CircleShape2D_f37wl")
+
+[node name="Sprite2D" type="Sprite2D" parent="MovableArea"]
+scale = Vector2(2.91, 1.615)
+texture = SubResource("AtlasTexture_s0asv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MovableArea/Sprite2D"]
+rotation = 0.785398
+texture = SubResource("AtlasTexture_s0asv")
 
 [connection signal="animation_finished" from="SpriteRoot/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
