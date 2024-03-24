@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var moveSpeed : int = 6
 @export var maxHealth : int = 9
-@export var armor : int = 12
+@export var armor : int = 8
 @export var chanceToHitModifier : int = 0
 @export var weaponSkill : int = 12
 @export var weaponDamage : int = 6
@@ -21,7 +21,7 @@ extends CharacterBody2D
 @onready var spriteRootNode : Node2D = $SpriteRoot
 @onready var animationPlayer : AnimationPlayer = $SpriteRoot/AnimationPlayer
 
-enum {IDLE, WALKING, RUNNING, ATTACKING, ATTACKING_TWO, RELOADING, HURT, DEATH}
+enum {IDLE, WALKING, RUNNING, ATTACKING, ATTACKING_TWO, RELOADING, HURT, MISSED, RESISTED, DEATH}
 var activeState := IDLE
 
 enum CombatActions {ATTACK, SHOOTSINGLE, SHOOTBURST, GRENADE, MOVE, RELOAD, FLEE, PASS}
@@ -73,7 +73,10 @@ func CompleteChosenAction():
 			FleeAction()
 		CombatActions.PASS:
 			PassAction()
-			
+	
+	#this await is here to ensure that the consequences of this action for potential
+	#targets is finished before possibly continuing into their turn
+	await get_tree().create_timer(1).timeout
 	print("Actions points: ", currentActionPoints)
 	if currentActionPoints > 0: ChooseCombatAction(currentCombatArea)
 	else:
@@ -82,6 +85,7 @@ func CompleteChosenAction():
 		
 #region Action Processing	
 func ShootSingleAction():
+	print("Shooting Single")
 	currentActionPoints -= singleShotCost
 	currentWeaponAmmo -= 1
 	activeState = ATTACKING
@@ -89,9 +93,9 @@ func ShootSingleAction():
 	if dmgDealt >= 0: print("Deals ", dmgDealt, " damage")
 	elif dmgDealt == -1: print("Attack missed")
 	elif dmgDealt == -2: print("Damage resisted")
-	print("Shooting Single")
 
 func ShootBurstAction():
+	print("Shooting Burst")
 	currentActionPoints -= burstShotCost
 	currentWeaponAmmo -= 3 if currentWeaponAmmo >= 3 else currentWeaponAmmo
 	activeState = ATTACKING_TWO
@@ -99,7 +103,6 @@ func ShootBurstAction():
 	if dmgDealt >= 0: print("Deals ", dmgDealt, " damage")
 	elif dmgDealt == -1: print("Attack missed")
 	elif dmgDealt == -2: print("Damage resisted")
-	print("Shooting Burst")
 
 func GrenadeAction():
 	currentActionPoints -= grenadeCost
@@ -150,25 +153,29 @@ func AttackTarget(target : BaseCharacter) -> int:
 	var hitPenalty = 0
 	if currentChosenAction == CombatActions.SHOOTBURST: hitPenalty = -2
 	var toAvoid : int = target.RollToAvoidAttack(hitPenalty)
-	if toAvoid >= toHit: return -1
+	if toAvoid >= toHit:
+		target.activeState = MISSED
+		return -1
 	var damageToDeal : int = CalculateDamageToDeal(toHit - toAvoid)
 	var damagetToResist : int = target.RollToResistDamage()
-	if damagetToResist >= damageToDeal: return -2
+	if damagetToResist >= damageToDeal:
+		target.activeState = RESISTED
+		return -2
 	target.TakeDamage(damageToDeal - damagetToResist)
 	return damageToDeal - damagetToResist
 
 # ??Factor in distance to shoot??
 func RollToHit():
-	return RollUtil.GetRoll(weaponSkill + getHealthBonus())
+	return RollUtil.GetRoll(weaponSkill + (maxHealth/2) + getHealthBonus())
 
 func CalculateDamageToDeal(netHits : int):
 	return weaponDamage + netHits
 
 func RollToAvoidAttack(penaltyFromAttacker : int):
-	return RollUtil.GetRoll(moveSpeed + getHealthBonus()) + chanceToHitModifier + penaltyFromAttacker
+	return RollUtil.GetRoll(moveSpeed + maxHealth + getHealthBonus()) + chanceToHitModifier + penaltyFromAttacker
 
 func RollToResistDamage():
-	return RollUtil.GetRoll(armor + getHealthBonus())
+	return RollUtil.GetRoll(armor + (maxHealth/2) + getHealthBonus())
 
 func TakeDamage(damage: int):
 	currentHealth -= damage
@@ -209,6 +216,12 @@ func _physics_process(delta):
 			velocity = Vector2.ZERO
 		HURT:
 			animationPlayer.play("Hurt")
+			velocity = Vector2.ZERO
+		MISSED:
+			animationPlayer.play("Missed")
+			velocity = Vector2.ZERO
+		RESISTED:
+			animationPlayer.play("Resisted")
 			velocity = Vector2.ZERO
 		DEATH:
 			Die()

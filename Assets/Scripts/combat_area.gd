@@ -5,7 +5,6 @@ class_name CombatArea extends Area2D
 @onready var stop_ = $"../CanvasLayer/Stop!"
 
 var camera_2d : Camera2D
-var player : BaseCharacter
 
 var enemies : Array[BaseCharacter]
 var players : Array[BaseCharacter]
@@ -72,14 +71,14 @@ func CallNextCombatantToTakeTurn():
 		TakeTurn(enemies[_currentActiveCombatantIndex - players.size()])
 
 func TakeTurn(actor : BaseCharacter):
+	print("---",actor.name, "'s turn---")
 	actor.ChooseCombatAction(self)
 
 #Handle combat area enter
 func _on_body_entered(body):
 	# TODO: disconnect this after it's entered first time
 	if body.is_in_group("Player"):
-		player = body
-		player.isInputDisabled = true
-		player.HaltActions()
+		body.isInputDisabled = true
+		body.HaltActions()
 		#print(spawnAreas[0].moveTarget.name)
 		PlayCutscene()
