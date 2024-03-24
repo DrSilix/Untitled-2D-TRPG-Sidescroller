@@ -123,6 +123,11 @@ func MoveAction():
 	associatedPathNode.occupied = true
 	MoveTo(associatedPathNode.global_position)
 
+func Die():
+	super.Die()
+	GameManager.current_enemies.erase(self)
+	queue_free()
+
 func _process(delta):
 	pass
 

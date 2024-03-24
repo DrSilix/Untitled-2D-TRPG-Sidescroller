@@ -50,7 +50,10 @@ func _on_action_chosen(action : String, data):
 func CompleteChosenAction():
 	super.CompleteChosenAction()
 
-
+func Die():
+	super.Die()
+	GameManager.current_players.erase(self)
+	queue_free()
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
 	if !isInputDisabled:

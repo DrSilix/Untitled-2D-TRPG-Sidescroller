@@ -20,7 +20,10 @@ func _ready():
 
 func PlayCutscene():
 	camera_2d = GameManager.camera_2d
-		
+	camera_2d.position_smoothing_enabled = false
+	camera_2d.reparent(get_parent())
+	await get_tree().create_timer(0.1).timeout
+	camera_2d.position_smoothing_enabled = true
 	stop_.visible = true
 	await get_tree().create_timer(2).timeout
 	stop_.visible = false
@@ -53,13 +56,13 @@ func BeginCombat():
 func CombatRound():
 	if _round > 1: print("Round ",_round ," Complete")
 	print("Round ",_round ," Starting")
-	_numberOfCombatParticipants = players.size() + enemies.size()
 	_currentActiveCombatantIndex = -1
 	_round += 1
 	CallNextCombatantToTakeTurn()
 
 func CallNextCombatantToTakeTurn():
 	_currentActiveCombatantIndex += 1
+	_numberOfCombatParticipants = players.size() + enemies.size()
 	if _currentActiveCombatantIndex >= _numberOfCombatParticipants:
 		CombatRound()
 		return

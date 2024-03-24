@@ -95,7 +95,10 @@ func ShootBurstAction():
 	currentActionPoints -= burstShotCost
 	currentWeaponAmmo -= 3 if currentWeaponAmmo >= 3 else currentWeaponAmmo
 	activeState = ATTACKING_TWO
-	AttackTarget(attackTarget)
+	var dmgDealt = AttackTarget(attackTarget)
+	if dmgDealt >= 0: print("Deals ", dmgDealt, " damage")
+	elif dmgDealt == -1: print("Attack missed")
+	elif dmgDealt == -2: print("Damage resisted")
 	print("Shooting Burst")
 
 func GrenadeAction():
@@ -142,9 +145,11 @@ func getHealthBonus():
 
 
 func AttackTarget(target : BaseCharacter) -> int:
-	print(self.name, " attacks ", target.name)
+	print(self.name, " attacks ", target.name)	
 	var toHit : int = RollToHit()
-	var toAvoid : int = target.RollToAvoidAttack()
+	var hitPenalty = 0
+	if currentChosenAction == CombatActions.SHOOTBURST: hitPenalty = -2
+	var toAvoid : int = target.RollToAvoidAttack(hitPenalty)
 	if toAvoid >= toHit: return -1
 	var damageToDeal : int = CalculateDamageToDeal(toHit - toAvoid)
 	var damagetToResist : int = target.RollToResistDamage()
@@ -159,8 +164,8 @@ func RollToHit():
 func CalculateDamageToDeal(netHits : int):
 	return weaponDamage + netHits
 
-func RollToAvoidAttack():
-	return RollUtil.GetRoll(moveSpeed + getHealthBonus()) + chanceToHitModifier
+func RollToAvoidAttack(penaltyFromAttacker : int):
+	return RollUtil.GetRoll(moveSpeed + getHealthBonus()) + chanceToHitModifier + penaltyFromAttacker
 
 func RollToResistDamage():
 	return RollUtil.GetRoll(armor + getHealthBonus())
@@ -206,9 +211,13 @@ func _physics_process(delta):
 			animationPlayer.play("Hurt")
 			velocity = Vector2.ZERO
 		DEATH:
+			Die()
 			animationPlayer.play("Death")
 		_:
 			pass
+
+func Die():
+	print(self.name, " died")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	activeState = IDLE
