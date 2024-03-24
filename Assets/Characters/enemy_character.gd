@@ -95,7 +95,8 @@ func ChooseCombatAction(combatArea : CombatArea):
 			if chosenWeight <= 0:
 				chosenPossibleAction = act
 				break
-
+	
+	ChooseAttackTarget()
 	currentChosenAction = chosenPossibleAction.combatAction
 	print(CombatActions.keys()[currentChosenAction])
 	CompleteChosenAction()
@@ -104,7 +105,16 @@ func ChooseCombatAction(combatArea : CombatArea):
 func CompleteChosenAction():
 	await get_tree().create_timer(1).timeout
 	super.CompleteChosenAction()
-	
+
+func ChooseAttackTarget():
+	var players := GameManager.current_players
+	var champion = 99999
+	for player in players:
+		var dist = players[0].global_position.distance_squared_to(global_position)
+		if dist < champion:
+			attackTarget = players[0]
+			champion = dist
+
 func MoveAction():
 	print("Moving")
 	moveA.weight -= 1

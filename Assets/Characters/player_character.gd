@@ -29,8 +29,10 @@ func _on_action_chosen(action : String, data):
 	match action:
 		"shootsingle":
 			currentChosenAction = CombatActions.SHOOTSINGLE
+			attackTarget = GameManager.current_enemies[data as int]
 		"shootburst":
 			currentChosenAction = CombatActions.SHOOTBURST
+			attackTarget = GameManager.current_enemies[data as int]
 		"grenade":
 			currentChosenAction = CombatActions.GRENADE
 		"reload":

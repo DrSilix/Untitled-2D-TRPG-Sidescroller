@@ -32,6 +32,7 @@ var currentHealth : int = maxHealth
 var currentActionPoints : int = maxActionPoints
 var currentWeaponAmmo : int = maxWeaponAmmo
 var moveTarget : Vector2
+var attackTarget : BaseCharacter
 
 var currentCombatArea : CombatArea
 
@@ -84,12 +85,17 @@ func ShootSingleAction():
 	currentActionPoints -= singleShotCost
 	currentWeaponAmmo -= 1
 	activeState = ATTACKING
+	var dmgDealt = AttackTarget(attackTarget)
+	if dmgDealt >= 0: print("Deals ", dmgDealt, " damage")
+	elif dmgDealt == -1: print("Attack missed")
+	elif dmgDealt == -2: print("Damage resisted")
 	print("Shooting Single")
 
 func ShootBurstAction():
 	currentActionPoints -= burstShotCost
 	currentWeaponAmmo -= 3 if currentWeaponAmmo >= 3 else currentWeaponAmmo
 	activeState = ATTACKING_TWO
+	AttackTarget(attackTarget)
 	print("Shooting Burst")
 
 func GrenadeAction():
@@ -135,7 +141,8 @@ func getHealthBonus():
 	return getHealthPenalty() + maxHealth
 
 
-func AttackTarget(target : BaseCharacter):
+func AttackTarget(target : BaseCharacter) -> int:
+	print(self.name, " attacks ", target.name)
 	var toHit : int = RollToHit()
 	var toAvoid : int = target.RollToAvoidAttack()
 	if toAvoid >= toHit: return -1
