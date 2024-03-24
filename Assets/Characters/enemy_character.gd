@@ -110,14 +110,15 @@ func ChooseAttackTarget():
 	var players := GameManager.current_players
 	var champion = 99999
 	for player in players:
-		var dist = players[0].global_position.distance_squared_to(global_position)
+		var dist = player.global_position.distance_squared_to(global_position)
 		if dist < champion:
-			attackTarget = players[0]
+			attackTarget = player
 			champion = dist
 
 func MoveAction():
 	print("Moving")
 	moveA.weight -= 1
+	currentActionPoints -= moveCost
 	associatedPathNode.occupied = false
 	associatedPathNode = associatedPathNode.GetMoveToNode()
 	associatedPathNode.occupied = true

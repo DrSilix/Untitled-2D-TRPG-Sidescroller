@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var moveSpeed : int = 6
 @export var maxHealth : int = 9
-@export var armor : int = 10
+@export var armor : int = 12
 @export var chanceToHitModifier : int = 0
 @export var weaponSkill : int = 12
 @export var weaponDamage : int = 6

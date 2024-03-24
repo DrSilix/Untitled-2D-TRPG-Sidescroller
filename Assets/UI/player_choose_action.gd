@@ -37,7 +37,6 @@ func Initialize(character : BaseCharacter):
 	_character = character
 	_enemies = GameManager.current_enemies
 	ResetAllMenus()
-	ConstructTargetMenu()
 
 func ResetAllMenus():
 	sub_attack.visible = false
@@ -112,6 +111,7 @@ func PassDisabledCheck(doDisable : bool):
 #endregion
 
 func ConstructTargetMenu():
+	DeconstructTargetMenu()
 	for i in range(_enemies.size()):
 		var enemy := _enemies[i]
 		var newButton = BUTTON.instantiate()
@@ -127,6 +127,7 @@ func DeconstructTargetMenu():
 
 
 func _on_attack_pressed():
+	ConstructTargetMenu()
 	if sub_attack.visible:
 		AttackMenuOpenState(false)
 	else:
