@@ -165,7 +165,7 @@ func _on_move_location_chosen(viewport: Node, event: InputEvent, shape_idx: int)
 		query.collision_mask = 0b00000000_00000000_00000000_00000010
 		var points : Array[Dictionary] = physics.intersect_point(query)
 		if points.size() > 0:
-			print(points[0]["collider"].name)
+			#print(points.size(), " - ", points[0]["collider"].name)
 			moveable_area.visible = false
 			get_node("../../MovableArea").disconnect("input_event", _on_move_location_chosen)
 			ActionChosen("move", moveTo)

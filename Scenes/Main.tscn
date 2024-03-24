@@ -403,6 +403,8 @@ metadata/_edit_lock_ = true
 [node name="Barrel6" type="StaticBody2D" parent="BackgroundObjects"]
 z_index = 354
 position = Vector2(858, 355)
+collision_layer = 9
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
@@ -429,6 +431,8 @@ metadata/_edit_lock_ = true
 [node name="Barrel7" type="StaticBody2D" parent="BackgroundObjects"]
 z_index = 354
 position = Vector2(887, 326)
+collision_layer = 9
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
@@ -487,6 +491,8 @@ metadata/_edit_lock_ = true
 [node name="Box4" type="StaticBody2D" parent="BackgroundObjects"]
 z_index = 354
 position = Vector2(817, 357)
+collision_layer = 9
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
@@ -506,6 +512,8 @@ metadata/_edit_lock_ = true
 [node name="Box6" type="StaticBody2D" parent="BackgroundObjects"]
 z_index = 354
 position = Vector2(914, 394.52)
+collision_layer = 9
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
@@ -525,6 +533,8 @@ metadata/_edit_lock_ = true
 [node name="Box5" type="StaticBody2D" parent="BackgroundObjects"]
 z_index = 354
 position = Vector2(797, 353)
+collision_layer = 9
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
@@ -748,6 +758,8 @@ metadata/_edit_lock_ = true
 [node name="Box1" type="StaticBody2D" parent="BackgroundObjects/Boxes3"]
 z_index = 354
 position = Vector2(-12.395, -26.955)
+collision_layer = 9
+collision_mask = 8
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
@@ -760,17 +772,19 @@ position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="Box2" type="StaticBody2D" parent="BackgroundObjects/Boxes3"]
+[node name="GBox2" type="StaticBody2D" parent="BackgroundObjects/Boxes3"]
 z_index = 354
 position = Vector2(7.22, -28.71)
+collision_layer = 9
+collision_mask = 9
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes3/Box2"]
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes3/GBox2"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes3/Box2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes3/GBox2"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
@@ -787,6 +801,7 @@ position = Vector2(0, 21)
 texture = ExtResource("13_bviol")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes3/Box3"]
+visible = false
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
@@ -1170,6 +1185,8 @@ shape = SubResource("RectangleShape2D_lnui5")
 
 [node name="CombatArea" type="Area2D" parent="." node_paths=PackedStringArray("spawns")]
 position = Vector2(934, 381)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("41_ovlr0")
 spawns = [NodePath("EnemySpawn1"), NodePath("EnemySpawn2"), NodePath("EnemySpawn3")]
 

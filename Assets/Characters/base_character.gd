@@ -20,6 +20,8 @@ extends CharacterBody2D
 
 @onready var spriteRootNode : Node2D = $SpriteRoot
 @onready var animationPlayer : AnimationPlayer = $SpriteRoot/AnimationPlayer
+@onready var cover_collision : Area2D = $CoverArea
+@onready var cover_icon = $CoverIcon
 
 enum {IDLE, WALKING, RUNNING, ATTACKING, ATTACKING_TWO, RELOADING, HURT, MISSED, RESISTED, DEATH}
 var activeState := IDLE
@@ -38,6 +40,8 @@ var currentCombatArea : CombatArea
 
 func _ready():
 	animationPlayer.connect("animation_finished", _on_AnimationPlayer_animation_finished,)
+	cover_collision.connect("body_entered", _on_cover_area_body_entered)
+	cover_collision.connect("body_exited", _on_cover_area_body_exited)
 
 func MoveTo(location :Vector2):
 	moveTarget = location
@@ -128,10 +132,14 @@ func PassAction():
 #endregion
 
 func TakeCover():
+	print("Taking cover")
+	cover_icon.visible = true
 	hasCover = true
 	chanceToHitModifier = -3
 
 func LeaveCover():
+	print("Leaving cover")
+	cover_icon.visible = false
 	hasCover = false
 	chanceToHitModifier = 0
 
@@ -148,7 +156,8 @@ func getHealthBonus():
 
 
 func AttackTarget(target : BaseCharacter) -> int:
-	print(self.name, " attacks ", target.name)	
+	print(self.name, " attacks ", target.name)
+	SetFacingTowardsTarget(target)
 	var toHit : int = RollToHit()
 	var hitPenalty = 0
 	if currentChosenAction == CombatActions.SHOOTBURST: hitPenalty = -2
@@ -172,7 +181,8 @@ func CalculateDamageToDeal(netHits : int):
 	return weaponDamage + netHits
 
 func RollToAvoidAttack(penaltyFromAttacker : int):
-	return RollUtil.GetRoll(moveSpeed + maxHealth + getHealthBonus()) + chanceToHitModifier + penaltyFromAttacker
+	return RollUtil.GetRoll(moveSpeed + maxHealth + getHealthBonus()) \
+	+ penaltyFromAttacker - chanceToHitModifier
 
 func RollToResistDamage():
 	return RollUtil.GetRoll(armor + (maxHealth/2) + getHealthBonus())
@@ -229,8 +239,20 @@ func _physics_process(delta):
 		_:
 			pass
 
+func SetFacingTowardsTarget(target : BaseCharacter):
+	if target.position.x >= position.x:
+		spriteRootNode.scale.x = 1
+	else:
+		spriteRootNode.scale.x = -1
+
 func Die():
 	print(self.name, " died")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	activeState = IDLE
+	
+func _on_cover_area_body_entered(body):
+	TakeCover()
+	
+func _on_cover_area_body_exited(body):
+	LeaveCover()

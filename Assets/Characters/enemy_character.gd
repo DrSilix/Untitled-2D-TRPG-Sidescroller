@@ -124,17 +124,20 @@ func MoveAction():
 	associatedPathNode.occupied = true
 	MoveTo(associatedPathNode.global_position)
 
+func TakeCover():
+	super.TakeCover()
+	moveA.weight = 1
+
+func TakeDamage(damage : int):
+	super.TakeDamage(damage)
+	if not hasCover:
+		moveA.weight += 2
+
 func Die():
 	super.Die()
 	GameManager.current_enemies.erase(self)
 	queue_free()
 
-func _process(delta):
-	pass
-
-func _physics_process(delta):
-	super._physics_process(delta)
-	spriteRootNode.scale.x = -1
 	
 class CAction:
 	var weight
