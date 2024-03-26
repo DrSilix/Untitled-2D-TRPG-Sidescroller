@@ -116,7 +116,7 @@ func DisconnectFromEnemies():
 #region button disabled checks
 func TakeAimDisabledCheck():
 	#TODO: implement take aim in character controllers
-	if _character.currentHealth > _character.maxHealth / 2:
+	if _character.aimModifier > 0 or _character.currentWeaponAmmo <= 0:
 		take_aim.disabled = true
 	else:
 		take_aim.disabled = false
@@ -164,28 +164,19 @@ func _on_attack_pressed():
 
 func _on_move_pressed():
 	print("move pressed")
-	get_node("../../MovableArea").connect("input_event", _on_move_location_chosen)
+	moveable_area.connect("input_event", _on_move_location_chosen)
 	ChangeMenuState(State.MOVEMENU)
 
 func CancelMove():
-	get_node("../../MovableArea").disconnect("input_event", _on_move_location_chosen)
+	moveable_area.disconnect("input_event", _on_move_location_chosen)
 	ChangeMenuState(State.MAINMENU)
 
 func _on_move_location_chosen(viewport: Node, event: InputEvent, shape_idx: int):
 	if event.is_action_pressed("Move"):
 		var moveTo : Vector2 = _character.get_canvas_transform().affine_inverse() * event.position
-		var physics = get_world_2d().get_direct_space_state()
-		var query = PhysicsPointQueryParameters2D.new()
-		query.position = moveTo
-		query.collide_with_areas = true
-		query.collide_with_bodies = false
-		query.collision_mask = 0b00000000_00000000_00000000_00000010
-		var points : Array[Dictionary] = physics.intersect_point(query)
-		if points.size() > 0:
-			#print(points.size(), " - ", points[0]["collider"].name)
-			moveable_area.visible = false
-			get_node("../../MovableArea").disconnect("input_event", _on_move_location_chosen)
-			ActionChosen("move", moveTo)
+		moveable_area.visible = false
+		moveable_area.disconnect("input_event", _on_move_location_chosen)
+		ActionChosen("move", moveTo)
 			
 	
 

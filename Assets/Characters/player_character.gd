@@ -38,13 +38,13 @@ func _on_action_chosen(action : String, data):
 			currentChosenAction = CombatActions.GRENADE
 		"reload":
 			currentChosenAction = CombatActions.RELOAD
+		"takeaim":
+			currentChosenAction = CombatActions.TAKEAIM
 		"move":
 			currentChosenAction = CombatActions.MOVE
 			moveTarget = data as Vector2
 		"pass":
 			currentChosenAction = CombatActions.PASS
-		"flee":
-			currentChosenAction = CombatActions.FLEE
 	CompleteChosenAction()
 
 

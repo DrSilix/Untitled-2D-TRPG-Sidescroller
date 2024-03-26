@@ -870,3 +870,6 @@ patch_margin_bottom = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableArea"]
 position = Vector2(0.5, -14.5)
 shape = SubResource("CapsuleShape2D_qbuse")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0

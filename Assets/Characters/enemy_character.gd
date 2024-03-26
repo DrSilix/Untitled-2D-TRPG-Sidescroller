@@ -2,7 +2,7 @@ extends BaseCharacter
 
 @export var attackWeight := 5
 @export var moveWeight := 3
-@export var fleeWeight := 0
+@export var takeAimWeight := 0
 
 @export_group("Attacks")
 @export var singleShotWeight := 9
@@ -19,9 +19,9 @@ var rng := RandomNumberGenerator.new()
 @onready var moveA : CAction = CAction.new(moveWeight,
 											moveCost,
 											CombatActions.MOVE)
-@onready var fleeA : CAction = CAction.new(fleeWeight,
-											fleeCost,
-											CombatActions.FLEE)
+@onready var aimA : CAction = CAction.new(takeAimWeight,
+											takeAimCost,
+											CombatActions.TAKEAIM)
 @onready var singleSA : CAction = CAction.new(singleShotWeight,
 											singleShotCost,
 											CombatActions.SHOOTSINGLE)
@@ -41,6 +41,8 @@ func _ready():
 func ChooseCombatAction(combatArea : CombatArea):
 	highlight_yellow.visible = true
 	currentCombatArea = combatArea
+	aimA.weight = (-aimModifier + 1) if aimModifier < 0 else 1
+	attackA.weight = attackWeight if aimModifier <= 0 else 99
 	await get_tree().create_timer(1).timeout
 	var combinedWeightActions := 0
 	var possibleActions : Array[CAction]
@@ -50,9 +52,6 @@ func ChooseCombatAction(combatArea : CombatArea):
 	if moveA.cost <= currentActionPoints and moveA.weight > 0:
 		combinedWeightActions += moveA.weight
 		possibleActions.append(moveA)
-	if fleeA.cost <= currentActionPoints and fleeA.weight > 0:
-		combinedWeightActions += fleeA.weight
-		possibleActions.append(fleeA)
 	
 	if possibleActions.size() == 0 and combinedWeightActions == 0:
 		currentChosenAction = CombatActions.PASS
@@ -82,6 +81,10 @@ func ChooseCombatAction(combatArea : CombatArea):
 		if grenadeA.cost <= currentActionPoints and grenadeA.weight > 0:
 			combinedWeightActions += grenadeA.weight
 			possibleActions.append(grenadeA)
+		if aimA.cost <= currentActionPoints and aimA.weight > 0 \
+		and currentWeaponAmmo > 0 and aimModifier <= 0:
+			combinedWeightActions += aimA.weight
+			possibleActions.append(aimA)
 		
 		if possibleActions.size() == 0 and combinedWeightActions == 0:
 			currentChosenAction = CombatActions.RELOAD
@@ -136,7 +139,7 @@ func LeaveCover():
 
 func TakeDamage(damage : int):
 	super.TakeDamage(damage)
-	if not hasCover:
+	if hasCover == 0:
 		moveA.weight += 2
 
 func Die():

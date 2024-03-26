@@ -2260,14 +2260,26 @@ region = Rect2(592, 144, 32, 32)
 
 [node name="Cyborg_Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 15
+collision_mask = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
 script = ExtResource("1_nld74")
+isOverworldControllable = null
+moveSpeed = null
 maxHealth = 10
 armor = 10
+chanceToHitModifier = null
+weaponSkill = null
 weaponDamage = 4
+maxWeaponAmmo = null
+maxActionPoints = null
+moveCost = null
+fleeCost = null
+singleShotCost = null
+burstShotCost = null
+grenadeCost = null
+reloadCost = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.34)
@@ -2313,8 +2325,8 @@ libraries = {
 
 [node name="MovableArea" type="Area2D" parent="."]
 visible = false
-collision_layer = 2
-collision_mask = 2
+collision_layer = 32
+collision_mask = 32
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovableArea"]
@@ -2392,5 +2404,8 @@ patch_margin_left = 5
 patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
 
 [connection signal="animation_finished" from="SpriteRoot/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

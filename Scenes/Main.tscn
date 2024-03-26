@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=64 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -46,6 +46,13 @@
 [ext_resource type="Script" path="res://Assets/Scripts/enemy_spawn.gd" id="43_nnltu"]
 [ext_resource type="PackedScene" uid="uid://crl3xnu4uelc1" path="res://Assets/UI/stop_speech_bubble.tscn" id="44_k18i6"]
 [ext_resource type="PackedScene" uid="uid://x1j2btwuvqub" path="res://Assets/UI/player_choose_action.tscn" id="48_6fmxg"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ldg06"]
+vertices = PackedVector2Array(275, 443, 421, 432, 895, 431, 933, 431, 1288, 443, 903, 360, 1011, 369, 973, 369, 713, 366, 871, 360, 539, 401, 1187, 391, 1209, 391, 933, 414, 895, 414, 870, 390, 836, 391, 1209, 376, 1187, 376, 903, 344, 1288, 325, 356, 432, 275, 427, 356, 416, 1011, 386, 713, 349, 871, 344, 488, 383, 488, 399, 421, 415, 384, 415, 161, 391, 161, 376, 251, 358, 289, 358, 507, 376, 289, 342, 629, 350, 629, 366, 529, 376, 501, 401, 69, 325, 676, 349, 676, 350, 973, 371, 954, 371, 991, 387, 991, 386, 778, 388, 798, 388, 798, 391, 836, 390, 539, 385, 778, 374, 529, 385, 507, 383, 501, 399, 384, 416, 266, 427, 266, 424, 219, 440, 249, 440, 249, 443, 68, 443, 219, 424, 139, 391, 251, 342, 139, 376, 870, 374, 954, 387)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14), PackedInt32Array(15, 11, 10, 16), PackedInt32Array(17, 18, 6, 5, 19, 20), PackedInt32Array(21, 1, 0), PackedInt32Array(12, 4, 3, 13), PackedInt32Array(20, 4, 12, 17), PackedInt32Array(21, 0, 22, 23), PackedInt32Array(18, 11, 24, 6), PackedInt32Array(9, 8, 25, 26), PackedInt32Array(27, 28, 29, 30, 31, 32, 33, 34), PackedInt32Array(35, 34, 36, 37, 38, 39), PackedInt32Array(10, 14, 2, 1, 29, 40), PackedInt32Array(41, 42, 43, 37, 36), PackedInt32Array(7, 44, 45, 8), PackedInt32Array(46, 47, 24, 11), PackedInt32Array(48, 49, 50, 10), PackedInt32Array(16, 51, 15), PackedInt32Array(50, 16, 10), PackedInt32Array(48, 10, 52, 53), PackedInt32Array(53, 52, 54, 39, 38, 8), PackedInt32Array(35, 55, 27, 34), PackedInt32Array(28, 56, 40, 29), PackedInt32Array(30, 57, 23, 31), PackedInt32Array(22, 58, 59, 23), PackedInt32Array(60, 61, 62, 63), PackedInt32Array(31, 64, 60, 63, 65), PackedInt32Array(41, 20, 19, 26), PackedInt32Array(41, 26, 25, 42), PackedInt32Array(41, 36, 66), PackedInt32Array(67, 41, 66, 33, 32), PackedInt32Array(31, 23, 59, 64), PackedInt32Array(65, 63, 41, 67), PackedInt32Array(53, 8, 45, 68), PackedInt32Array(68, 45, 69, 15), PackedInt32Array(11, 15, 69, 46)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(64, 320, 63, 448, 1293, 448, 1293, 320)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 5.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7xmqh"]
 friction = 0.0
@@ -204,108 +211,111 @@ layer_2/z_index = -3
 layer_2/tile_data = PackedInt32Array(786440, 262426, 15, 851976, 852250, 14, 917512, 917786, 14, 983048, 393498, 15, 1048584, 262426, 15, 1114120, 917786, 14, 1179656, 262426, 15, 1245192, 393498, 15, 786441, 262426, 15, 851977, 917786, 14, 917513, 282, 14, 983049, 327962, 15, 1048585, 282, 14, 1114121, 852250, 14, 1179657, 282, 14, 1245193, 917786, 14, 786442, 393498, 15, 851978, 393498, 15, 917514, 983322, 13, 983050, 262426, 15, 1048586, 983322, 13, 1114122, 327962, 15, 1179658, 983322, 13, 1245194, 852250, 14, 786443, 262426, 15, 851979, 917786, 14, 917515, 262426, 15, 983051, 327962, 15, 1048587, 852250, 14, 1114123, 393498, 15, 1179659, 262426, 15, 1245195, 262426, 15, 786444, 852250, 14, 851980, 917786, 14, 917516, 393498, 15, 983052, 852250, 14, 1048588, 262426, 15, 1114124, 262426, 15, 1179660, 852250, 14, 1245196, 65818, 13, 786445, 393498, 15, 851981, 327962, 15, 917517, 282, 14, 983053, 262426, 15, 1048589, 282, 14, 1114125, 393498, 15, 1179661, 282, 14, 1245197, 852250, 14, 786446, 262426, 15, 851982, 393498, 15, 917518, 983322, 13, 983054, 917786, 14, 1048590, 983322, 13, 1114126, 852250, 14, 1179662, 983322, 13, 1245198, 917786, 14, 786447, 852250, 14, 851983, 327962, 15, 917519, 852250, 14, 983055, 262426, 15, 1048591, 917786, 14, 1114127, 393498, 15, 1179663, 917786, 14, 1245199, 917786, 14, 786448, 852250, 14, 851984, 917786, 14, 917520, 393498, 15, 983056, 327962, 15, 1048592, 393498, 15, 1114128, 393498, 15, 1179664, 917786, 14, 1245200, 393498, 15, 786464, 262426, 15, 852000, 852250, 14, 917536, 917786, 14, 983072, 393498, 15, 1048608, 262426, 15, 1114144, 917786, 14, 1179680, 262426, 15, 1245216, 459034, 15, 786465, 262426, 15, 852001, 459034, 15, 917537, 282, 14, 983073, 327962, 15, 1048609, 282, 14, 1114145, 852250, 14, 1179681, 282, 14, 1245217, 917786, 14, 786466, 393498, 15, 852002, 393498, 15, 917538, 983322, 13, 983074, 262426, 15, 1048610, 983322, 13, 1114146, 327962, 15, 1179682, 983322, 13, 1245218, 852250, 14, 786467, 262426, 15, 852003, 917786, 14, 917539, 262426, 15, 983075, 327962, 15, 1048611, 852250, 14, 1114147, 459034, 15, 1179683, 262426, 15, 1245219, 262426, 15, 786468, 852250, 14, 852004, 917786, 14, 917540, 393498, 15, 983076, 852250, 14, 1048612, 983322, 14, 1114148, 262426, 15, 1179684, 852250, 14, 1245220, 65818, 13, 786469, 393498, 15, 852005, 327962, 15, 917541, 282, 14, 983077, 262426, 15, 1048613, 282, 14, 1114149, 393498, 15, 1179685, 282, 14, 1245221, 852250, 14, 786470, 262426, 15, 852006, 393498, 15, 917542, 983322, 13, 983078, 917786, 14, 1048614, 983322, 13, 1114150, 852250, 14, 1179686, 983322, 13, 1245222, 917786, 14, 786471, 852250, 14, 852007, 327962, 15, 917543, 852250, 14, 983079, 459034, 15, 1048615, 917786, 14, 1114151, 393498, 15, 1179687, 983322, 14, 1245223, 917786, 14, 786472, 852250, 14, 852008, 917786, 14, 917544, 393498, 15, 983080, 327962, 15, 1048616, 393498, 15, 1114152, 393498, 15, 1179688, 917786, 14, 1245224, 393498, 15, 983061, 262426, 2, 1048597, 327962, 3, 1114133, 262426, 3, 1179669, 786714, 3, 1245205, 262426, 3, 983062, 327962, 2, 1048598, 327962, 3, 1114134, 786714, 3, 1179670, 327962, 3, 1245206, 65818, 268435469, 983063, 459034, 2, 1048599, 786714, 3, 1114135, 262426, 3, 1179671, 786714, 3, 1245207, 983322, 13, 851992, 655642, 536870914, 917528, 393498, 536870916, 983064, 393498, 4, 1048600, 786714, 3, 1114136, 786714, 3, 1179672, 196890, 3, 1245208, 786714, 3, 1114137, 786714, 1342177282, 1179673, 131354, 1610612740, 1310741, 524570, 2, 1310742, 262426, 13, 1310743, 524570, 2, 1310744, 524570, 2, 1245209, 721178, 2, 917545, 917786, 2, 917549, 1114394, 2, 917548, 983322, 2, 917547, 983322, 2, 917546, 983322, 2, 852009, 917786, 536870914, 852013, 1114394, 536870914, 852012, 983322, 536870914, 852011, 983322, 536870914, 852010, 983322, 536870914, 786473, 1048858, 3, 786474, 1114394, 3, 786475, 1114394, 3, 786476, 1114394, 3, 786477, 65818, 4, 655394, 524570, 9, 720930, 590106, 1342177283, 720910, 1048858, 8, 655374, 524570, 9, 720906, 524570, 8, 720935, 524570, 8, 983094, 590106, 3, 1048630, 917786, 1342177293, 1114166, 917786, 1342177293, 1179702, 917786, 1342177293, 1245238, 917786, 1342177293, 1310774, 917786, 1342177293, 983095, 721178, 3, 1048631, 917786, 1342177293, 1114167, 983322, 13, 1179703, 917786, 1342177293, 1245239, 983322, 13, 1310775, 917786, 1342177293, 983096, 721178, 3, 1048632, 917786, 1342177293, 1114168, 917786, 1342177293, 1179704, 917786, 1342177293, 1245240, 590106, 7, 1310776, 917786, 13, 983097, 721178, 3, 1048633, 917786, 1342177293, 1114169, 282, 14, 1179705, 917786, 1342177293, 1245241, 983322, 13, 1310777, 917786, 1342177293, 983098, 721178, 3, 1048634, 917786, 1342177293, 1114170, 917786, 1342177293, 1179706, 917786, 1342177293, 1245242, 917786, 1342177293, 1310778, 917786, 1342177293, 1114109, 1048858, 3, 1179645, 786714, 3, 1245181, 196890, 3, 1310717, 786714, 3, 1376253, 524570, 2, 1114110, 1114394, 3, 1179646, 262426, 3, 1245182, 262426, 3, 1310718, 65818, 9, 1376254, 524570, 2, 1114111, 1114394, 3, 1179647, 786714, 3, 1245183, 786714, 3, 1310719, 590106, 7, 1376255, 917786, 13, 1048576, 282, 4, 1114112, 786714, 3, 1179648, 327962, 3, 1245184, 65818, 9, 1310720, 524570, 2, 1048577, 1114394, 3, 1114113, 786714, 3, 1179649, 786714, 3, 1245185, 262426, 3, 1310721, 524570, 2, 1048578, 1114394, 3, 1114114, 327962, 3, 1179650, 786714, 3, 1245186, 786714, 3, 1310722, 524570, 2, 1048579, 282, 4, 1114115, 786714, 3, 1179651, 786714, 3, 1245187, 65818, 9, 1310723, 524570, 2, 1048580, 1114394, 3, 1114116, 786714, 3, 1179652, 786714, 3, 1245188, 131354, 3, 1310724, 524570, 2, 1048581, 1114394, 3, 1114117, 327962, 3, 1179653, 786714, 3, 1245189, 65818, 9, 1310725, 524570, 2, 1048582, 65818, 4, 1114118, 196890, 3, 1179654, 786714, 3, 1245190, 196890, 3, 1310726, 524570, 2)
 metadata/_edit_lock_ = true
 
-[node name="BackgroundObjects" type="Node" parent="."]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_ldg06")
 
-[node name="Arch" type="Sprite2D" parent="BackgroundObjects"]
+[node name="BackgroundObjects" type="Node" parent="NavigationRegion2D"]
+
+[node name="Arch" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(434, 284)
 texture = ExtResource("9_0v5go")
 metadata/_edit_lock_ = true
 
-[node name="Decoration7" type="Sprite2D" parent="BackgroundObjects/Arch"]
+[node name="Decoration7" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Arch"]
 z_index = 1
 position = Vector2(-12, 0)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("9_2f2yh")
 metadata/_edit_lock_ = true
 
-[node name="Decoration8" type="Sprite2D" parent="BackgroundObjects/Arch"]
+[node name="Decoration8" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Arch"]
 z_index = 1
 position = Vector2(10, 0)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("9_2f2yh")
 metadata/_edit_lock_ = true
 
-[node name="Fence2" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence2" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(392, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence4" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence4" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(352.5, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence3" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence3" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(372, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence6" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence6" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(313, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence5" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence5" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(332.5, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence7" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence7" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(273.5, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence8" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence8" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(293, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence9" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence9" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(253.5, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence10" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence10" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(613, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence11" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence11" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(573.5, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence12" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence12" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(593, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence13" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence13" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(534, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence14" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence14" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(553.5, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence15" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence15" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(494.5, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence16" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence16" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(514, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Fence17" type="Sprite2D" parent="BackgroundObjects"]
+[node name="Fence17" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(474.5, 307)
 texture = ExtResource("9_kkxld")
 metadata/_edit_lock_ = true
 
-[node name="Barrel1" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Barrel1" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(232, 405)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -313,18 +323,18 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Barrel1"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Barrel1"]
 position = Vector2(0, 20)
 texture = ExtResource("14_p1j1o")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Barrel1"]
 position = Vector2(0, 26.935)
 scale = Vector2(0.85, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Barrel2" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Barrel2" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(250, 402)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -332,18 +342,18 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Barrel2"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Barrel2"]
 position = Vector2(0, 20)
 texture = ExtResource("14_p1j1o")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Barrel2"]
 position = Vector2(-0.305, 29.855)
 scale = Vector2(1.24, 0.525)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Barrel3" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Barrel3" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(262, 408)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -351,18 +361,18 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Barrel3"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Barrel3"]
 position = Vector2(0, 20)
 texture = ExtResource("14_p1j1o")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Barrel3"]
 position = Vector2(0, 26.935)
 scale = Vector2(0.85, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Barrel4" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Barrel4" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(500, 364)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -370,18 +380,18 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Barrel4"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Barrel4"]
 position = Vector2(0, 20)
 texture = ExtResource("14_p1j1o")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Barrel4"]
 position = Vector2(1.63, 26.935)
 scale = Vector2(1.01, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Barrel5" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Barrel5" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(642, 331)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -389,18 +399,18 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Barrel5"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Barrel5"]
 position = Vector2(0, 20)
 texture = ExtResource("14_p1j1o")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel5"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Barrel5"]
 position = Vector2(0, 26.935)
 scale = Vector2(0.85, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Barrel6" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Barrel6" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(858, 355)
 collision_layer = 9
@@ -410,25 +420,25 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Barrel6"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Barrel6"]
 position = Vector2(0, 20)
 texture = ExtResource("14_p1j1o")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel6"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Barrel6"]
 position = Vector2(-3.76, 26.935)
 scale = Vector2(1.25, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Decoration19" type="Sprite2D" parent="BackgroundObjects/Barrel6"]
+[node name="Decoration19" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Barrel6"]
 z_index = -1
 position = Vector2(6.10352e-05, 6.00006)
 rotation = 1.17602
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
-[node name="Barrel7" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Barrel7" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(887, 326)
 collision_layer = 9
@@ -438,19 +448,19 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Barrel7"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Barrel7"]
 position = Vector2(0, 20)
 rotation = 1.5708
 texture = ExtResource("14_p1j1o")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Barrel7"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Barrel7"]
 position = Vector2(0, 25.95)
 scale = Vector2(1.25, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Box2" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Box2" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(270, 323)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -458,18 +468,18 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Box2"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Box2"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Box2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Box2"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Box3" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Box3" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(520, 366)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -477,18 +487,18 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Box3"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Box3"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Box3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Box3"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Box4" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Box4" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(817, 357)
 collision_layer = 9
@@ -498,18 +508,18 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Box4"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Box4"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Box4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Box4"]
 position = Vector2(0, 25.84)
 scale = Vector2(1.54, 0.565)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Box6" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Box6" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(914, 394.52)
 collision_layer = 9
@@ -519,18 +529,18 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Box6"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Box6"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Box6"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Box6"]
 position = Vector2(0, 28.3)
 scale = Vector2(1.54, 0.565)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Box5" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Box5" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(797, 353)
 collision_layer = 9
@@ -540,18 +550,18 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Box5"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Box5"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Box5"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Box5"]
 position = Vector2(0, 28.115)
 scale = Vector2(1.54, 0.385)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Pillar1" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Pillar1" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(150, 354)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -559,17 +569,17 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Pillar1"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Pillar1"]
 texture = ExtResource("12_onkwc")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Pillar1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Pillar1"]
 position = Vector2(0, 29.705)
 scale = Vector2(0.67, 0.41)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Pillar2" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Pillar2" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(518, 354)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -577,17 +587,17 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Pillar2"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Pillar2"]
 texture = ExtResource("12_onkwc")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Pillar2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Pillar2"]
 position = Vector2(0, 29.705)
 scale = Vector2(0.67, 0.41)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Pillar3" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Pillar3" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(838, 354)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -595,17 +605,17 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Pillar3"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Pillar3"]
 texture = ExtResource("12_onkwc")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Pillar3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Pillar3"]
 position = Vector2(0.15, 28.193)
 scale = Vector2(0.685, 0.525)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Line2D2" type="Line2D" parent="BackgroundObjects/Pillar3"]
+[node name="Line2D2" type="Line2D" parent="NavigationRegion2D/BackgroundObjects/Pillar3"]
 position = Vector2(-838, -354)
 points = PackedVector2Array(836, 329, 840, 329, 841, 337, 841, 341, 841, 347, 842, 352, 843, 357, 845, 361, 849, 363, 853, 364, 857, 364, 849, 364, 848, 365, 847, 369, 847, 373, 848, 378, 849, 381, 848, 384, 847, 385, 843, 386, 838, 386, 836, 386, 833, 386, 832, 386)
 width = 1.0
@@ -613,7 +623,7 @@ default_color = Color(0.823529, 0.184314, 0.117647, 1)
 gradient = SubResource("Gradient_dmxuo")
 metadata/_edit_lock_ = true
 
-[node name="Pillar4" type="StaticBody2D" parent="BackgroundObjects"]
+[node name="Pillar4" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 354
 position = Vector2(1198, 354)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
@@ -621,17 +631,17 @@ script = ExtResource("12_3w3n6")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Pillar4"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Pillar4"]
 texture = ExtResource("12_onkwc")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Pillar4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Pillar4"]
 position = Vector2(0, 29.705)
 scale = Vector2(0.67, 0.41)
 shape = SubResource("RectangleShape2D_kthqr")
 metadata/_edit_lock_ = true
 
-[node name="Line2D2" type="Line2D" parent="BackgroundObjects/Pillar4"]
+[node name="Line2D2" type="Line2D" parent="NavigationRegion2D/BackgroundObjects/Pillar4"]
 position = Vector2(-1198, -354)
 points = PackedVector2Array(1183, 384, 1184, 386, 1186, 386, 1187, 384, 1187, 381, 1181, 382, 1179, 385, 1180, 387, 1184, 389, 1189, 386, 1191, 382, 1191, 374, 1191, 364, 1192, 354, 1193, 346, 1194, 340, 1195, 333, 1196, 330, 1200, 330, 1201, 333, 1202, 340, 1203, 349, 1204, 365, 1205, 374, 1206, 384, 1208, 386, 1211, 386, 1215, 386, 1219, 387)
 width = 1.0
@@ -639,123 +649,123 @@ default_color = Color(0.823529, 0.184314, 0.117647, 1)
 gradient = SubResource("Gradient_75lvm")
 metadata/_edit_lock_ = true
 
-[node name="Decoration20" type="Sprite2D" parent="BackgroundObjects/Pillar4"]
+[node name="Decoration20" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Pillar4"]
 z_index = -1
 position = Vector2(6, 26.0001)
 rotation = 1.23995
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
-[node name="Boxes1" type="Node2D" parent="BackgroundObjects"]
+[node name="Boxes1" type="Node2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(387, 424)
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Box1" type="StaticBody2D" parent="BackgroundObjects/Boxes1"]
+[node name="Box1" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects/Boxes1"]
 z_index = 354
 position = Vector2(-12.395, -26.955)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes1/Box1"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Boxes1/Box1"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes1/Box1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Boxes1/Box1"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="Box2" type="StaticBody2D" parent="BackgroundObjects/Boxes1"]
+[node name="Box2" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects/Boxes1"]
 z_index = 354
 position = Vector2(15.57, -27.19)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes1/Box2"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Boxes1/Box2"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes1/Box2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Boxes1/Box2"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="Box3" type="StaticBody2D" parent="BackgroundObjects/Boxes1" node_paths=PackedStringArray("parentZNode")]
+[node name="Box3" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects/Boxes1" node_paths=PackedStringArray("parentZNode")]
 z_index = 354
 position = Vector2(0.525, -49.295)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 parentZNode = NodePath("../Box2")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes1/Box3"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Boxes1/Box3"]
 position = Vector2(0, 21)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes1/Box3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Boxes1/Box3"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 disabled = true
 
-[node name="Boxes2" type="Node2D" parent="BackgroundObjects"]
+[node name="Boxes2" type="Node2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(679, 358)
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Box1" type="StaticBody2D" parent="BackgroundObjects/Boxes2"]
+[node name="Box1" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects/Boxes2"]
 z_index = 354
 position = Vector2(-12.395, -26.955)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes2/Box1"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Boxes2/Box1"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes2/Box1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Boxes2/Box1"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="Box2" type="StaticBody2D" parent="BackgroundObjects/Boxes2"]
+[node name="Box2" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects/Boxes2"]
 z_index = 354
 position = Vector2(15.57, -27.19)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes2/Box2"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Boxes2/Box2"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes2/Box2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Boxes2/Box2"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="Box3" type="StaticBody2D" parent="BackgroundObjects/Boxes2" node_paths=PackedStringArray("parentZNode")]
+[node name="Box3" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects/Boxes2" node_paths=PackedStringArray("parentZNode")]
 z_index = 354
 position = Vector2(0.525, -49.295)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 parentZNode = NodePath("../../Boxes1/Box2")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes2/Box3"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Boxes2/Box3"]
 position = Vector2(0, 21)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes2/Box3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Boxes2/Box3"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 disabled = true
 
-[node name="Boxes3" type="Node2D" parent="BackgroundObjects"]
+[node name="Boxes3" type="Node2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(985, 379)
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Box1" type="StaticBody2D" parent="BackgroundObjects/Boxes3"]
+[node name="Box1" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects/Boxes3"]
 z_index = 354
 position = Vector2(-12.395, -26.955)
 collision_layer = 9
@@ -763,16 +773,16 @@ collision_mask = 8
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes3/Box1"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Boxes3/Box1"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes3/Box1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Boxes3/Box1"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="GBox2" type="StaticBody2D" parent="BackgroundObjects/Boxes3"]
+[node name="GBox2" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects/Boxes3"]
 z_index = 354
 position = Vector2(7.22, -28.71)
 collision_layer = 9
@@ -780,256 +790,256 @@ collision_mask = 9
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes3/GBox2"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Boxes3/GBox2"]
 position = Vector2(0, 20)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes3/GBox2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Boxes3/GBox2"]
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 
-[node name="Box3" type="StaticBody2D" parent="BackgroundObjects/Boxes3" node_paths=PackedStringArray("parentZNode")]
+[node name="Box3" type="StaticBody2D" parent="NavigationRegion2D/BackgroundObjects/Boxes3" node_paths=PackedStringArray("parentZNode")]
 z_index = 354
 position = Vector2(-11.14, -49.295)
 physics_material_override = SubResource("PhysicsMaterial_7xmqh")
 script = ExtResource("12_3w3n6")
 parentZNode = NodePath("../Box1")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundObjects/Boxes3/Box3"]
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/Boxes3/Box3"]
 position = Vector2(0, 21)
 texture = ExtResource("13_bviol")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundObjects/Boxes3/Box3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/BackgroundObjects/Boxes3/Box3"]
 visible = false
 position = Vector2(0, 26.935)
 scale = Vector2(1.54, 0.545)
 shape = SubResource("RectangleShape2D_kthqr")
 disabled = true
 
-[node name="DecorationLine" type="Node" parent="BackgroundObjects"]
+[node name="DecorationLine" type="Node" parent="NavigationRegion2D/BackgroundObjects"]
 
-[node name="Line2D" type="Line2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Line2D" type="Line2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 500
 points = PackedVector2Array(-31, 340, 60, 336, 148, 329, 152, 329, 245, 335, 329, 336, 427, 334, 515, 330, 521, 330, 587, 334, 680, 336, 768, 334, 836, 329, 840, 329)
 width = 1.0
 default_color = Color(0.823529, 0.184314, 0.117647, 1)
 metadata/_edit_lock_ = true
 
-[node name="Decoration1" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration1" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(180, 338)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
-[node name="Decoration16" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration16" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(76, 341)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
-[node name="Decoration5" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration5" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(260, 343)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
-[node name="Decoration7" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration7" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(406, 341)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
-[node name="Decoration10" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration10" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(603, 341)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
-[node name="Decoration12" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration12" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(719, 342)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
-[node name="Decoration14" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration14" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(800, 338)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
-[node name="Decoration19" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration19" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(1192, 361)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
-[node name="Decoration2" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration2" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(221, 342)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
-[node name="Decoration15" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration15" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(119, 339)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
-[node name="Decoration17" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration17" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(32, 344)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
-[node name="Decoration6" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration6" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(350, 343)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
-[node name="Decoration11" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration11" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(644, 343)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
-[node name="Decoration8" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration8" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(463, 340)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
-[node name="Decoration9" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration9" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(562, 340)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
-[node name="Decoration13" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration13" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(761, 341)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
-[node name="Decoration18" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration18" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(841, 355)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
-[node name="Decoration3" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration3" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(680, 345)
 texture = ExtResource("17_05iwa")
 metadata/_edit_lock_ = true
 
-[node name="Decoration4" type="Sprite2D" parent="BackgroundObjects/DecorationLine"]
+[node name="Decoration4" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
 z_index = 1000
 position = Vector2(305, 346)
 texture = ExtResource("18_8bnkk")
 metadata/_edit_lock_ = true
 
-[node name="guitar" type="Sprite2D" parent="BackgroundObjects"]
+[node name="guitar" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(850, 275)
 texture = ExtResource("19_gjr5e")
 metadata/_edit_lock_ = true
 
-[node name="tequila" type="Sprite2D" parent="BackgroundObjects"]
+[node name="tequila" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(629, 268)
 texture = ExtResource("20_8m7dw")
 metadata/_edit_lock_ = true
 
-[node name="arrow_heart" type="Sprite2D" parent="BackgroundObjects"]
+[node name="arrow_heart" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(676, 287)
 texture = ExtResource("21_rfal0")
 metadata/_edit_lock_ = true
 
-[node name="open" type="Sprite2D" parent="BackgroundObjects"]
+[node name="open" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(567, 273)
 texture = ExtResource("22_l1h6b")
 metadata/_edit_lock_ = true
 
-[node name="bolt" type="Sprite2D" parent="BackgroundObjects"]
+[node name="bolt" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(1007, 283)
 texture = ExtResource("23_eog71")
 metadata/_edit_lock_ = true
 
-[node name="noodles" type="Sprite2D" parent="BackgroundObjects"]
+[node name="noodles" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(103, 264)
 texture = ExtResource("24_u2cit")
 metadata/_edit_lock_ = true
 
-[node name="large_conv_stand" type="Sprite2D" parent="BackgroundObjects"]
+[node name="large_conv_stand" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(776, 303)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("27_wp3mc")
 metadata/_edit_lock_ = true
 
-[node name="red_vending" type="Sprite2D" parent="BackgroundObjects"]
+[node name="red_vending" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(648, 307)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("28_ept5t")
 metadata/_edit_lock_ = true
 
-[node name="blue_vending" type="Sprite2D" parent="BackgroundObjects"]
+[node name="blue_vending" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(150, 305)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("29_8o8hd")
 metadata/_edit_lock_ = true
 
-[node name="green_vending" type="Sprite2D" parent="BackgroundObjects"]
+[node name="green_vending" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(944, 300)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("30_h5n40")
 metadata/_edit_lock_ = true
 
-[node name="blue_vending2" type="Sprite2D" parent="BackgroundObjects"]
+[node name="blue_vending2" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(965, 305)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("29_8o8hd")
 metadata/_edit_lock_ = true
 
-[node name="red_vending2" type="Sprite2D" parent="BackgroundObjects"]
+[node name="red_vending2" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(982, 306)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("28_ept5t")
 metadata/_edit_lock_ = true
 
-[node name="info_signboard" type="Sprite2D" parent="BackgroundObjects"]
+[node name="info_signboard" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 1
 position = Vector2(392, 304)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("31_l68rq")
 metadata/_edit_lock_ = true
 
-[node name="hydrant" type="Sprite2D" parent="BackgroundObjects"]
+[node name="hydrant" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 1000
 position = Vector2(593, 438)
 texture = ExtResource("32_vl5ny")
 metadata/_edit_lock_ = true
 
-[node name="wrong_way_sign" type="Sprite2D" parent="BackgroundObjects"]
+[node name="wrong_way_sign" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 z_index = 1000
 position = Vector2(187, 417)
 texture = ExtResource("33_ymdix")
 metadata/_edit_lock_ = true
 
-[node name="18" type="Sprite2D" parent="BackgroundObjects"]
+[node name="18" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 modulate = Color(0.498039, 0.498039, 0.498039, 1)
 position = Vector2(345, 282)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("34_xq2ow")
 metadata/_edit_lock_ = true
 
-[node name="11" type="Sprite2D" parent="BackgroundObjects"]
+[node name="11" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 modulate = Color(0.537255, 0.537255, 0.537255, 1)
 position = Vector2(355, 282)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("35_jx2ts")
 metadata/_edit_lock_ = true
 
-[node name="19" type="Sprite2D" parent="BackgroundObjects"]
+[node name="19" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 modulate = Color(0.52549, 0.52549, 0.52549, 1)
 position = Vector2(367, 283)
 rotation = 0.0714674
@@ -1037,22 +1047,22 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("36_8fpdy")
 metadata/_edit_lock_ = true
 
-[node name="LampPost" type="Sprite2D" parent="BackgroundObjects"]
+[node name="LampPost" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(222, 255)
 texture = ExtResource("37_wax4g")
 metadata/_edit_lock_ = true
 
-[node name="LampPost2" type="Sprite2D" parent="BackgroundObjects"]
+[node name="LampPost2" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(736, 254)
 texture = ExtResource("37_wax4g")
 metadata/_edit_lock_ = true
 
-[node name="LampPost3" type="Sprite2D" parent="BackgroundObjects"]
+[node name="LampPost3" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(1079, 254)
 texture = ExtResource("37_wax4g")
 metadata/_edit_lock_ = true
 
-[node name="Fan" type="AnimatedSprite2D" parent="BackgroundObjects"]
+[node name="Fan" type="AnimatedSprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 position = Vector2(494, 274)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_gssm3")
@@ -1060,21 +1070,21 @@ autoplay = "default"
 frame_progress = 0.631321
 metadata/_edit_lock_ = true
 
-[node name="15" type="Sprite2D" parent="BackgroundObjects"]
+[node name="15" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 modulate = Color(0, 1, 1, 1)
 position = Vector2(1035, 274)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("39_ik5m1")
 metadata/_edit_lock_ = true
 
-[node name="17" type="Sprite2D" parent="BackgroundObjects"]
+[node name="17" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 modulate = Color(0, 1, 1, 1)
 position = Vector2(1059, 274)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("40_v6oh5")
 metadata/_edit_lock_ = true
 
-[node name="20" type="Sprite2D" parent="BackgroundObjects"]
+[node name="20" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects"]
 modulate = Color(0, 1, 1, 1)
 position = Vector2(1047, 274)
 scale = Vector2(0.5, 0.5)
@@ -1572,7 +1582,7 @@ mouse_filter = 1
 
 [node name="PlayerSpawn" type="Sprite2D" parent="."]
 modulate = Color(0.2, 1, 0.0588235, 1)
-position = Vector2(702, 399)
+position = Vector2(694, 406)
 scale = Vector2(2, 2)
 skew = -0.773181
 texture = SubResource("AtlasTexture_btrtx")
