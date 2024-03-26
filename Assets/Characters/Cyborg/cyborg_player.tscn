@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cqb2ap066ohga"]
+[gd_scene load_steps=44 format=3 uid="uid://cqb2ap066ohga"]
 
 [ext_resource type="Script" path="res://Assets/Characters/player_character.gd" id="1_nld74"]
 [ext_resource type="Texture2D" uid="uid://bppw7d22ppws1" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/3 Cyborg/Idle2.png" id="2_a5s80"]
@@ -22,6 +22,18 @@
 [ext_resource type="Texture2D" uid="uid://bh53vexsd5vsr" path="res://Assets/Sprites/Skillicon6_18.png" id="20_j614p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4myl"]
+
+[sub_resource type="Gradient" id="Gradient_1lx0j"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.674528)
+colors = PackedColorArray(0.0196078, 0.0196078, 0.0196078, 0.611765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m0ynd"]
+gradient = SubResource("Gradient_1lx0j")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="Animation" id="Animation_3q5o5"]
 resource_name = "FireGun"
@@ -2263,6 +2275,11 @@ scale = Vector2(0.81, 0.45)
 shape = SubResource("CircleShape2D_a4myl")
 
 [node name="SpriteRoot" type="Node2D" parent="."]
+
+[node name="Shadow" type="Sprite2D" parent="SpriteRoot"]
+position = Vector2(0, 1)
+scale = Vector2(0.53, 0.265)
+texture = SubResource("GradientTexture2D_m0ynd")
 
 [node name="Body" type="Sprite2D" parent="SpriteRoot"]
 position = Vector2(10, -22)

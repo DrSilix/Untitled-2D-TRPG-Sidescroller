@@ -56,15 +56,15 @@ modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1aijj"]
 content_margin_left = 5.0
 bg_color = Color(0.305882, 0.305882, 0.305882, 1)
-border_width_left = 2
-border_width_bottom = 2
+border_width_left = 4
+border_width_bottom = 4
 border_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eik3m"]
 content_margin_left = 5.0
 bg_color = Color(0.435294, 0.435294, 0.435294, 1)
-border_width_left = 2
-border_width_bottom = 2
+border_width_left = 4
+border_width_bottom = 4
 border_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_231j7"]
@@ -84,10 +84,11 @@ grow_vertical = 2
 script = ExtResource("1_brwui")
 
 [node name="Main" type="Control" parent="."]
+visible = false
 anchors_preset = 0
-offset_top = 292.0
+offset_top = 231.0
 offset_right = 1.0
-offset_bottom = 293.0
+offset_bottom = 232.0
 
 [node name="Panel" type="PanelContainer" parent="Main"]
 layout_mode = 0
@@ -111,7 +112,7 @@ theme_override_constants/separation = 16
 [node name="Attack" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_a7pjo")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
@@ -121,7 +122,7 @@ text = "Attack"
 [node name="Move" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_a7pjo")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
@@ -131,7 +132,7 @@ text = "Move"
 [node name="Pass" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_a7pjo")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
@@ -139,12 +140,11 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
 text = "Pass"
 
 [node name="SubAttack" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_left = -9.0
-offset_top = 287.0
+offset_top = 187.0
 offset_right = -8.0
-offset_bottom = 288.0
+offset_bottom = 188.0
 
 [node name="Panel" type="PanelContainer" parent="SubAttack"]
 layout_mode = 0
@@ -169,7 +169,7 @@ theme_override_constants/separation = 16
 [node name="SingleShot" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_a7pjo")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
@@ -179,7 +179,7 @@ text = "SingleShot"
 [node name="BurstShot" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_a7pjo")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
@@ -189,7 +189,7 @@ text = "BurstShot"
 [node name="Grenade" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_a7pjo")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
@@ -199,7 +199,7 @@ text = "Grenade"
 [node name="TakeAim" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_a7pjo")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
@@ -210,7 +210,7 @@ text = "Take Aim"
 [node name="Reload" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_a7pjo")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
@@ -250,9 +250,9 @@ offset_right = 1280.0
 offset_bottom = 40.0
 
 [node name="Cancel" type="Button" parent="CancelButton"]
-offset_left = -32.0
-offset_right = 28.0
-offset_bottom = 70.0
+offset_left = -63.0
+offset_right = 22.0
+offset_bottom = 93.0
 scale = Vector2(1.2, 1)
 theme_override_colors/font_color = Color(0.780392, 0.294118, 0.243137, 1)
 theme_override_colors/font_pressed_color = Color(0.780392, 0.294118, 0.243137, 1)
@@ -261,9 +261,9 @@ theme_override_colors/font_focus_color = Color(0.780392, 0.294118, 0.243137, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.780392, 0.294118, 0.243137, 1)
 theme_override_colors/font_disabled_color = Color(0.780392, 0.294118, 0.243137, 1)
 theme_override_colors/font_outline_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
-theme_override_constants/outline_size = 5
+theme_override_constants/outline_size = 9
 theme_override_fonts/font = ExtResource("3_a7pjo")
-theme_override_font_sizes/font_size = 65
+theme_override_font_sizes/font_size = 90
 theme_override_styles/normal = SubResource("StyleBoxFlat_1aijj")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1aijj")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eik3m")

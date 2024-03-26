@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cjbguv36aqb2n"]
+[gd_scene load_steps=39 format=3 uid="uid://cjbguv36aqb2n"]
 
 [ext_resource type="Script" path="res://Assets/Characters/player_character.gd" id="1_7j6cw"]
 [ext_resource type="Texture2D" uid="uid://bbrh8a82hd7j" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/3 Hands/2 Punk/1.png" id="2_mvd4u"]
@@ -17,6 +17,18 @@
 [ext_resource type="Texture2D" uid="uid://bh53vexsd5vsr" path="res://Assets/Sprites/Skillicon6_18.png" id="15_euljo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4myl"]
+
+[sub_resource type="Gradient" id="Gradient_1sr1j"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.674528)
+colors = PackedColorArray(0.0196078, 0.0196078, 0.0196078, 0.611765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pq6tc"]
+gradient = SubResource("Gradient_1sr1j")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="Animation" id="Animation_3q5o5"]
 resource_name = "FireGun"
@@ -2668,6 +2680,11 @@ scale = Vector2(0.81, 0.45)
 shape = SubResource("CircleShape2D_a4myl")
 
 [node name="SpriteRoot" type="Node2D" parent="."]
+
+[node name="Shadow" type="Sprite2D" parent="SpriteRoot"]
+position = Vector2(0, 1)
+scale = Vector2(0.53, 0.265)
+texture = SubResource("GradientTexture2D_pq6tc")
 
 [node name="Arms2" type="Sprite2D" parent="SpriteRoot"]
 visible = false
