@@ -2,15 +2,16 @@ extends Control
 
 signal action_chosen(action : String, data)
 
-@onready var sub_attack : Control = $SubAttack
-@onready var targets : Control = $Targets
-@onready var targets_v_box_container = $Targets/Panel/MarginContainer/TargetsVBoxContainer
-
+@onready var main_menu := $Main
+@onready var sub_attack_menu := $SubAttack
+@onready var targets_menu := $Targets
+@onready var targets_v_box_container := $Targets/Panel/MarginContainer/TargetsVBoxContainer
+@onready var cancel_button = $CancelButton/Cancel
 
 @onready var attack := $Main/Panel/MarginContainer/VBoxContainer/Attack
 @onready var move := $Main/Panel/MarginContainer/VBoxContainer/Move
 @onready var passB := $Main/Panel/MarginContainer/VBoxContainer/Pass
-@onready var flee := $Main/Panel/MarginContainer/VBoxContainer/Flee
+@onready var take_aim := $SubAttack/Panel/MarginContainer/VBoxContainer/TakeAim
 @onready var reload := $SubAttack/Panel/MarginContainer/VBoxContainer/Reload
 @onready var single_shot := $SubAttack/Panel/MarginContainer/VBoxContainer/SingleShot
 @onready var burst_shot := $SubAttack/Panel/MarginContainer/VBoxContainer/BurstShot
@@ -22,6 +23,9 @@ var _character : BaseCharacter
 var _enemies : Array[BaseCharacter]
 var attackType : String
 var moveable_area : Area2D
+
+enum State {MAINMENU, ATTACKMENU, TARGETMENU, MOVEMENU}
+var currentState : State
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,124 +39,137 @@ func _process(delta):
 #must be called each time this action chooser is used
 func Initialize(character : BaseCharacter):
 	_character = character
+	moveable_area = _character.find_child("MovableArea")
 	_enemies = GameManager.current_enemies
 	ResetAllMenus()
-
-func ResetAllMenus():
-	sub_attack.visible = false
-	targets.visible = false
-	attack.text = "Attack"
-	single_shot.text = "Single\nShot"
-	burst_shot.text = "Burst\nShot"
-	grenade.text = "Grenade"
-	AllDisabledCheck(false)
+	ChangeMenuState(State.MAINMENU)
 
 func ActionChosen(action : String, data):
-	DeconstructTargetMenu()
 	ResetAllMenus()
 	visible = false
 	action_chosen.emit(action, data)
 
-func AllDisabledCheck(doDisable : bool):
-	AttackDisabledCheck(doDisable)
-	SingleShotDisabledCheck(doDisable)
-	BurstShotDisabledCheck(doDisable)
-	GrenadeDisabledCheck(doDisable)
-	ReloadDisabledCheck(doDisable)
-	MoveDisabledCheck(doDisable)
-	FleeDisabledCheck(doDisable)
-	passB.disabled = doDisable
+func ResetAllMenus():
+	main_menu.visible = true
+	sub_attack_menu.visible = false
+	cancel_button.visible = false
+	moveable_area.visible = false
+	IsDisabledCheck()
 
-func AllButOneDisabledCheck(doDisable : bool, one):
-	pass
+func IsDisabledCheck():
+	AttackDisabledCheck()
+	SingleShotDisabledCheck()
+	BurstShotDisabledCheck()
+	GrenadeDisabledCheck()
+	ReloadDisabledCheck()
+	MoveDisabledCheck()
+	TakeAimDisabledCheck()
+	passB.disabled = false
+
+func ChangeMenuState(state : State):
+	main_menu.visible = false
+	sub_attack_menu.visible = false
+	match state:
+		State.MAINMENU:
+			currentState = State.MAINMENU
+			main_menu.visible = true
+			moveable_area.visible = false
+			cancel_button.visible = false
+		State.ATTACKMENU:
+			currentState = State.ATTACKMENU
+			sub_attack_menu.visible = true
+			cancel_button.visible = true
+		State.TARGETMENU:
+			currentState = State.TARGETMENU
+			for enemy in _enemies:
+				print(enemy.name, " connected")
+				var clickArea := enemy.find_child("SelectableArea")
+				clickArea.connect("input_event", _on_enemy_select_input_event.bind(enemy))
+			cancel_button.visible = true
+		State.MOVEMENU:
+			moveable_area.visible = true
+			currentState = State.MOVEMENU
+			cancel_button.visible = true
+
+func _on_cancel_pressed():
+	match currentState:
+		State.ATTACKMENU:
+			ChangeMenuState(State.MAINMENU)
+		State.TARGETMENU:
+			ChangeMenuState(State.ATTACKMENU)
+		State.MOVEMENU:
+			CancelMove()
+			ChangeMenuState(State.MAINMENU)
+
+func ConnectToEnemies():
+	for enemy in _enemies:
+				print(enemy.name, " connected")
+				var clickArea := enemy.find_child("SelectableArea")
+				clickArea.connect("input_event", _on_enemy_select_input_event.bind(enemy))
+
+func DisconnectFromEnemies():
+	for enemy in _enemies:
+				print(enemy.name, " connected")
+				var clickArea := enemy.find_child("SelectableArea")
+				clickArea.disconnect("input_event", _on_enemy_select_input_event)
 
 #region button disabled checks
-func FleeDisabledCheck(doDisable : bool):
+func TakeAimDisabledCheck():
+	#TODO: implement take aim in character controllers
 	if _character.currentHealth > _character.maxHealth / 2:
-		flee.disabled = true
+		take_aim.disabled = true
 	else:
-		flee.disabled = doDisable
+		take_aim.disabled = false
 
-func AttackDisabledCheck(doDisable : bool):
+func AttackDisabledCheck():
 	if _character.currentActionPoints < _character.singleShotCost:
 		attack.disabled = true
-	else: attack.disabled = doDisable
+	else: attack.disabled = false
 
-func SingleShotDisabledCheck(doDisable : bool):
+func SingleShotDisabledCheck():
 	if _character.currentActionPoints < _character.singleShotCost or \
 	_character.currentWeaponAmmo < 1:
 		single_shot.disabled = true
-	else: single_shot.disabled = doDisable
+	else: single_shot.disabled = false
 
-func BurstShotDisabledCheck(doDisable : bool):
+func BurstShotDisabledCheck():
 	if _character.currentActionPoints < _character.burstShotCost or \
 	_character.currentWeaponAmmo < 3:
 		burst_shot.disabled = true
-	else: burst_shot.disabled = doDisable
+	else: burst_shot.disabled = false
 	
-func GrenadeDisabledCheck(doDisable : bool):
+func GrenadeDisabledCheck():
 	if _character.currentActionPoints < _character.grenadeCost:
 		grenade.disabled = true
-	else: grenade.disabled = doDisable
+	else: grenade.disabled = false
 
-func ReloadDisabledCheck(doDisable : bool):
+func ReloadDisabledCheck():
 	if _character.currentActionPoints < _character.reloadCost or \
 	_character.currentWeaponAmmo >= 3:
 		reload.disabled = true
-	else: reload.disabled = doDisable
+	else: reload.disabled = false
 
-func MoveDisabledCheck(doDisable : bool):
+func MoveDisabledCheck():
 	if _character.currentActionPoints < _character.moveCost:
 		move.disabled = true
-	else: move.disabled = doDisable
+	else: move.disabled = false
 
-func PassDisabledCheck(doDisable : bool):
-	passB.disabled = doDisable
+func PassDisabledCheck():
+	passB.disabled = false
 #endregion
-
-func ConstructTargetMenu():
-	DeconstructTargetMenu()
-	for i in range(_enemies.size()):
-		var enemy := _enemies[i]
-		var newButton = BUTTON.instantiate()
-		newButton.text = enemy.name
-		newButton.name = enemy.name
-		newButton.targetId = i
-		targets_v_box_container.add_child(newButton)
-		newButton.connect("pressed_with_info", _on_enemy_target_pressed_with_info)
-		
-func DeconstructTargetMenu():
-	for n in targets_v_box_container.get_children():
-		n.queue_free()
 
 
 func _on_attack_pressed():
-	ConstructTargetMenu()
-	if sub_attack.visible:
-		AttackMenuOpenState(false)
-	else:
-		AttackMenuOpenState(true)
-
-func AttackMenuOpenState(isOpen : bool):
-	sub_attack.visible = isOpen
-	attack.text = "Cancel" if isOpen else "Attack"
-	AttackDisabledCheck(false)
-	MoveDisabledCheck(isOpen)
-	PassDisabledCheck(isOpen)
-	FleeDisabledCheck(isOpen)
-	ReloadDisabledCheck(false)
-	SingleShotDisabledCheck(false)
-	BurstShotDisabledCheck(false)
-	GrenadeDisabledCheck(false)
-	single_shot.text = "Single\nShot"
-	burst_shot.text = "Burst\nShot"
-	grenade.text = "Grenade"
+	ChangeMenuState(State.ATTACKMENU)
 
 func _on_move_pressed():
-	moveable_area = _character.find_child("MovableArea")
-	moveable_area.visible = true
-	visible = false
+	print("move pressed")
 	get_node("../../MovableArea").connect("input_event", _on_move_location_chosen)
+	ChangeMenuState(State.MOVEMENU)
+
+func CancelMove():
+	get_node("../../MovableArea").disconnect("input_event", _on_move_location_chosen)
+	ChangeMenuState(State.MAINMENU)
 
 func _on_move_location_chosen(viewport: Node, event: InputEvent, shape_idx: int):
 	if event.is_action_pressed("Move"):
@@ -176,48 +193,28 @@ func _on_pass_pressed():
 	ActionChosen("pass", null)
 
 
-func _on_flee_pressed():
-	ActionChosen("flee", null)
+func _on_take_aim_pressed():
+	ActionChosen("takeaim", null)
 
 # TODO: functionize this as it's copied 3 times
 func _on_single_shot_pressed():
-	if targets.visible:
-		targets.visible = false
-		AttackMenuOpenState(true)
-	else:
-		targets.visible = true
-		single_shot.text = "Cancel"
-		AllDisabledCheck(true)
-		SingleShotDisabledCheck(false)
-		attackType = "shootsingle"
+	ChangeMenuState(State.TARGETMENU)
+	attackType = "shootsingle"
 
 
 func _on_burst_shot_pressed():
-	if targets.visible:
-		targets.visible = false
-		AttackMenuOpenState(true)
-	else:
-		targets.visible = true
-		burst_shot.text = "Cancel"
-		AllDisabledCheck(true)
-		BurstShotDisabledCheck(false)
-		attackType = "shootburst"
+	ChangeMenuState(State.TARGETMENU)
+	attackType = "shootburst"
 
 
 func _on_grenade_pressed():
-	if targets.visible:
-		targets.visible = false
-		AttackMenuOpenState(true)
-	else:
-		targets.visible = true
-		grenade.text = "Cancel"
-		AllDisabledCheck(true)
-		GrenadeDisabledCheck(false)
-		attackType = "grenade"
-
+	ChangeMenuState(State.TARGETMENU)
+	attackType = "grenade"
 
 func _on_reload_pressed():
 	ActionChosen("reload", null)
 	
-func _on_enemy_target_pressed_with_info(button : Button):
-	ActionChosen(attackType, button.targetId)
+func _on_enemy_select_input_event(viewport, event : InputEvent, shape_rid, enemy : BaseCharacter):
+	if event.is_action_pressed("Move"):
+		DisconnectFromEnemies()
+		ActionChosen(attackType, enemy)

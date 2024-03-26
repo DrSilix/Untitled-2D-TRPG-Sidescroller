@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cghwhb7ybxf2e"]
+[gd_scene load_steps=12 format=3 uid="uid://cghwhb7ybxf2e"]
 
+[ext_resource type="FontFile" uid="uid://rk5ygevjqcej" path="res://Assets/UI/Fonts/superstar_memesbruh03.ttf" id="1_gx3au"]
 [ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="1_hr3px"]
 [ext_resource type="Script" path="res://Assets/UI/target_button.gd" id="2_prfe3"]
 
@@ -46,13 +47,13 @@ modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(0, 62)
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("1_gx3au")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
 theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
-text = "Single
-Shot"
+text = "Enemy1"
 script = ExtResource("2_prfe3")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

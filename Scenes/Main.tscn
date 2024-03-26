@@ -1568,10 +1568,11 @@ mouse_filter = 1
 
 [node name="PlayerChooseAction" parent="CanvasLayer" instance=ExtResource("48_6fmxg")]
 visible = false
+mouse_filter = 1
 
 [node name="PlayerSpawn" type="Sprite2D" parent="."]
 modulate = Color(0.2, 1, 0.0588235, 1)
-position = Vector2(734, 421)
+position = Vector2(702, 399)
 scale = Vector2(2, 2)
 skew = -0.773181
 texture = SubResource("AtlasTexture_btrtx")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cqb2ap066ohga"]
+[gd_scene load_steps=42 format=3 uid="uid://cqb2ap066ohga"]
 
 [ext_resource type="Script" path="res://Assets/Characters/player_character.gd" id="1_nld74"]
 [ext_resource type="Texture2D" uid="uid://bppw7d22ppws1" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/3 Cyborg/Idle2.png" id="2_a5s80"]
@@ -684,7 +684,6 @@ tracks/19/keys = {
 
 [sub_resource type="Animation" id="Animation_bb4tp"]
 resource_name = "Idle"
-length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -693,7 +692,7 @@ tracks/0/path = NodePath("SpriteRoot/Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -705,7 +704,7 @@ tracks/1/path = NodePath("SpriteRoot/Arms:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6),
+"times": PackedFloat32Array(0, 0.3, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2(6, -17), Vector2(5, -17), Vector2(6, -17)]
@@ -717,7 +716,7 @@ tracks/2/path = NodePath("SpriteRoot/Gun:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6),
+"times": PackedFloat32Array(0, 0.3, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2(6, -18), Vector2(5, -18), Vector2(6, -18)]
@@ -2199,6 +2198,54 @@ region = Rect2(464, 304, 32, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wbk1"]
 radius = 15.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fldvn"]
+atlas = ExtResource("16_q6wvs")
+region = Rect2(416, 144, 32, 32)
+
+[sub_resource type="Animation" id="Animation_3hhup"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+
+[sub_resource type="Animation" id="Animation_52a2x"]
+resource_name = "pulse"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1.2, 1.2), Vector2(1.26, 1.26), Vector2(1.32, 1.32), Vector2(1.38, 1.38), Vector2(1.44, 1.44), Vector2(1.5, 1.5), Vector2(1.44, 1.44), Vector2(1.38, 1.38), Vector2(1.32, 1.32), Vector2(1.26, 1.26), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t14uj"]
+_data = {
+"RESET": SubResource("Animation_3hhup"),
+"pulse": SubResource("Animation_52a2x")
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0j7c0"]
+load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4ian"]
+atlas = SubResource("CompressedTexture2D_0j7c0")
+region = Rect2(592, 144, 32, 32)
+
 [node name="Cyborg_Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 15
@@ -2206,6 +2253,9 @@ motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
 script = ExtResource("1_nld74")
+maxHealth = 10
+armor = 10
+weaponDamage = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.34)
@@ -2277,5 +2327,53 @@ visible = false
 self_modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(0, -39)
 texture = ExtResource("20_j614p")
+
+[node name="HighlightYellow" type="NinePatchRect" parent="."]
+visible = false
+z_index = 888
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = -29.0
+offset_right = 13.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(13, 16)
+texture = SubResource("AtlasTexture_fldvn")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HighlightYellow"]
+libraries = {
+"": SubResource("AnimationLibrary_t14uj")
+}
+autoplay = "pulse"
+
+[node name="HighlightRed" type="NinePatchRect" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -36.0
+offset_right = 7.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_f4ian")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
 
 [connection signal="animation_finished" from="SpriteRoot/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

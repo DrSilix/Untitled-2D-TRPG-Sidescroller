@@ -19,6 +19,7 @@ func DisconnectFromMovableArea():
 		get_node("../MovableArea").disconnect("input_event", _on_input_event)
 
 func ChooseCombatAction(combatArea : CombatArea):
+	highlight_yellow.visible = true
 	currentCombatArea = combatArea
 	player_choose_action_menu.visible = true
 	player_choose_action_menu.Initialize(self)
@@ -29,10 +30,10 @@ func _on_action_chosen(action : String, data):
 	match action:
 		"shootsingle":
 			currentChosenAction = CombatActions.SHOOTSINGLE
-			attackTarget = GameManager.current_enemies[data as int]
+			attackTarget = data as BaseCharacter
 		"shootburst":
 			currentChosenAction = CombatActions.SHOOTBURST
-			attackTarget = GameManager.current_enemies[data as int]
+			attackTarget = data as BaseCharacter
 		"grenade":
 			currentChosenAction = CombatActions.GRENADE
 		"reload":

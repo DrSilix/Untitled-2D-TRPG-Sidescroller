@@ -33,11 +33,13 @@ var rng := RandomNumberGenerator.new()
 											CombatActions.GRENADE)
 
 func _ready():
+	animationPlayer.speed_scale *= RandomNumberGenerator.new().randf_range(0.85, 1.15)
 	super._ready()
 
 #action weights, when using an action the weight is reduced, when event
 #weight can be increased. e.g. movement reduces as used, when hit gets raised
 func ChooseCombatAction(combatArea : CombatArea):
+	highlight_yellow.visible = true
 	currentCombatArea = combatArea
 	await get_tree().create_timer(1).timeout
 	var combinedWeightActions := 0
@@ -127,6 +129,10 @@ func MoveAction():
 func TakeCover():
 	super.TakeCover()
 	moveA.weight = 1
+	
+func LeaveCover():
+	super.LeaveCover()
+	moveA.weight = 3
 
 func TakeDamage(damage : int):
 	super.TakeDamage(damage)

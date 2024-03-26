@@ -1,6 +1,6 @@
 class_name BaseCharacter
 extends CharacterBody2D
-
+#region variables
 @export var moveSpeed : int = 6
 @export var maxHealth : int = 9
 @export var armor : int = 8
@@ -21,7 +21,9 @@ extends CharacterBody2D
 @onready var spriteRootNode : Node2D = $SpriteRoot
 @onready var animationPlayer : AnimationPlayer = $SpriteRoot/AnimationPlayer
 @onready var cover_collision : Area2D = $CoverArea
-@onready var cover_icon = $CoverIcon
+@onready var cover_icon : Sprite2D = $CoverIcon
+@onready var highlight_yellow : NinePatchRect = $HighlightYellow
+@onready var highlight_red : NinePatchRect = $HighlightRed
 
 enum {IDLE, WALKING, RUNNING, ATTACKING, ATTACKING_TWO, RELOADING, HURT, MISSED, RESISTED, DEATH}
 var activeState := IDLE
@@ -37,7 +39,7 @@ var moveTarget : Vector2
 var attackTarget : BaseCharacter
 
 var currentCombatArea : CombatArea
-
+#endregion
 func _ready():
 	animationPlayer.connect("animation_finished", _on_AnimationPlayer_animation_finished,)
 	cover_collision.connect("body_entered", _on_cover_area_body_entered)
@@ -53,7 +55,6 @@ func HaltActions():
 
 func MoveVelocity(velocity :Vector2):
 	pass
-
 
 func ChooseCombatAction(combatArea : CombatArea):
 	currentCombatArea = combatArea
@@ -82,6 +83,7 @@ func CompleteChosenAction():
 	#targets is finished before possibly continuing into their turn
 	await get_tree().create_timer(1).timeout
 	print("Actions points: ", currentActionPoints)
+	highlight_yellow.visible = false
 	if currentActionPoints > 0: ChooseCombatAction(currentCombatArea)
 	else:
 		currentActionPoints = maxActionPoints
@@ -134,6 +136,13 @@ func PassAction():
 func TakeCover():
 	print("Taking cover")
 	cover_icon.visible = true
+	cover_icon.self_modulate.a = 0
+	var tween = get_tree().create_tween()
+	tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
+	tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
+	tween.tween_property(cover_icon, "self_modulate:a", 0.5, 3)
+	tween.tween_property(cover_icon, "self_modulate:a", 0.5, 5)
+	tween.tween_property(cover_icon, "self_modulate:a", 0.2, 1)
 	hasCover = true
 	chanceToHitModifier = -3
 
@@ -158,7 +167,7 @@ func getHealthBonus():
 func AttackTarget(target : BaseCharacter) -> int:
 	print(self.name, " attacks ", target.name)
 	SetFacingTowardsTarget(target)
-	var toHit : int = RollToHit()
+	var toHit : int = RollToHit() + CalculateDistancePenalty(target)
 	var hitPenalty = 0
 	if currentChosenAction == CombatActions.SHOOTBURST: hitPenalty = -2
 	var toAvoid : int = target.RollToAvoidAttack(hitPenalty)
@@ -172,6 +181,11 @@ func AttackTarget(target : BaseCharacter) -> int:
 		return -2
 	target.TakeDamage(damageToDeal - damagetToResist)
 	return damageToDeal - damagetToResist
+
+func CalculateDistancePenalty(target : BaseCharacter) -> int:
+	var distanceSquared = global_position.distance_squared_to(target.global_position)
+	print(-floor(distanceSquared/15000), " - ", distanceSquared/15000)
+	return -floor(distanceSquared/15000)
 
 # ??Factor in distance to shoot??
 func RollToHit():

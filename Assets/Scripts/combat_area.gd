@@ -78,6 +78,7 @@ func TakeTurn(actor : BaseCharacter):
 func _on_body_entered(body):
 	# TODO: disconnect this after it's entered first time
 	if body.is_in_group("Player"):
+		disconnect("body_entered", _on_body_entered,)
 		body.isInputDisabled = true
 		body.HaltActions()
 		#print(spawnAreas[0].moveTarget.name)

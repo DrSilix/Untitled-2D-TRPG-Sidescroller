@@ -1,10 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://x1j2btwuvqub"]
+[gd_scene load_steps=17 format=3 uid="uid://x1j2btwuvqub"]
 
 [ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="1_4oasa"]
 [ext_resource type="Script" path="res://Assets/UI/player_choose_action.gd" id="1_brwui"]
+[ext_resource type="FontFile" uid="uid://rk5ygevjqcej" path="res://Assets/UI/Fonts/superstar_memesbruh03.ttf" id="3_a7pjo"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loubr"]
-bg_color = Color(0.2, 0.2, 0.2, 0.941176)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf675"]
+atlas = ExtResource("1_4oasa")
+region = Rect2(352, 290, 40, 12)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v70tm"]
+texture = SubResource("AtlasTexture_bf675")
+texture_margin_left = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jp4c4"]
 atlas = ExtResource("1_4oasa")
@@ -47,6 +53,27 @@ content_margin_bottom = 5.0
 texture = SubResource("AtlasTexture_oqwst")
 modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1aijj"]
+content_margin_left = 5.0
+bg_color = Color(0.305882, 0.305882, 0.305882, 1)
+border_width_left = 2
+border_width_bottom = 2
+border_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eik3m"]
+content_margin_left = 5.0
+bg_color = Color(0.435294, 0.435294, 0.435294, 1)
+border_width_left = 2
+border_width_bottom = 2
+border_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_231j7"]
+content_margin_left = 5.0
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+border_width_left = 2
+border_width_bottom = 2
+border_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
+
 [node name="PlayerChooseAction" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -58,16 +85,16 @@ script = ExtResource("1_brwui")
 
 [node name="Main" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 59.0
-offset_top = 253.0
-offset_right = 60.0
-offset_bottom = 254.0
+offset_top = 292.0
+offset_right = 1.0
+offset_bottom = 293.0
 
 [node name="Panel" type="PanelContainer" parent="Main"]
 layout_mode = 0
+offset_top = 194.0
 offset_right = 236.0
-offset_bottom = 408.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_loubr")
+offset_bottom = 428.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_v70tm")
 
 [node name="MarginContainer" type="MarginContainer" parent="Main/Panel"]
 layout_mode = 2
@@ -79,10 +106,11 @@ theme_override_constants/margin_bottom = 26
 [node name="VBoxContainer" type="VBoxContainer" parent="Main/Panel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/separation = 32
+theme_override_constants/separation = 16
 
 [node name="Attack" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_a7pjo")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
@@ -92,6 +120,7 @@ text = "Attack"
 
 [node name="Move" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_a7pjo")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
@@ -101,6 +130,7 @@ text = "Move"
 
 [node name="Pass" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_a7pjo")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
@@ -108,28 +138,21 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
 theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
 text = "Pass"
 
-[node name="Flee" type="Button" parent="Main/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
-theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
-disabled = true
-text = "Flee	"
-
 [node name="SubAttack" type="Control" parent="."]
+visible = false
 anchors_preset = 0
-offset_left = 302.0
-offset_top = 253.0
-offset_right = 303.0
-offset_bottom = 254.0
+offset_left = -9.0
+offset_top = 287.0
+offset_right = -8.0
+offset_bottom = 288.0
 
 [node name="Panel" type="PanelContainer" parent="SubAttack"]
 layout_mode = 0
-offset_right = 236.0
-offset_bottom = 408.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_loubr")
+offset_left = 9.0
+offset_top = 67.0
+offset_right = 310.0
+offset_bottom = 347.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_v70tm")
 
 [node name="MarginContainer" type="MarginContainer" parent="SubAttack/Panel"]
 layout_mode = 2
@@ -141,80 +164,120 @@ theme_override_constants/margin_bottom = 26
 [node name="VBoxContainer" type="VBoxContainer" parent="SubAttack/Panel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/separation = 32
+theme_override_constants/separation = 16
 
 [node name="SingleShot" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_a7pjo")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
 theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
-text = "Single
-Shot"
+text = "SingleShot"
 
 [node name="BurstShot" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_a7pjo")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
 theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
-text = "Burst
-Shot"
+text = "BurstShot"
 
 [node name="Grenade" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_a7pjo")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
 theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
 text = "Grenade"
 
-[node name="Reload" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 62)
+[node name="TakeAim" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_a7pjo")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
+theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
+disabled = true
+text = "Take Aim"
+
+[node name="Reload" type="Button" parent="SubAttack/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_a7pjo")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxTexture_nde4c")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_8jua6")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
 theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
 text = "Reload"
 
-[node name="Targets" type="Control" parent="."]
+[node name="Targets_old" type="Control" parent="."]
+visible = false
 anchors_preset = 0
-offset_left = 546.0
-offset_top = 253.0
-offset_right = 547.0
-offset_bottom = 254.0
+offset_top = 312.0
+offset_right = 1.0
+offset_bottom = 313.0
 
-[node name="Panel" type="PanelContainer" parent="Targets"]
+[node name="Panel" type="PanelContainer" parent="Targets_old"]
 layout_mode = 0
+offset_top = 108.0
 offset_right = 236.0
 offset_bottom = 408.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_loubr")
+theme_override_styles/panel = SubResource("StyleBoxTexture_v70tm")
 
-[node name="MarginContainer" type="MarginContainer" parent="Targets/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Targets_old/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 42
 theme_override_constants/margin_top = 26
 theme_override_constants/margin_right = 42
 theme_override_constants/margin_bottom = 26
 
-[node name="TargetsVBoxContainer" type="VBoxContainer" parent="Targets/Panel/MarginContainer"]
+[node name="TargetsVBoxContainer" type="VBoxContainer" parent="Targets_old/Panel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 32
+theme_override_constants/separation = 16
+
+[node name="CancelButton" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1240.0
+offset_right = 1280.0
+offset_bottom = 40.0
+
+[node name="Cancel" type="Button" parent="CancelButton"]
+offset_left = -32.0
+offset_right = 28.0
+offset_bottom = 70.0
+scale = Vector2(1.2, 1)
+theme_override_colors/font_color = Color(0.780392, 0.294118, 0.243137, 1)
+theme_override_colors/font_pressed_color = Color(0.780392, 0.294118, 0.243137, 1)
+theme_override_colors/font_hover_color = Color(0.780392, 0.294118, 0.243137, 1)
+theme_override_colors/font_focus_color = Color(0.780392, 0.294118, 0.243137, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.780392, 0.294118, 0.243137, 1)
+theme_override_colors/font_disabled_color = Color(0.780392, 0.294118, 0.243137, 1)
+theme_override_colors/font_outline_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_a7pjo")
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = SubResource("StyleBoxFlat_1aijj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1aijj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eik3m")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_231j7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1aijj")
+text = "X"
+text_overrun_behavior = 1
 
 [connection signal="pressed" from="Main/Panel/MarginContainer/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="Main/Panel/MarginContainer/VBoxContainer/Move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="Main/Panel/MarginContainer/VBoxContainer/Pass" to="." method="_on_pass_pressed"]
-[connection signal="pressed" from="Main/Panel/MarginContainer/VBoxContainer/Flee" to="." method="_on_flee_pressed"]
 [connection signal="pressed" from="SubAttack/Panel/MarginContainer/VBoxContainer/SingleShot" to="." method="_on_single_shot_pressed"]
 [connection signal="pressed" from="SubAttack/Panel/MarginContainer/VBoxContainer/BurstShot" to="." method="_on_burst_shot_pressed"]
 [connection signal="pressed" from="SubAttack/Panel/MarginContainer/VBoxContainer/Grenade" to="." method="_on_grenade_pressed"]
+[connection signal="pressed" from="SubAttack/Panel/MarginContainer/VBoxContainer/TakeAim" to="." method="_on_take_aim_pressed"]
 [connection signal="pressed" from="SubAttack/Panel/MarginContainer/VBoxContainer/Reload" to="." method="_on_reload_pressed"]
+[connection signal="pressed" from="CancelButton/Cancel" to="." method="_on_cancel_pressed"]
