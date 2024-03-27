@@ -1,39 +1,53 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbbpdf2yli53k"]
+[gd_scene load_steps=16 format=3 uid="uid://bbbpdf2yli53k"]
 
 [ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="1_sxhih"]
+[ext_resource type="FontFile" uid="uid://rk5ygevjqcej" path="res://Assets/UI/Fonts/superstar_memesbruh03.ttf" id="2_pla1m"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aes8k"]
 load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m0lmh"]
 atlas = SubResource("CompressedTexture2D_aes8k")
-region = Rect2(352, 288, 16, 16)
+region = Rect2(352, 290, 16, 12)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kxlr6"]
 texture = SubResource("AtlasTexture_m0lmh")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lp7ky"]
 atlas = ExtResource("1_sxhih")
-region = Rect2(368, 128, 16, 16)
+region = Rect2(368, 130, 16, 12)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_afd7u"]
 texture = SubResource("AtlasTexture_lp7ky")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_41gti"]
 atlas = ExtResource("1_sxhih")
-region = Rect2(384, 128, 16, 16)
+region = Rect2(384, 130, 15, 12)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b1i70"]
 texture = SubResource("AtlasTexture_41gti")
 
 [sub_resource type="LabelSettings" id="LabelSettings_0dspq"]
-font_size = 12
+line_spacing = 0.0
+font = ExtResource("2_pla1m")
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_7vtj7"]
+line_spacing = 0.0
+font = ExtResource("2_pla1m")
+font_size = 18
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kinyf"]
 bg_color = Color(0.301961, 0.301961, 0.301961, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jm31u"]
 bg_color = Color(0.568627, 0.858824, 0.411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w087p"]
+bg_color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tatk0"]
+bg_color = Color(1, 0.858824, 0.411765, 1)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -43,51 +57,362 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Nameplate1" type="Control" parent="."]
+[node name="BikerNameplate" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 0
+offset_top = -1.0
 offset_right = 183.0
-offset_bottom = 40.0
-scale = Vector2(1.76934, 2.1655)
+offset_bottom = 39.0
+scale = Vector2(1.7, 1.7)
 
-[node name="Panel" type="Panel" parent="Nameplate1"]
+[node name="Panel" type="Panel" parent="BikerNameplate"]
+self_modulate = Color(1, 1, 1, 0.862745)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_kxlr6")
 
-[node name="Panel2" type="Panel" parent="Nameplate1"]
+[node name="Panel2" type="Panel" parent="BikerNameplate"]
+self_modulate = Color(1, 1, 1, 0.862745)
 layout_mode = 0
 offset_left = 40.0
-offset_right = 142.0
+offset_right = 154.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_afd7u")
 
-[node name="Panel3" type="Panel" parent="Nameplate1"]
+[node name="Panel3" type="Panel" parent="BikerNameplate"]
+self_modulate = Color(1, 1, 1, 0.862745)
 layout_mode = 0
-offset_left = 142.0
-offset_right = 183.0
+offset_left = 153.529
+offset_right = 194.529
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_b1i70")
 
-[node name="Label" type="Label" parent="Nameplate1"]
+[node name="Label" type="Label" parent="BikerNameplate"]
 layout_mode = 0
-offset_left = 36.8518
-offset_top = 16.8273
-offset_right = 83.8518
-offset_bottom = 39.8273
-text = "Player 1"
+offset_left = 10.7385
+offset_top = 11.7817
+offset_right = 73.7385
+offset_bottom = 34.7817
+text = "Biker"
 label_settings = SubResource("LabelSettings_0dspq")
 
-[node name="ProgressBar" type="ProgressBar" parent="Nameplate1"]
+[node name="Label2" type="Label" parent="BikerNameplate"]
 layout_mode = 0
-offset_left = 22.7384
-offset_top = 8.53691
-offset_right = 168.738
-offset_bottom = 15.5369
+offset_left = 93.7392
+offset_top = 12.0065
+offset_right = 111.739
+offset_bottom = 31.0065
+text = "AP"
+label_settings = SubResource("LabelSettings_7vtj7")
+
+[node name="Label3" type="Label" parent="BikerNameplate"]
+layout_mode = 0
+offset_left = 93.7392
+offset_top = 23.5511
+offset_right = 147.739
+offset_bottom = 42.5511
+text = "Ammo: 6"
+label_settings = SubResource("LabelSettings_7vtj7")
+
+[node name="ProgressBar" type="ProgressBar" parent="BikerNameplate"]
+layout_mode = 0
+offset_left = 11.4578
+offset_top = 4.15608
+offset_right = 171.458
+offset_bottom = 11.1561
 theme_override_font_sizes/font_size = 10
 theme_override_styles/background = SubResource("StyleBoxFlat_kinyf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jm31u")
 step = 1.0
 value = 48.0
 show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="BikerNameplate"]
+layout_mode = 0
+offset_left = 112.955
+offset_top = 16.8616
+offset_right = 182.955
+offset_bottom = 24.8616
+theme_override_font_sizes/font_size = 10
+theme_override_styles/background = SubResource("StyleBoxFlat_w087p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tatk0")
+max_value = 6.0
+step = 1.0
+value = 6.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BikerNameplate/ProgressBar2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="BikerNameplate/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="BikerNameplate/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="BikerNameplate/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="BikerNameplate/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="BikerNameplate/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="Nameplate2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 69.0
+offset_right = 183.0
+offset_bottom = 109.0
+scale = Vector2(1.7, 1.7)
+
+[node name="Panel" type="Panel" parent="Nameplate2"]
+self_modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_kxlr6")
+
+[node name="Panel2" type="Panel" parent="Nameplate2"]
+self_modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 0
+offset_left = 40.0
+offset_right = 154.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_afd7u")
+
+[node name="Panel3" type="Panel" parent="Nameplate2"]
+self_modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 0
+offset_left = 153.529
+offset_right = 194.529
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_b1i70")
+
+[node name="Label" type="Label" parent="Nameplate2"]
+layout_mode = 0
+offset_left = 10.7385
+offset_top = 11.7817
+offset_right = 73.7385
+offset_bottom = 34.7817
+text = "Punk"
+label_settings = SubResource("LabelSettings_0dspq")
+
+[node name="Label2" type="Label" parent="Nameplate2"]
+layout_mode = 0
+offset_left = 93.7392
+offset_top = 12.0065
+offset_right = 111.739
+offset_bottom = 31.0065
+text = "AP"
+label_settings = SubResource("LabelSettings_7vtj7")
+
+[node name="Label3" type="Label" parent="Nameplate2"]
+layout_mode = 0
+offset_left = 93.7392
+offset_top = 23.5511
+offset_right = 147.739
+offset_bottom = 42.5511
+text = "Ammo: 6"
+label_settings = SubResource("LabelSettings_7vtj7")
+
+[node name="ProgressBar" type="ProgressBar" parent="Nameplate2"]
+layout_mode = 0
+offset_left = 11.4578
+offset_top = 4.15608
+offset_right = 171.458
+offset_bottom = 11.1561
+theme_override_font_sizes/font_size = 10
+theme_override_styles/background = SubResource("StyleBoxFlat_kinyf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jm31u")
+step = 1.0
+value = 48.0
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="Nameplate2"]
+layout_mode = 0
+offset_left = 112.955
+offset_top = 16.8616
+offset_right = 182.955
+offset_bottom = 24.8616
+theme_override_font_sizes/font_size = 10
+theme_override_styles/background = SubResource("StyleBoxFlat_w087p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tatk0")
+max_value = 6.0
+step = 1.0
+value = 6.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Nameplate2/ProgressBar2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Nameplate2/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Nameplate2/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Nameplate2/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Nameplate2/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="Nameplate2/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="Nameplate3" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 138.0
+offset_right = 183.0
+offset_bottom = 178.0
+scale = Vector2(1.7, 1.7)
+
+[node name="Panel" type="Panel" parent="Nameplate3"]
+self_modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_kxlr6")
+
+[node name="Panel2" type="Panel" parent="Nameplate3"]
+self_modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 0
+offset_left = 40.0
+offset_right = 154.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_afd7u")
+
+[node name="Panel3" type="Panel" parent="Nameplate3"]
+self_modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 0
+offset_left = 153.529
+offset_right = 194.529
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_b1i70")
+
+[node name="Label" type="Label" parent="Nameplate3"]
+layout_mode = 0
+offset_left = 10.7385
+offset_top = 11.7817
+offset_right = 73.7385
+offset_bottom = 34.7817
+text = "Cyber"
+label_settings = SubResource("LabelSettings_0dspq")
+
+[node name="Label2" type="Label" parent="Nameplate3"]
+layout_mode = 0
+offset_left = 93.7392
+offset_top = 12.0065
+offset_right = 111.739
+offset_bottom = 31.0065
+text = "AP"
+label_settings = SubResource("LabelSettings_7vtj7")
+
+[node name="Label3" type="Label" parent="Nameplate3"]
+layout_mode = 0
+offset_left = 93.7392
+offset_top = 23.5511
+offset_right = 147.739
+offset_bottom = 42.5511
+text = "Ammo: 6"
+label_settings = SubResource("LabelSettings_7vtj7")
+
+[node name="ProgressBar" type="ProgressBar" parent="Nameplate3"]
+layout_mode = 0
+offset_left = 11.4578
+offset_top = 4.15608
+offset_right = 171.458
+offset_bottom = 11.1561
+theme_override_font_sizes/font_size = 10
+theme_override_styles/background = SubResource("StyleBoxFlat_kinyf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jm31u")
+step = 1.0
+value = 48.0
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="Nameplate3"]
+layout_mode = 0
+offset_left = 112.955
+offset_top = 16.8616
+offset_right = 182.955
+offset_bottom = 24.8616
+theme_override_font_sizes/font_size = 10
+theme_override_styles/background = SubResource("StyleBoxFlat_w087p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tatk0")
+max_value = 6.0
+step = 1.0
+value = 6.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Nameplate3/ProgressBar2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Nameplate3/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Nameplate3/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Nameplate3/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Nameplate3/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="Nameplate3/ProgressBar2/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.301961, 0.301961, 0.301961, 1)

@@ -827,115 +827,115 @@ default_color = Color(0.823529, 0.184314, 0.117647, 1)
 metadata/_edit_lock_ = true
 
 [node name="Decoration1" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(180, 338)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
 [node name="Decoration16" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(76, 341)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
 [node name="Decoration5" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(260, 343)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
 [node name="Decoration7" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(406, 341)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
 [node name="Decoration10" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(603, 341)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
 [node name="Decoration12" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(719, 342)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
 [node name="Decoration14" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(800, 338)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
 [node name="Decoration19" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(1192, 361)
 texture = ExtResource("15_latxf")
 metadata/_edit_lock_ = true
 
 [node name="Decoration2" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(221, 342)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
 [node name="Decoration15" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(119, 339)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
 [node name="Decoration17" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(32, 344)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
 [node name="Decoration6" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(350, 343)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
 [node name="Decoration11" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(644, 343)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
 [node name="Decoration8" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(463, 340)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
 [node name="Decoration9" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(562, 340)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
 [node name="Decoration13" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(761, 341)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
 [node name="Decoration18" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(841, 355)
 texture = ExtResource("16_83u01")
 metadata/_edit_lock_ = true
 
 [node name="Decoration3" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(680, 345)
 texture = ExtResource("17_05iwa")
 metadata/_edit_lock_ = true
 
 [node name="Decoration4" type="Sprite2D" parent="NavigationRegion2D/BackgroundObjects/DecorationLine"]
-z_index = 1000
+z_index = 499
 position = Vector2(305, 346)
 texture = ExtResource("18_8bnkk")
 metadata/_edit_lock_ = true
@@ -1569,6 +1569,7 @@ shape = SubResource("CircleShape2D_sxwgc")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("41_lftf4")]
+visible = false
 mouse_filter = 1
 metadata/_edit_lock_ = true
 

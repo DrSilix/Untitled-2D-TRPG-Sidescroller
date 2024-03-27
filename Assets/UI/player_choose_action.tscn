@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://x1j2btwuvqub"]
+[gd_scene load_steps=18 format=3 uid="uid://x1j2btwuvqub"]
 
 [ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="1_4oasa"]
 [ext_resource type="Script" path="res://Assets/UI/player_choose_action.gd" id="1_brwui"]
@@ -53,6 +53,9 @@ content_margin_bottom = 5.0
 texture = SubResource("AtlasTexture_oqwst")
 modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1yki"]
+bg_color = Color(0.337255, 0.337255, 0.337255, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1aijj"]
 content_margin_left = 5.0
 bg_color = Color(0.305882, 0.305882, 0.305882, 1)
@@ -84,7 +87,6 @@ grow_vertical = 2
 script = ExtResource("1_brwui")
 
 [node name="Main" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_top = 231.0
 offset_right = 1.0
@@ -139,7 +141,61 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_duxmc")
 theme_override_styles/focus = SubResource("StyleBoxTexture_nde4c")
 text = "Pass"
 
+[node name="Information" type="PanelContainer" parent="Main"]
+visible = false
+layout_mode = 0
+offset_left = 15.0
+offset_top = 95.0
+offset_right = 277.0
+offset_bottom = 192.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g1yki")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main/Information"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/Information/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Main/Information/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatusName" type="Label" parent="Main/Information/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Cyborg"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/Information/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/Information/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatusHealth" type="Label" parent="Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Health: 6 (-1)"
+
+[node name="StatusAim" type="Label" parent="Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Aim: -1"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Main/Information/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatusCover" type="Label" parent="Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Cover: Yes (3)"
+
+[node name="StatusAmmo" type="Label" parent="Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Ammo: 6"
+
 [node name="SubAttack" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_left = -9.0
 offset_top = 187.0
@@ -250,6 +306,7 @@ offset_right = 1280.0
 offset_bottom = 40.0
 
 [node name="Cancel" type="Button" parent="CancelButton"]
+layout_mode = 0
 offset_left = -63.0
 offset_right = 22.0
 offset_bottom = 93.0

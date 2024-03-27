@@ -17,6 +17,12 @@ signal action_chosen(action : String, data)
 @onready var burst_shot := $SubAttack/Panel/MarginContainer/VBoxContainer/BurstShot
 @onready var grenade := $SubAttack/Panel/MarginContainer/VBoxContainer/Grenade
 
+@onready var status_name = $Main/Information/MarginContainer/VBoxContainer/HBoxContainer2/StatusName
+@onready var status_health = $Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatusHealth
+@onready var status_aim = $Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatusAim
+@onready var status_cover = $Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatusCover
+@onready var status_ammo = $Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatusAmmo
+
 const BUTTON = preload("res://Assets/UI/button.tscn")
 
 var _character : BaseCharacter
@@ -42,6 +48,7 @@ func Initialize(character : BaseCharacter):
 	moveable_area = _character.find_child("MovableArea")
 	_enemies = GameManager.current_enemies
 	ResetAllMenus()
+	BuildStatusInfo(character)
 	ChangeMenuState(State.MAINMENU)
 
 func ActionChosen(action : String, data):
@@ -55,6 +62,15 @@ func ResetAllMenus():
 	cancel_button.visible = false
 	moveable_area.visible = false
 	IsDisabledCheck()
+
+func BuildStatusInfo(char : BaseCharacter):
+	status_name.text = char.name
+	status_health.text = "Health: " + str(char.currentHealth) + " (" + str(char.getHealthPenalty()) + ")"
+	var aimStatus = "Yes (" if char.aimModifier > 0 else "No ("
+	status_aim.text = "Aim: " + aimStatus + str(char.aimModifier) + ")"
+	var covertStatus = "Yes (3)" if char.hasCover > 0 else "No (0)"
+	status_cover.text = "Cover: " + covertStatus
+	status_ammo.text = "Ammo: " + str(char.currentWeaponAmmo)
 
 func IsDisabledCheck():
 	AttackDisabledCheck()

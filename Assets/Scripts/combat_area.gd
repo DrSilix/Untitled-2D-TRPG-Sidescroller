@@ -49,7 +49,10 @@ func BeginCombat():
 	GameManager.current_enemies = enemies
 	players = GameManager.current_players
 	for player in players:
+		player.main_status_bar.visible = true
 		player.DisconnectFromMovableArea()
+	for enemy in enemies:
+		enemy.main_status_bar.visible = true
 	CombatRound()
 
 func CombatRound():
@@ -57,6 +60,13 @@ func CombatRound():
 	print("Round ",_round ," Starting")
 	_currentActiveCombatantIndex = -1
 	_round += 1
+	for player in players:
+		player.main_status_bar.visible = true
+		player.currentActionPoints = player.maxActionPoints
+		player.DisconnectFromMovableArea()
+	for enemy in enemies:
+		enemy.main_status_bar.visible = true
+		enemy.currentActionPoints = enemy.maxActionPoints
 	CallNextCombatantToTakeTurn()
 
 func CallNextCombatantToTakeTurn():

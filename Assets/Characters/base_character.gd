@@ -26,6 +26,13 @@ extends CharacterBody2D
 @onready var highlight_yellow : NinePatchRect = $HighlightYellow
 @onready var highlight_red : NinePatchRect = $HighlightRed
 
+@onready var main_status_bar = $StatusBar
+@onready var health_bar : ProgressBar = $StatusBar/HealthBar
+@onready var ap_bar : ProgressBar = $StatusBar/APBar
+@onready var status_cover_icon : TextureRect = $StatusBar/CoverIcon
+@onready var aim_icon : TextureRect = $StatusBar/AimIcon
+@onready var ammo_bar : ProgressBar = $StatusBar/AmmoIcon/AmmoBar
+
 enum {IDLE, WALKING, RUNNING, ATTACKING, ATTACKING_TWO, RELOADING, HURT, MISSED, RESISTED, DEATH}
 var activeState := IDLE
 
@@ -34,15 +41,18 @@ var currentChosenAction : CombatActions
 
 var hasCover : int = 0
 var aimModifier = 0
-var currentHealth : int = maxHealth
-var currentActionPoints : int = maxActionPoints
-var currentWeaponAmmo : int = maxWeaponAmmo
+var currentHealth : int
+var currentActionPoints : int
+var currentWeaponAmmo : int
 var moveTarget : Vector2
 var attackTarget : BaseCharacter
 
 var currentCombatArea : CombatArea
 #endregion
 func _ready():
+	currentHealth = maxHealth
+	currentActionPoints = maxActionPoints
+	currentWeaponAmmo = maxWeaponAmmo
 	animationPlayer.connect("animation_finished", _on_AnimationPlayer_animation_finished,)
 	cover_collision.connect("body_entered", _on_cover_area_body_entered)
 	cover_collision.connect("body_exited", _on_cover_area_body_exited)
@@ -89,9 +99,7 @@ func CompleteChosenAction():
 	print("Actions points: ", currentActionPoints)
 	highlight_yellow.visible = false
 	if currentActionPoints > 0: ChooseCombatAction(currentCombatArea)
-	else:
-		currentActionPoints = maxActionPoints
-		currentCombatArea.CallNextCombatantToTakeTurn()
+	else: currentCombatArea.CallNextCombatantToTakeTurn()
 		
 #region Action Processing	
 func ShootSingleAction():
@@ -150,11 +158,14 @@ func TakeCover():
 	cover_icon.visible = true
 	cover_icon.self_modulate.a = 0
 	var tween = get_tree().create_tween()
-	tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
+	"""tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
 	tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
 	tween.tween_property(cover_icon, "self_modulate:a", 0.5, 3)
 	tween.tween_property(cover_icon, "self_modulate:a", 0.5, 5)
-	tween.tween_property(cover_icon, "self_modulate:a", 0.2, 1)
+	tween.tween_property(cover_icon, "self_modulate:a", 0.2, 1)"""
+	tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
+	tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
+	tween.tween_property(cover_icon, "self_modulate:a", 0, 3)
 	chanceToHitModifier = -3
 
 func LeaveCover():
@@ -218,8 +229,18 @@ func TakeDamage(damage: int):
 	activeState = HURT if currentHealth > 0 else DEATH
 #endregion
 
-func _physics_process(delta):
+func UpdateStatusPanel():
+	health_bar.value = ceil((currentHealth as float / maxHealth as float) * 100)
+	ap_bar.value = currentActionPoints
+	status_cover_icon.visible = true if hasCover > 0 else false
+	var goodColor = Color("#91ff7e")
+	var badColor = Color("#d31f41")
+	aim_icon.self_modulate = goodColor if aimModifier > 0 else badColor
+	aim_icon.visible = false if aimModifier == 0 else true
+	ammo_bar.value = ceil((currentWeaponAmmo as float / maxWeaponAmmo as float) * 100)
 
+func _physics_process(delta):
+	UpdateStatusPanel()
 	match activeState:
 		IDLE:
 			animationPlayer.play("Idle")
