@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://34l71tnmp3gg"
+path="res://.godot/imported/Jump6 (2).wav-bc912a15536fb1dc6c8704fbe42e46ef.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Sourcefiles/RetroSFXMurkje/Jumpy/Jump6 (2).wav"
+dest_files=["res://.godot/imported/Jump6 (2).wav-bc912a15536fb1dc6c8704fbe42e46ef.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

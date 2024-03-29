@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ba5nhf2u5mo0n"
+path="res://.godot/imported/Retro Impact Metal 36.wav-1769baccd400962731f08b50b697dc90.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Impact/Retro Impact Metal 36.wav"
+dest_files=["res://.godot/imported/Retro Impact Metal 36.wav-1769baccd400962731f08b50b697dc90.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

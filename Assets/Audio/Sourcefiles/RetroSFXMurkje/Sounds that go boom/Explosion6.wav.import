@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ducbu4t7jdw68"
+path="res://.godot/imported/Explosion6.wav-93dac5a29437e2839bfdb68713a8008f.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Sourcefiles/RetroSFXMurkje/Sounds that go boom/Explosion6.wav"
+dest_files=["res://.godot/imported/Explosion6.wav-93dac5a29437e2839bfdb68713a8008f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

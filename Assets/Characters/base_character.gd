@@ -75,6 +75,7 @@ func ChooseCombatAction(combatArea : CombatArea):
 	pass
 
 func CompleteChosenAction():
+	await get_tree().create_timer(0.2).timeout
 	#do this if moving
 	match currentChosenAction:
 		CombatActions.SHOOTSINGLE:
@@ -107,7 +108,7 @@ func ShootSingleAction():
 	currentActionPoints -= singleShotCost
 	currentWeaponAmmo -= 1
 	activeState = ATTACKING
-	var dmgDealt = AttackTarget(attackTarget)
+	var dmgDealt = await AttackTarget(attackTarget)
 	aimModifier -= 1 if aimModifier <= 0 else 2
 	if dmgDealt >= 0: print("Deals ", dmgDealt, " damage")
 	elif dmgDealt == -1: print("Attack missed")
@@ -118,7 +119,7 @@ func ShootBurstAction():
 	currentActionPoints -= burstShotCost
 	currentWeaponAmmo -= 3 if currentWeaponAmmo >= 3 else currentWeaponAmmo
 	activeState = ATTACKING_TWO
-	var dmgDealt = AttackTarget(attackTarget)
+	var dmgDealt = await AttackTarget(attackTarget)
 	aimModifier -= 3
 	if dmgDealt >= 0: print("Deals ", dmgDealt, " damage")
 	elif dmgDealt == -1: print("Attack missed")
@@ -189,19 +190,26 @@ func getHealthBonus():
 
 func AttackTarget(target : BaseCharacter) -> int:
 	print(self.name, " attacks ", target.name)
+	var attackResultDelayTime = 0.6
 	SetFacingTowardsTarget(target)
 	var toHit : int = RollToHit() + CalculateDistancePenalty(target)
 	var hitPenalty = 0
-	if currentChosenAction == CombatActions.SHOOTBURST: hitPenalty = -2
+	if currentChosenAction == CombatActions.SHOOTBURST:
+		hitPenalty = -2
+		attackResultDelayTime = 1.2
 	var toAvoid : int = target.RollToAvoidAttack(hitPenalty)
 	if toAvoid >= toHit:
+		await get_tree().create_timer(attackResultDelayTime).timeout
 		target.activeState = MISSED
 		return -1
 	var damageToDeal : int = CalculateDamageToDeal(toHit - toAvoid)
 	var damagetToResist : int = target.RollToResistDamage()
 	if damagetToResist >= damageToDeal:
+		await get_tree().create_timer(attackResultDelayTime).timeout
 		target.activeState = RESISTED
 		return -2
+	
+	await get_tree().create_timer(attackResultDelayTime).timeout
 	target.TakeDamage(damageToDeal - damagetToResist)
 	return damageToDeal - damagetToResist
 

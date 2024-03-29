@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cjbguv36aqb2n"]
+[gd_scene load_steps=55 format=3 uid="uid://cjbguv36aqb2n"]
 
 [ext_resource type="Script" path="res://Assets/Characters/player_character.gd" id="1_7j6cw"]
 [ext_resource type="Texture2D" uid="uid://bbrh8a82hd7j" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/3 Hands/2 Punk/1.png" id="2_mvd4u"]
@@ -9,15 +9,21 @@
 [ext_resource type="Texture2D" uid="uid://cxsd2y2dtk157" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/1 Biker/Run1.png" id="7_0iq02"]
 [ext_resource type="Texture2D" uid="uid://7i6aib0se3ls" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/2 Punk/Walk2.png" id="8_xku8x"]
 [ext_resource type="Texture2D" uid="uid://dnb7jodfr3abe" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/3 Hands/2 Punk/7.png" id="9_1um18"]
+[ext_resource type="AudioStream" uid="uid://cjhj0n1ytgsy4" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Weapon/Retro Gun Multishots 6 Delay9 03.wav" id="9_aq1rb"]
 [ext_resource type="Texture2D" uid="uid://cna175w6j1avs" path="res://Assets/Sprites/Sourcefiles/free-guns-pack-2-for-main-characters-pixel-art/1 Characters/2 Punk/Idle2.png" id="10_qkiho"]
 [ext_resource type="Texture2D" uid="uid://bs8mi3r1851d3" path="res://Assets/Sprites/Sourcefiles/free-guns-pack-2-for-main-characters-pixel-art/3 Hands/2 Punk/8.png" id="11_7ksm3"]
+[ext_resource type="AudioStream" uid="uid://bxbvsm44d1lth" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Impact/Retro Impact Punch 07.wav" id="11_fcbx0"]
 [ext_resource type="Texture2D" uid="uid://bwqyefm5e3pp" path="res://Assets/Sprites/Sourcefiles/free-guns-pack-2-for-main-characters-pixel-art/4 Shoot_effects/7_1.png" id="12_e0o7o"]
 [ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="12_qk7vk"]
+[ext_resource type="AudioStream" uid="uid://dhlc572owrhre" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Swoosh/Retro Swooosh 07.wav" id="12_t6wry"]
 [ext_resource type="Texture2D" uid="uid://cx6q42wmh07nr" path="res://Assets/Sprites/Sourcefiles/free-guns-pack-2-for-main-characters-pixel-art/4 Shoot_effects/9_1.png" id="13_d5wlg"]
+[ext_resource type="AudioStream" uid="uid://cnv04ku4wlcrf" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Weapon/reload/Retro Weapon Reload 03.wav" id="13_hgntw"]
 [ext_resource type="Texture2D" uid="uid://bh53vexsd5vsr" path="res://Assets/Sprites/Skillicon6_18.png" id="15_euljo"]
+[ext_resource type="AudioStream" uid="uid://cey1ca60ctvwr" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Impact/Retro Impact Punch Hurt 01.wav" id="15_ihgga"]
 [ext_resource type="Texture2D" uid="uid://h7rgm0xmgf8c" path="res://Assets/Sprites/Sourcefiles/sheild-32.png" id="16_cpf0k"]
 [ext_resource type="Texture2D" uid="uid://dxq3u4h8w3xyj" path="res://Assets/Sprites/Sourcefiles/crosshair-32.png" id="17_4nt7v"]
 [ext_resource type="Texture2D" uid="uid://c42ym0pkh7vfw" path="res://Assets/Sprites/Sourcefiles/bullet-32.png" id="18_43oah"]
+[ext_resource type="AudioStream" uid="uid://c4q551724v14q" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/FootStep/Retro FootStep Grass 01.wav" id="18_q466p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4myl"]
 
@@ -300,6 +306,42 @@ tracks/21/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("AudioStreamPlayer:stream")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_aq1rb")]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("AudioStreamPlayer:playing")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_qhyk2"]
 resource_name = "Attack2"
@@ -567,6 +609,42 @@ tracks/21/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("AudioStreamPlayer:stream")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_aq1rb")]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("AudioStreamPlayer:playing")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
 }
 
 [sub_resource type="Animation" id="Animation_0mra3"]
@@ -882,6 +960,42 @@ tracks/25/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("AudioStreamPlayer:stream")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_fcbx0")]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("AudioStreamPlayer:playing")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_bb4tp"]
@@ -1360,6 +1474,42 @@ tracks/22/keys = {
 "update": 1,
 "values": [ExtResource("4_eryt2")]
 }
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("AudioStreamPlayer:stream")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_t6wry")]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("AudioStreamPlayer:playing")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_n0b28"]
 length = 0.001
@@ -1735,6 +1885,18 @@ tracks/30/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("AudioStreamPlayer:pitch_scale")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_b633x"]
 resource_name = "Reloading"
@@ -2026,6 +2188,42 @@ tracks/23/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Color(1, 1, 1, 1), Color(0.858824, 0.890196, 0.580392, 1), Color(1, 1, 1, 1)]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("AudioStreamPlayer:stream")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_hgntw")]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("AudioStreamPlayer:playing")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_c2xvh"]
@@ -2342,6 +2540,42 @@ tracks/25/keys = {
 "update": 1,
 "values": [Vector2(1, 1)]
 }
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("AudioStreamPlayer:stream")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("15_ihgga")]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("AudioStreamPlayer:playing")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_ekcrc"]
 resource_name = "Run"
@@ -2591,6 +2825,54 @@ tracks/13/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-9.0]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("AudioStreamPlayer:stream")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("18_q466p")]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("AudioStreamPlayer:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("AudioStreamPlayer:pitch_scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.9, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w6inl"]
@@ -2931,5 +3213,8 @@ step = 1.0
 value = 50.0
 fill_mode = 3
 show_percentage = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_t6wry")
 
 [connection signal="animation_finished" from="SpriteRoot/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -2,6 +2,9 @@ extends Control
 
 signal action_chosen(action : String, data)
 
+@export var ui_positive : AudioStreamWAV
+@export var ui_negative : AudioStreamWAV
+
 @onready var main_menu := $Main
 @onready var sub_attack_menu := $SubAttack
 @onready var targets_menu := $Targets
@@ -22,6 +25,8 @@ signal action_chosen(action : String, data)
 @onready var status_aim = $Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatusAim
 @onready var status_cover = $Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatusCover
 @onready var status_ammo = $Main/Information/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatusAmmo
+
+@onready var ui_sfx = $UI_SFX
 
 const BUTTON = preload("res://Assets/UI/button.tscn")
 
@@ -52,6 +57,7 @@ func Initialize(character : BaseCharacter):
 	ChangeMenuState(State.MAINMENU)
 
 func ActionChosen(action : String, data):
+	PlayPositiveSound()
 	ResetAllMenus()
 	visible = false
 	action_chosen.emit(action, data)
@@ -92,10 +98,12 @@ func ChangeMenuState(state : State):
 			moveable_area.visible = false
 			cancel_button.visible = false
 		State.ATTACKMENU:
+			PlayPositiveSound()
 			currentState = State.ATTACKMENU
 			sub_attack_menu.visible = true
 			cancel_button.visible = true
 		State.TARGETMENU:
+			PlayPositiveSound()
 			currentState = State.TARGETMENU
 			for enemy in _enemies:
 				print(enemy.name, " connected")
@@ -103,11 +111,13 @@ func ChangeMenuState(state : State):
 				clickArea.connect("input_event", _on_enemy_select_input_event.bind(enemy))
 			cancel_button.visible = true
 		State.MOVEMENU:
+			PlayPositiveSound()
 			moveable_area.visible = true
 			currentState = State.MOVEMENU
 			cancel_button.visible = true
 
 func _on_cancel_pressed():
+	PlayNegativeSound()
 	match currentState:
 		State.ATTACKMENU:
 			ChangeMenuState(State.MAINMENU)
@@ -215,8 +225,9 @@ func _on_burst_shot_pressed():
 
 
 func _on_grenade_pressed():
-	ChangeMenuState(State.TARGETMENU)
-	attackType = "grenade"
+	pass
+	#ChangeMenuState(State.TARGETMENU)
+	#attackType = "grenade"
 
 func _on_reload_pressed():
 	ActionChosen("reload", null)
@@ -225,3 +236,11 @@ func _on_enemy_select_input_event(viewport, event : InputEvent, shape_rid, enemy
 	if event.is_action_pressed("Move"):
 		DisconnectFromEnemies()
 		ActionChosen(attackType, enemy)
+
+func PlayPositiveSound():
+	ui_sfx.stream = ui_positive
+	ui_sfx.play()
+	
+func PlayNegativeSound():
+	ui_sfx.stream = ui_negative
+	ui_sfx.play()

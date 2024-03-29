@@ -1,7 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://x1j2btwuvqub"]
+[gd_scene load_steps=20 format=3 uid="uid://x1j2btwuvqub"]
 
 [ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="1_4oasa"]
 [ext_resource type="Script" path="res://Assets/UI/player_choose_action.gd" id="1_brwui"]
+[ext_resource type="AudioStream" uid="uid://bmxgc6ndg6pa7" path="res://Assets/Audio/Sourcefiles/RetroSFXMurkje/Blips/beep.wav" id="2_2dgdt"]
+[ext_resource type="AudioStream" uid="uid://lg2ohufr1qmt" path="res://Assets/Audio/Sourcefiles/RetroSFXMurkje/Blips/bleep.wav" id="3_3nwdn"]
 [ext_resource type="FontFile" uid="uid://rk5ygevjqcej" path="res://Assets/UI/Fonts/superstar_memesbruh03.ttf" id="3_a7pjo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bf675"]
@@ -85,6 +87,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_brwui")
+ui_positive = ExtResource("2_2dgdt")
+ui_negative = ExtResource("3_3nwdn")
 
 [node name="Main" type="Control" parent="."]
 anchors_preset = 0
@@ -328,6 +332,8 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_231j7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_1aijj")
 text = "X"
 text_overrun_behavior = 1
+
+[node name="UI_SFX" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="Main/Panel/MarginContainer/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="Main/Panel/MarginContainer/VBoxContainer/Move" to="." method="_on_move_pressed"]
