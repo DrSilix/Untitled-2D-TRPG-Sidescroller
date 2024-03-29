@@ -291,7 +291,6 @@ func _physics_process(delta):
 			animationPlayer.play("Resisted")
 			velocity = Vector2.ZERO
 		DEATH:
-			Die()
 			animationPlayer.play("Death")
 		_:
 			pass

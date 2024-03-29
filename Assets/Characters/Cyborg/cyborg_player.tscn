@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cqb2ap066ohga"]
+[gd_scene load_steps=63 format=3 uid="uid://cqb2ap066ohga"]
 
 [ext_resource type="Script" path="res://Assets/Characters/player_character.gd" id="1_nld74"]
 [ext_resource type="Texture2D" uid="uid://bppw7d22ppws1" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/3 Cyborg/Idle2.png" id="2_a5s80"]
@@ -29,6 +29,8 @@
 [ext_resource type="Texture2D" uid="uid://dxq3u4h8w3xyj" path="res://Assets/Sprites/Sourcefiles/crosshair-32.png" id="22_wihgs"]
 [ext_resource type="Texture2D" uid="uid://c42ym0pkh7vfw" path="res://Assets/Sprites/Sourcefiles/bullet-32.png" id="23_im41c"]
 [ext_resource type="AudioStream" uid="uid://cs26rw0qucb61" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/FootStep/Retro FootStep Mud 01.wav" id="24_fiuij"]
+[ext_resource type="Texture2D" uid="uid://bpi713ywivdn5" path="res://Assets/Sprites/Sourcefiles/Free 3 Cyberpunk Sprites Pixel Art/3 Cyborg/Cyborg_death.png" id="25_sr34j"]
+[ext_resource type="AudioStream" uid="uid://cy55ric3pq58e" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Events/Negative/Retro Negative Long 12.wav" id="26_buoly"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4myl"]
 
@@ -2495,10 +2497,137 @@ tracks/15/keys = {
 "values": [1.0, 0.9, 1.0]
 }
 
+[sub_resource type="Animation" id="Animation_qcdck"]
+resource_name = "Death"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteRoot/Body:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("25_sr34j")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteRoot/Body:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpriteRoot/MuzzleBlast:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SpriteRoot/Gun:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SpriteRoot/Arms:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SpriteRoot/Body:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer:stream")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("26_buoly")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.6, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -20.0, -80.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Die"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w6inl"]
 _data = {
 "Attack1": SubResource("Animation_3q5o5"),
 "Attack2": SubResource("Animation_r3y85"),
+"Death": SubResource("Animation_qcdck"),
 "Hurt": SubResource("Animation_1t511"),
 "Idle": SubResource("Animation_bb4tp"),
 "Missed": SubResource("Animation_vi3fc"),
@@ -2627,11 +2756,13 @@ hframes = 6
 frame = 2
 
 [node name="Gun" type="Sprite2D" parent="SpriteRoot"]
+visible = false
 position = Vector2(6, -18)
 texture = ExtResource("4_wv8yw")
 region_rect = Rect2(0, 0, 27, 16)
 
 [node name="Arms" type="Sprite2D" parent="SpriteRoot"]
+visible = false
 position = Vector2(6, -17)
 texture = ExtResource("5_gvr48")
 
