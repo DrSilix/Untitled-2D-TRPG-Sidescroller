@@ -53,6 +53,7 @@ var attackTarget : BaseCharacter
 
 var currentCombatArea : CombatArea
 #endregion
+
 func _ready():
 	currentHealth = maxHealth
 	currentActionPoints = maxActionPoints
@@ -74,8 +75,10 @@ func HaltActions():
 func MoveVelocity(velocity :Vector2):
 	pass
 
-func ChooseCombatAction(combatArea : CombatArea):
+func InitializeCombatant(combatArea : CombatArea):
 	currentCombatArea = combatArea
+
+func ChooseCombatAction():
 	pass
 
 func CompleteChosenAction():
@@ -109,8 +112,10 @@ func CompleteChosenAction():
 func _on_action_completed():
 	print("Actions points: ", currentActionPoints)
 	highlight_yellow.visible = false
-	if currentActionPoints > 0: ChooseCombatAction(currentCombatArea)
-	else: currentCombatArea.CallNextCombatantToTakeTurn()
+	if not await currentCombatArea.CheckIfGameOver():
+		if currentActionPoints > 0:
+			ChooseCombatAction()
+		else: currentCombatArea.CallNextCombatantToTakeTurn()
 
 #region Action Processing	
 func ShootSingleAction():
@@ -138,6 +143,8 @@ func ShootBurstAction():
 	elif dmgDealt == -2: print("Damage resisted")
 
 func GrenadeAction():
+	attackTarget.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
+	attackTarget.TakeDamage(20)
 	currentActionPoints -= grenadeCost
 	print("Throwing Grenade")
 
@@ -318,7 +325,7 @@ func SetFacingTowardsTarget(target : BaseCharacter):
 		spriteRootNode.scale.x = -1
 
 func RemoveFromCombatList():
-	pass
+	currentCombatArea.RemoveCombatantFromRound(self)
 
 func Die():
 	action_finished.emit()

@@ -9,9 +9,9 @@ var camera_2d : Camera2D
 
 var enemies : Array[BaseCharacter]
 var players : Array[BaseCharacter]
+var combatRoundParticipants : Array[BaseCharacter]
 
 var _numberOfCombatParticipants : int
-var _currentActiveCombatantIndex : int
 var _round : int
 
 func _ready():
@@ -59,40 +59,58 @@ func BeginCombat():
 func CombatRound():
 	if _round > 1: print("Round ",_round ," Complete")
 	print("Round ",_round ," Starting")
-	_currentActiveCombatantIndex = -1
 	_round += 1
-	for player in players:
+	for player : BaseCharacter in players:
 		player.main_status_bar.visible = true
 		player.currentActionPoints = player.maxActionPoints
 		player.DisconnectFromMovableArea()
-	for enemy in enemies:
+		player.InitializeCombatant(self)
+		combatRoundParticipants.append(player)
+	for enemy : BaseCharacter in enemies:
 		enemy.main_status_bar.visible = true
 		enemy.currentActionPoints = enemy.maxActionPoints
+		enemy.InitializeCombatant(self)
+		combatRoundParticipants.append(enemy)
 	CallNextCombatantToTakeTurn()
 
 func CallNextCombatantToTakeTurn():
-	CheckIfGameOver()
-	_currentActiveCombatantIndex += 1
-	_numberOfCombatParticipants = players.size() + enemies.size()
-	if _currentActiveCombatantIndex >= _numberOfCombatParticipants:
+	if players.size() == 0 or enemies.size() == 0:
+		return
+	if combatRoundParticipants.size() == 0:
 		CombatRound()
 		return
-	if _currentActiveCombatantIndex < players.size():
-		TakeTurn(players[_currentActiveCombatantIndex])
-	else:
-		TakeTurn(enemies[_currentActiveCombatantIndex - players.size()])
+	_numberOfCombatParticipants = players.size() + enemies.size()
+	var currentCombatant = combatRoundParticipants.pop_front()
+	TakeTurn(currentCombatant)
 
 func TakeTurn(actor : BaseCharacter):
 	print("---",actor.name, "'s turn---")
-	actor.ChooseCombatAction(self)
+	actor.ChooseCombatAction()
+
+func RemoveCombatantFromRound(actor : BaseCharacter):
+	combatRoundParticipants.erase(actor)
+	#only one has an effect. max array size is like 5, usually 3
+	GameManager.current_players.erase(actor)
+	GameManager.current_enemies.erase(actor)
 
 func CheckIfGameOver():
 	if players.size() == 0:
-		print("You Lose!")
-		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+		GameOver(false)
+		return true
 	if enemies.size() == 0:
+		GameOver(true)
+		return true
+	return false
+		
+func GameOver(didWin : bool):
+	if didWin:
+		await get_tree().create_timer(2).timeout
 		print("You Win!")
-		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+		get_tree().change_scene_to_file("res://Scenes/you_win.tscn")
+	else:
+		await get_tree().create_timer(2).timeout
+		print("You Lose!")
+		get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 
 #Handle combat area enter
 func _on_body_entered(body):

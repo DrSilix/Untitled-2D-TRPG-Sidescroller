@@ -20,9 +20,8 @@ func DisconnectFromMovableArea():
 	if isOverworldControllable:
 		get_node("../MovableArea").disconnect("input_event", _on_input_event)
 
-func ChooseCombatAction(combatArea : CombatArea):
+func ChooseCombatAction():
 	highlight_yellow.visible = true
-	currentCombatArea = combatArea
 	player_choose_action_menu.visible = true
 	player_choose_action_menu.Initialize(self)
 	player_choose_action_menu.connect("action_chosen", _on_action_chosen)
@@ -38,6 +37,7 @@ func _on_action_chosen(action : String, data):
 			attackTarget = data as BaseCharacter
 		"grenade":
 			currentChosenAction = CombatActions.GRENADE
+			attackTarget = data as BaseCharacter
 		"reload":
 			currentChosenAction = CombatActions.RELOAD
 		"takeaim":
@@ -52,9 +52,6 @@ func _on_action_chosen(action : String, data):
 
 func CompleteChosenAction():
 	super.CompleteChosenAction()
-
-func RemoveFromCombatList():
-	GameManager.current_players.erase(self)
 
 func Die():
 	super.Die()

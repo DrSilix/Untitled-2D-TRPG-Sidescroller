@@ -40,9 +40,8 @@ func _ready():
 
 #action weights, when using an action the weight is reduced, when event
 #weight can be increased. e.g. movement reduces as used, when hit gets raised
-func ChooseCombatAction(combatArea : CombatArea):
+func ChooseCombatAction():
 	highlight_yellow.visible = true
-	currentCombatArea = combatArea
 	aimA.weight = (-aimModifier + 1) if aimModifier < 0 else 1
 	attackA.weight = attackWeight if aimModifier <= 0 else 99
 	await get_tree().create_timer(1).timeout
@@ -124,6 +123,7 @@ func ChooseAttackTarget():
 
 func MoveAction():
 	print("Moving")
+	self.connect("move_completed", _on_action_completed, CONNECT_ONE_SHOT)
 	moveA.weight -= 1
 	currentActionPoints -= moveCost
 	associatedPathNode.occupied = false
@@ -143,9 +143,6 @@ func TakeDamage(damage : int):
 	super.TakeDamage(damage)
 	if hasCover == 0:
 		moveA.weight += 2
-
-func RemoveFromCombatList():
-	GameManager.current_enemies.erase(self)
 
 func Die():
 	super.Die()

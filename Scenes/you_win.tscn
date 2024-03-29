@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmi5a6aighsud"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/results_title_card.gd" id="1_8snui"]
+[ext_resource type="FontFile" uid="uid://bro3qbgny5u03" path="res://Assets/UI/Fonts/Crang.ttf" id="1_asfq4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oh4yg"]
+bg_color = Color(0.243137, 0.243137, 0.243137, 1)
+
+[node name="YouWin" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8snui")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oh4yg")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.541176, 0.811765, 0.407843, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("1_asfq4")
+theme_override_font_sizes/font_size = 90
+text = "YOU WIN!"
+horizontal_alignment = 1

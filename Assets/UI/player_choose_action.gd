@@ -225,9 +225,8 @@ func _on_burst_shot_pressed():
 
 
 func _on_grenade_pressed():
-	pass
-	#ChangeMenuState(State.TARGETMENU)
-	#attackType = "grenade"
+	ChangeMenuState(State.TARGETMENU)
+	attackType = "grenade"
 
 func _on_reload_pressed():
 	ActionChosen("reload", null)
