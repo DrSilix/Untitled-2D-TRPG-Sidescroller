@@ -1,5 +1,9 @@
 class_name BaseCharacter
 extends CharacterBody2D
+
+signal action_finished
+signal move_completed
+
 #region variables
 @export var moveSpeed : int = 6
 @export var maxHealth : int = 9
@@ -96,18 +100,25 @@ func CompleteChosenAction():
 	
 	#this await is here to ensure that the consequences of this action for potential
 	#targets is finished before possibly continuing into their turn
-	await get_tree().create_timer(1).timeout
+	"""await get_tree().create_timer(1).timeout
+	print("Actions points: ", currentActionPoints)
+	highlight_yellow.visible = false
+	if currentActionPoints > 0: ChooseCombatAction(currentCombatArea)
+	else: currentCombatArea.CallNextCombatantToTakeTurn()"""
+		
+func _on_action_completed():
 	print("Actions points: ", currentActionPoints)
 	highlight_yellow.visible = false
 	if currentActionPoints > 0: ChooseCombatAction(currentCombatArea)
 	else: currentCombatArea.CallNextCombatantToTakeTurn()
-		
+
 #region Action Processing	
 func ShootSingleAction():
 	print("Shooting Single - Aim=", aimModifier)
 	currentActionPoints -= singleShotCost
 	currentWeaponAmmo -= 1
 	activeState = ATTACKING
+	attackTarget.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
 	var dmgDealt = await AttackTarget(attackTarget)
 	aimModifier -= 1 if aimModifier <= 0 else 2
 	if dmgDealt >= 0: print("Deals ", dmgDealt, " damage")
@@ -119,6 +130,7 @@ func ShootBurstAction():
 	currentActionPoints -= burstShotCost
 	currentWeaponAmmo -= 3 if currentWeaponAmmo >= 3 else currentWeaponAmmo
 	activeState = ATTACKING_TWO
+	attackTarget.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
 	var dmgDealt = await AttackTarget(attackTarget)
 	aimModifier -= 3
 	if dmgDealt >= 0: print("Deals ", dmgDealt, " damage")
@@ -132,23 +144,29 @@ func GrenadeAction():
 func ReloadAction():
 	currentActionPoints -= reloadCost if currentActionPoints >= reloadCost else currentActionPoints
 	aimModifier = 0
+	self.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
 	activeState = RELOADING
 	currentWeaponAmmo = maxWeaponAmmo
 	
 func TakeAimAction():
 	aimModifier = 2
 	currentActionPoints -= takeAimCost
+	await get_tree().create_timer(0.5).timeout
+	_on_action_completed()
 	print("Taking Aim")
 
 func MoveAction():
 	currentActionPoints -= moveCost
 	aimModifier = 0
+	self.connect("move_completed", _on_action_completed, CONNECT_ONE_SHOT)
 	MoveTo(moveTarget)
 	print("Moving")
 
 func PassAction():
 	currentActionPoints = 0
 	aimModifier = 0 if aimModifier < 0 else aimModifier
+	await get_tree().create_timer(0.5).timeout
+	_on_action_completed()
 	print("Passing Turn")
 #endregion
 
@@ -159,11 +177,6 @@ func TakeCover():
 	cover_icon.visible = true
 	cover_icon.self_modulate.a = 0
 	var tween = get_tree().create_tween()
-	"""tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
-	tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
-	tween.tween_property(cover_icon, "self_modulate:a", 0.5, 3)
-	tween.tween_property(cover_icon, "self_modulate:a", 0.5, 5)
-	tween.tween_property(cover_icon, "self_modulate:a", 0.2, 1)"""
 	tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
 	tween.tween_property(cover_icon, "self_modulate:a", 1, 0.5)
 	tween.tween_property(cover_icon, "self_modulate:a", 0, 3)
@@ -220,17 +233,17 @@ func CalculateDistancePenalty(target : BaseCharacter) -> int:
 
 # ??Factor in distance to shoot??
 func RollToHit():
-	return RollUtil.GetRoll(weaponSkill + (maxHealth/2) + getHealthBonus() + aimModifier)
+	return RollUtil.GetRoll(weaponSkill + getHealthBonus() + aimModifier)
 
 func CalculateDamageToDeal(netHits : int):
 	return weaponDamage + netHits
 
 func RollToAvoidAttack(penaltyFromAttacker : int):
-	return RollUtil.GetRoll(moveSpeed + maxHealth + getHealthBonus()) \
+	return RollUtil.GetRoll(moveSpeed + getHealthBonus()) \
 	+ penaltyFromAttacker - chanceToHitModifier
 
 func RollToResistDamage():
-	return RollUtil.GetRoll(armor + (maxHealth/2) + getHealthBonus())
+	return RollUtil.GetRoll(armor + getHealthBonus())
 
 func TakeDamage(damage: int):
 	currentHealth -= damage
@@ -262,7 +275,9 @@ func _physics_process(delta):
 			move_and_slide()
 			z_index = (position.y as int) - 30
 			if position.distance_squared_to(moveTarget) < 1:
-					activeState = IDLE
+				print("move complete")
+				move_completed.emit()
+				activeState = IDLE
 		RUNNING:
 			animationPlayer.play("Run")
 			velocity = position.direction_to(moveTarget) * moveSpeed * 20
@@ -270,7 +285,7 @@ func _physics_process(delta):
 			move_and_slide()
 			z_index = (position.y as int) - 30
 			if position.distance_squared_to(moveTarget) < 1:
-					activeState = IDLE
+				activeState = IDLE
 		ATTACKING:
 			if animationPlayer.current_animation != "Attack1": animationPlayer.play("Attack1")
 			#print(animationPlayer.current_animation)
@@ -291,6 +306,7 @@ func _physics_process(delta):
 			animationPlayer.play("Resisted")
 			velocity = Vector2.ZERO
 		DEATH:
+			RemoveFromCombatList()
 			animationPlayer.play("Death")
 		_:
 			pass
@@ -301,10 +317,16 @@ func SetFacingTowardsTarget(target : BaseCharacter):
 	else:
 		spriteRootNode.scale.x = -1
 
+func RemoveFromCombatList():
+	pass
+
 func Die():
+	action_finished.emit()
 	print(self.name, " died")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
+	print(name, " anim finished - ", anim_name, " - active state - ", activeState)
+	action_finished.emit()
 	activeState = IDLE
 	
 func _on_cover_area_body_entered(body):

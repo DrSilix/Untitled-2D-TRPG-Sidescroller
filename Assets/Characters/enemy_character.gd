@@ -144,9 +144,11 @@ func TakeDamage(damage : int):
 	if hasCover == 0:
 		moveA.weight += 2
 
+func RemoveFromCombatList():
+	GameManager.current_enemies.erase(self)
+
 func Die():
 	super.Die()
-	GameManager.current_enemies.erase(self)
 	queue_free()
 
 	

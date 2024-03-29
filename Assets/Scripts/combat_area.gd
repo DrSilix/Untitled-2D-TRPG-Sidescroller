@@ -71,6 +71,7 @@ func CombatRound():
 	CallNextCombatantToTakeTurn()
 
 func CallNextCombatantToTakeTurn():
+	CheckIfGameOver()
 	_currentActiveCombatantIndex += 1
 	_numberOfCombatParticipants = players.size() + enemies.size()
 	if _currentActiveCombatantIndex >= _numberOfCombatParticipants:
@@ -84,6 +85,14 @@ func CallNextCombatantToTakeTurn():
 func TakeTurn(actor : BaseCharacter):
 	print("---",actor.name, "'s turn---")
 	actor.ChooseCombatAction(self)
+
+func CheckIfGameOver():
+	if players.size() == 0:
+		print("You Lose!")
+		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+	if enemies.size() == 0:
+		print("You Win!")
+		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 #Handle combat area enter
 func _on_body_entered(body):

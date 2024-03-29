@@ -53,9 +53,11 @@ func _on_action_chosen(action : String, data):
 func CompleteChosenAction():
 	super.CompleteChosenAction()
 
+func RemoveFromCombatList():
+	GameManager.current_players.erase(self)
+
 func Die():
 	super.Die()
-	GameManager.current_players.erase(self)
 	queue_free()
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
@@ -63,5 +65,3 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
 		if event.is_action_pressed("Move"):
 			print(get_canvas_transform().affine_inverse() * event.position)
 			MoveTo(get_canvas_transform().affine_inverse() * event.position)
-		if event.is_action_pressed("Attack"):
-			activeState = ATTACKING
