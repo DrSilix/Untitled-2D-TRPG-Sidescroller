@@ -3,6 +3,7 @@ class_name CombatArea extends Area2D
 @export var spawns : Array[EnemySpawn]
 
 @onready var stop_ = $"../CanvasLayer/Stop!"
+@onready var GameManager := $/root/Node2D/GameManager
 
 var camera_2d : Camera2D
 

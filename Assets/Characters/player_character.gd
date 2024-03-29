@@ -3,6 +3,8 @@ extends BaseCharacter
 @export var isOverworldControllable = false;
 
 @onready var player_choose_action_menu := $/root/Node2D/CanvasLayer/PlayerChooseAction
+@onready var GameManager : GameManager = $/root/Node2D/GameManager
+
 
 var isInputDisabled = false
 

@@ -9,6 +9,8 @@ extends BaseCharacter
 @export var burstShotWeight := 5
 @export var grenadeWeight := 0
 
+@onready var GameManager : GameManager = $/root/Node2D/GameManager
+
 
 var associatedPathNode : PathNode
 var rng := RandomNumberGenerator.new()

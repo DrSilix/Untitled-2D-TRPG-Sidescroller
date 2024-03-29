@@ -1,0 +1,159 @@
+[gd_scene load_steps=16 format=3 uid="uid://8wmenat02qf4"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/main_menu.gd" id="1_2wk14"]
+[ext_resource type="Texture2D" uid="uid://c56paeopi780f" path="res://Assets/UI/Sourcefiles/menu_background.png" id="1_184ro"]
+[ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="3_pe6w7"]
+[ext_resource type="FontFile" uid="uid://rk5ygevjqcej" path="res://Assets/UI/Fonts/superstar_memesbruh03.ttf" id="4_3ue4l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ocb22"]
+texture = ExtResource("1_184ro")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh27x"]
+atlas = ExtResource("3_pe6w7")
+region = Rect2(864, 80, 97, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5ytlm"]
+texture = SubResource("AtlasTexture_yh27x")
+modulate_color = Color(0.054902, 0.054902, 0.054902, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ug32o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmaxg"]
+atlas = ExtResource("3_pe6w7")
+region = Rect2(524, 256, 56, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yrgj4"]
+texture = SubResource("AtlasTexture_fmaxg")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jtwj0"]
+load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_annl7"]
+atlas = SubResource("CompressedTexture2D_jtwj0")
+region = Rect2(524, 256, 56, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_igc48"]
+texture = SubResource("AtlasTexture_annl7")
+modulate_color = Color(0.537255, 0.537255, 0.537255, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mfxxl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vlhxc"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2wk14")
+
+[node name="BG_Image" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ocb22")
+
+[node name="Menu_Container" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 155.0
+offset_right = 603.0
+offset_bottom = 355.0
+scale = Vector2(2.09865, 2.2659)
+theme_override_styles/panel = SubResource("StyleBoxTexture_5ytlm")
+
+[node name="duplicateMoreSolid" type="Panel" parent="Menu_Container"]
+layout_mode = 2
+offset_right = 400.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_5ytlm")
+
+[node name="Buttons" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 156.0
+offset_right = 479.0
+offset_bottom = 606.0
+scale = Vector2(1.0017, 1)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ug32o")
+
+[node name="MarginContainer" type="MarginContainer" parent="Buttons"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 45
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Buttons/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Button" type="Button" parent="Buttons/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("4_3ue4l")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxTexture_yrgj4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yrgj4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_igc48")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mfxxl")
+text = "Start"
+
+[node name="Button2" type="Button" parent="Buttons/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("4_3ue4l")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxTexture_yrgj4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yrgj4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_igc48")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mfxxl")
+text = "options"
+
+[node name="Button4" type="Button" parent="Buttons/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("4_3ue4l")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxTexture_yrgj4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yrgj4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_igc48")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mfxxl")
+text = "Quit"
+
+[node name="Credits" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 489.0
+offset_top = 155.0
+offset_right = 1042.0
+offset_bottom = 487.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vlhxc")
+
+[node name="MarginContainer" type="MarginContainer" parent="Credits"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+text = "Credits:
+
+Sprites: craftpix.net - itch.io
+UI Art: Immunity - itch.io
+SFX - kronbits - itch.io
+SFX - Murkje -itch.io
+Music - Ace Buchannon - For The Unbroken
+
+Everything Else - Alex Hackl"
+
+[connection signal="pressed" from="Buttons/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Buttons/MarginContainer/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=66 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -47,6 +47,7 @@
 [ext_resource type="PackedScene" uid="uid://crl3xnu4uelc1" path="res://Assets/UI/stop_speech_bubble.tscn" id="44_k18i6"]
 [ext_resource type="AudioStream" uid="uid://h5oxl881alse" path="res://Assets/Audio/Sourcefiles/Ace Buchannon - For The Unbroken.wav" id="47_oqxrk"]
 [ext_resource type="PackedScene" uid="uid://x1j2btwuvqub" path="res://Assets/UI/player_choose_action.tscn" id="48_6fmxg"]
+[ext_resource type="Script" path="res://Assets/Scripts/game_manager.gd" id="48_s32lj"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ldg06"]
 vertices = PackedVector2Array(275, 443, 421, 432, 895, 431, 933, 431, 1288, 443, 903, 360, 1011, 369, 973, 369, 713, 366, 871, 360, 539, 401, 1187, 391, 1209, 391, 933, 414, 895, 414, 870, 390, 836, 391, 1209, 376, 1187, 376, 903, 344, 1288, 325, 356, 432, 275, 427, 356, 416, 1011, 386, 713, 349, 871, 344, 488, 383, 488, 399, 421, 415, 384, 415, 161, 391, 161, 376, 251, 358, 289, 358, 507, 376, 289, 342, 629, 350, 629, 366, 529, 376, 501, 401, 69, 325, 676, 349, 676, 350, 973, 371, 954, 371, 991, 387, 991, 386, 778, 388, 798, 388, 798, 391, 836, 390, 539, 385, 778, 374, 529, 385, 507, 383, 501, 399, 384, 416, 266, 427, 266, 424, 219, 440, 249, 440, 249, 443, 68, 443, 219, 424, 139, 391, 251, 342, 139, 376, 870, 374, 954, 387)
@@ -1607,3 +1608,6 @@ texture = SubResource("AtlasTexture_btrtx")
 stream = ExtResource("47_oqxrk")
 volume_db = -9.0
 autoplay = true
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("48_s32lj")

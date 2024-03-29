@@ -5,10 +5,10 @@ signal action_chosen(action : String, data)
 @export var ui_positive : AudioStreamWAV
 @export var ui_negative : AudioStreamWAV
 
+@onready var GameManager : GameManager = $/root/Node2D/GameManager
+
 @onready var main_menu := $Main
 @onready var sub_attack_menu := $SubAttack
-@onready var targets_menu := $Targets
-@onready var targets_v_box_container := $Targets/Panel/MarginContainer/TargetsVBoxContainer
 @onready var cancel_button = $CancelButton/Cancel
 
 @onready var attack := $Main/Panel/MarginContainer/VBoxContainer/Attack

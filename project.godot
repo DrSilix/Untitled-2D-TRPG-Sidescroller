@@ -11,14 +11,13 @@ config_version=5
 [application]
 
 config/name="Untitled-2D-Sidescroll-Turnbased"
-run/main_scene="res://Scenes/Main.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 RollUtil="*res://Assets/Scripts/roll_util.gd"
-GameManager="*res://Assets/Scripts/game_manager.gd"
 
 [display]
 
