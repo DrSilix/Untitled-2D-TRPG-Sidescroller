@@ -1,5 +1,7 @@
 class_name CombatArea extends Area2D
 
+signal turn_finished(nextCombatant, prevCombatant)
+
 @export var spawns : Array[EnemySpawn]
 
 @onready var stop_ = $"../CanvasLayer/Stop!"
@@ -9,10 +11,16 @@ var camera_2d : Camera2D
 
 var enemies : Array[BaseCharacter]
 var players : Array[BaseCharacter]
-var combatRoundParticipants : Array[BaseCharacter]
+var combatRoundParticipants : Array[Node]
 
+var currentlyActiveGrenade : Grenade
+var activeGrenadesParent : BaseCharacter
+var activeGrenadesBackupIndex : int
+
+var _currentCombatant
 var _numberOfCombatParticipants : int
 var _round : int
+var _turn : int
 
 func _ready():
 	stop_.visible = false
@@ -71,6 +79,12 @@ func CombatRound():
 		enemy.currentActionPoints = enemy.maxActionPoints
 		enemy.InitializeCombatant(self)
 		combatRoundParticipants.append(enemy)
+	if currentlyActiveGrenade:
+		var indexToInsert = activeGrenadesBackupIndex
+		if activeGrenadesParent != null:
+			indexToInsert = combatRoundParticipants.find(activeGrenadesParent)
+		combatRoundParticipants.insert(indexToInsert, currentlyActiveGrenade)
+	_turn = 0
 	CallNextCombatantToTakeTurn()
 
 func CallNextCombatantToTakeTurn():
@@ -80,10 +94,13 @@ func CallNextCombatantToTakeTurn():
 		CombatRound()
 		return
 	_numberOfCombatParticipants = players.size() + enemies.size()
-	var currentCombatant = combatRoundParticipants.pop_front()
-	TakeTurn(currentCombatant)
+	var previousCombatant = _currentCombatant
+	_currentCombatant = combatRoundParticipants.pop_front()
+	turn_finished.emit(_currentCombatant, previousCombatant)
+	_turn += 1
+	TakeTurn(_currentCombatant)
 
-func TakeTurn(actor : BaseCharacter):
+func TakeTurn(actor):
 	print("---",actor.name, "'s turn---")
 	actor.ChooseCombatAction()
 
@@ -92,6 +109,16 @@ func RemoveCombatantFromRound(actor : BaseCharacter):
 	#only one has an effect. max array size is like 5, usually 3
 	GameManager.current_players.erase(actor)
 	GameManager.current_enemies.erase(actor)
+	
+func RegisterGrenade(grenade : Grenade, combatant : BaseCharacter):
+	currentlyActiveGrenade = grenade
+	activeGrenadesParent = combatant
+	activeGrenadesBackupIndex = _turn - 1
+
+func DeregisterGrenade():
+	currentlyActiveGrenade = null
+	activeGrenadesParent = null
+	
 
 func CheckIfGameOver():
 	if players.size() == 0:

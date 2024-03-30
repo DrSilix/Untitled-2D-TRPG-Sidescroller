@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 signal action_finished
 signal move_completed
-
 #region variables
 @export var moveSpeed : int = 6
 @export var maxHealth : int = 9
@@ -22,6 +21,9 @@ signal move_completed
 @export var grenadeCost := 6
 @export var reloadCost := 3
 
+const GRENADE = preload("res://Assets/grenade.tscn")
+@onready var grenade_marker = $SpriteRoot/Grenade
+
 @onready var spriteRootNode : Node2D = $SpriteRoot
 @onready var navigation_agent_2d : NavigationAgent2D = $NavigationAgent2D
 @onready var animationPlayer : AnimationPlayer = $SpriteRoot/AnimationPlayer
@@ -37,7 +39,7 @@ signal move_completed
 @onready var aim_icon : TextureRect = $StatusBar/AimIcon
 @onready var ammo_bar : ProgressBar = $StatusBar/AmmoIcon/AmmoBar
 
-enum {IDLE, WALKING, RUNNING, ATTACKING, ATTACKING_TWO, RELOADING, HURT, MISSED, RESISTED, DEATH}
+enum {IDLE, WALKING, RUNNING, ATTACKING, ATTACKING_TWO, THROWING_GRENADE, RELOADING, HURT, MISSED, RESISTED, DEATH}
 var activeState := IDLE
 
 enum CombatActions {ATTACK, SHOOTSINGLE, SHOOTBURST, GRENADE, MOVE, RELOAD, TAKEAIM, PASS}
@@ -100,14 +102,7 @@ func CompleteChosenAction():
 			# TODO: somehow wait for move to finish. signals??
 		CombatActions.PASS:
 			PassAction()
-	
-	#this await is here to ensure that the consequences of this action for potential
-	#targets is finished before possibly continuing into their turn
-	"""await get_tree().create_timer(1).timeout
-	print("Actions points: ", currentActionPoints)
-	highlight_yellow.visible = false
-	if currentActionPoints > 0: ChooseCombatAction(currentCombatArea)
-	else: currentCombatArea.CallNextCombatantToTakeTurn()"""
+
 		
 func _on_action_completed():
 	print("Actions points: ", currentActionPoints)
@@ -143,10 +138,23 @@ func ShootBurstAction():
 	elif dmgDealt == -2: print("Damage resisted")
 
 func GrenadeAction():
-	attackTarget.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
-	attackTarget.TakeDamage(20)
+	#attackTarget.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
+	#attackTarget.TakeDamage(20)
 	currentActionPoints -= grenadeCost
+	SetFacingTowardsTarget(attackTarget)
+	self.connect("action_finished", InstantiateAndThrowGrenade, CONNECT_ONE_SHOT)
+	self.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
+	activeState = THROWING_GRENADE
 	print("Throwing Grenade")
+	
+func InstantiateAndThrowGrenade():
+	print("Instantiating and Throwing Grenade")
+	var toHit : int = RollToHit() + CalculateDistancePenalty(attackTarget)
+	var grenade : Grenade = GRENADE.instantiate()
+	get_parent().add_child(grenade)
+	grenade.global_position = grenade_marker.global_position
+	currentCombatArea.RegisterGrenade(grenade, self)
+	grenade.ThrowAt(toHit, attackTarget.global_position, currentCombatArea)
 
 func ReloadAction():
 	currentActionPoints -= reloadCost if currentActionPoints >= reloadCost else currentActionPoints
@@ -299,6 +307,9 @@ func _physics_process(delta):
 			velocity = Vector2.ZERO
 		ATTACKING_TWO:
 			if animationPlayer.current_animation != "Attack2": animationPlayer.play("Attack2")
+			velocity = Vector2.ZERO
+		THROWING_GRENADE:
+			if animationPlayer.current_animation != "Throw_Grenade": animationPlayer.play("Throw_Grenade")
 			velocity = Vector2.ZERO
 		RELOADING:
 			if animationPlayer.current_animation != "Reloading": animationPlayer.play("Reloading")

@@ -40,7 +40,7 @@ func _ready():
 
 #action weights, when using an action the weight is reduced, when event
 #weight can be increased. e.g. movement reduces as used, when hit gets raised
-func ChooseCombatAction():
+func ChooseCombatAction():	
 	highlight_yellow.visible = true
 	aimA.weight = (-aimModifier + 1) if aimModifier < 0 else 1
 	attackA.weight = attackWeight if aimModifier <= 0 else 99

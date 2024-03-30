@@ -1,10 +1,11 @@
-[gd_scene load_steps=63 format=3 uid="uid://cqb2ap066ohga"]
+[gd_scene load_steps=66 format=3 uid="uid://cqb2ap066ohga"]
 
 [ext_resource type="Script" path="res://Assets/Characters/player_character.gd" id="1_nld74"]
 [ext_resource type="Texture2D" uid="uid://bppw7d22ppws1" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/3 Cyborg/Idle2.png" id="2_a5s80"]
 [ext_resource type="Texture2D" uid="uid://bmpcoxwgds66x" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/4 Shoot_effects/2_1.png" id="3_un1j1"]
 [ext_resource type="Texture2D" uid="uid://7vbdy8qxfvgr" path="res://Assets/Sprites/Sourcefiles/free-guns-pack-2-for-main-characters-pixel-art/2 Guns/9_1.png" id="4_wv8yw"]
 [ext_resource type="Texture2D" uid="uid://wu86jyhlmu1r" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/3 Hands/3 Cyborg/8.png" id="5_gvr48"]
+[ext_resource type="Texture2D" uid="uid://b1hxuu6yvf0t6" path="res://Assets/Sprites/Sourcefiles/bombs-and-explosions-pixel-art-set/1 Bombs/4_1.png" id="6_1ndyx"]
 [ext_resource type="Texture2D" uid="uid://cx6q42wmh07nr" path="res://Assets/Sprites/Sourcefiles/free-guns-pack-2-for-main-characters-pixel-art/4 Shoot_effects/9_1.png" id="6_6brq1"]
 [ext_resource type="Texture2D" uid="uid://cxsd2y2dtk157" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/1 Characters/1 Biker/Run1.png" id="6_cfmf4"]
 [ext_resource type="AudioStream" uid="uid://42ceperf5cfy" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Magic/Retro Magic 11.wav" id="6_eexmo"]
@@ -31,6 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://cs26rw0qucb61" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/FootStep/Retro FootStep Mud 01.wav" id="24_fiuij"]
 [ext_resource type="Texture2D" uid="uid://bpi713ywivdn5" path="res://Assets/Sprites/Sourcefiles/Free 3 Cyberpunk Sprites Pixel Art/3 Cyborg/Cyborg_death.png" id="25_sr34j"]
 [ext_resource type="AudioStream" uid="uid://cy55ric3pq58e" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Events/Negative/Retro Negative Long 12.wav" id="26_buoly"]
+[ext_resource type="Texture2D" uid="uid://css77xx7ticj1" path="res://Assets/Sprites/Sourcefiles/bombs-and-explosions-pixel-art-set/2 Animation/3.png" id="28_k2h2i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4myl"]
 
@@ -1717,6 +1719,54 @@ tracks/28/keys = {
 "update": 0,
 "values": [1.0]
 }
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("SpriteRoot/Grenade:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("SpriteRoot/Grenade:frame")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("SpriteRoot/Grenade:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("SpriteRoot/Grenade:position")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, -29)]
+}
 
 [sub_resource type="Animation" id="Animation_o6ml2"]
 resource_name = "Reloading"
@@ -2623,6 +2673,154 @@ tracks/15/keys = {
 "values": [1.0, 0.9, 1.0]
 }
 
+[sub_resource type="Animation" id="Animation_q6625"]
+resource_name = "Throw_Grenade"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteRoot/AnimationPlayer:active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteRoot/MuzzleBlast:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpriteRoot/Gun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SpriteRoot/Arms:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SpriteRoot/Body:hframes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SpriteRoot/Body:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_k2h2i")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SpriteRoot/Body:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SpriteRoot/Grenade:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SpriteRoot/Grenade:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SpriteRoot/Grenade:z_index")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [-1, 0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SpriteRoot/Grenade:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-3, -26), Vector2(7, -29), Vector2(18, -35), Vector2(25, -38)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("SpriteRoot/Grenade:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.81587]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w6inl"]
 _data = {
 "Attack1": SubResource("Animation_3q5o5"),
@@ -2635,6 +2833,7 @@ _data = {
 "Reloading": SubResource("Animation_o6ml2"),
 "Resisted": SubResource("Animation_abta1"),
 "Run": SubResource("Animation_ekcrc"),
+"Throw_Grenade": SubResource("Animation_q6625"),
 "Walk": SubResource("Animation_dsgr0")
 }
 
@@ -2718,7 +2917,7 @@ bg_color = Color(1, 0.894118, 0, 1)
 
 [node name="Cyborg_Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
@@ -2765,6 +2964,14 @@ region_rect = Rect2(0, 0, 27, 16)
 visible = false
 position = Vector2(6, -17)
 texture = ExtResource("5_gvr48")
+
+[node name="Grenade" type="Sprite2D" parent="SpriteRoot"]
+visible = false
+position = Vector2(7, -29)
+rotation = 0.81587
+texture = ExtResource("6_1ndyx")
+hframes = 4
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteRoot"]
 root_node = NodePath("../..")

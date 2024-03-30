@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://16cbe3kx3src"]
+[gd_scene load_steps=54 format=3 uid="uid://16cbe3kx3src"]
 
 [ext_resource type="Texture2D" uid="uid://cgnjrp6wydebj" path="res://Assets/Sprites/Sourcefiles/police-cyberpunk-characters-pixel-art/2 Sergeant/Idle.png" id="1_ej44u"]
 [ext_resource type="Script" path="res://Assets/Characters/enemy_character.gd" id="1_roqyh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b4kwe2s17txm3" path="res://Assets/Sprites/Sourcefiles/police-cyberpunk-characters-pixel-art/2 Sergeant/Attack3.png" id="3_k056f"]
 [ext_resource type="Texture2D" uid="uid://pcyq03fulrws" path="res://Assets/Sprites/Sourcefiles/free-guns-for-cyberpunk-characters-pixel-art/4 Shoot_effects/3_1.png" id="3_kj75q"]
 [ext_resource type="Texture2D" uid="uid://lqe3l81myats" path="res://Assets/Sprites/Sourcefiles/police-cyberpunk-characters-pixel-art/2 Sergeant/Attack1.png" id="3_lo0xd"]
+[ext_resource type="Texture2D" uid="uid://b1hxuu6yvf0t6" path="res://Assets/Sprites/Sourcefiles/bombs-and-explosions-pixel-art-set/1 Bombs/4_1.png" id="4_a6iif"]
 [ext_resource type="Texture2D" uid="uid://nran6b4cv71h" path="res://Assets/Sprites/Sourcefiles/police-cyberpunk-characters-pixel-art/2 Sergeant/Attack2.png" id="6_7x4p7"]
 [ext_resource type="AudioStream" uid="uid://dhxjswxubf1ux" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Weapon/Retro Weapon Gun LoFi 03.wav" id="6_lnkl1"]
 [ext_resource type="AudioStream" uid="uid://bxbvsm44d1lth" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Impact/Retro Impact Punch 07.wav" id="7_7al1p"]
@@ -761,6 +762,42 @@ tracks/12/keys = {
 "update": 0,
 "values": [1.0]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Grenade:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Grenade:frame")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Grenade:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(29, -34)]
+}
 
 [sub_resource type="Animation" id="Animation_53tun"]
 resource_name = "Reloading"
@@ -1110,6 +1147,82 @@ tracks/7/keys = {
 "values": [1.0, 0.9, 1.0]
 }
 
+[sub_resource type="Animation" id="Animation_wmf1e"]
+resource_name = "Throw_Grenade"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_7x4p7")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 2, 3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Grenade:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Grenade:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Grenade:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(22, -31), Vector2(29, -34), Vector2(36, -37)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_05sqg"]
 _data = {
 "Attack1": SubResource("Animation_hfr4u"),
@@ -1121,6 +1234,7 @@ _data = {
 "RESET": SubResource("Animation_y1o05"),
 "Reloading": SubResource("Animation_53tun"),
 "Resisted": SubResource("Animation_7j1pg"),
+"Throw_Grenade": SubResource("Animation_wmf1e"),
 "Walk": SubResource("Animation_gnog1")
 }
 
@@ -1199,7 +1313,7 @@ bg_color = Color(1, 0.894118, 0, 1)
 
 [node name="Enemy1" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 4
-collision_mask = 15
+collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
@@ -1210,7 +1324,6 @@ weaponDamage = 5
 position = Vector2(0, 0.34)
 scale = Vector2(0.81, 0.45)
 shape = SubResource("CircleShape2D_a4myl")
-disabled = true
 
 [node name="SpriteRoot" type="Node2D" parent="."]
 
@@ -1223,6 +1336,7 @@ texture = SubResource("GradientTexture2D_q8s7s")
 position = Vector2(10, -22)
 texture = ExtResource("1_ej44u")
 hframes = 4
+region_rect = Rect2(42, 0, 33, 48)
 
 [node name="SFX" type="Sprite2D" parent="SpriteRoot"]
 visible = false
@@ -1230,6 +1344,15 @@ position = Vector2(0, -17)
 scale = Vector2(-0.495, 1)
 texture = ExtResource("3_kj75q")
 hframes = 6
+frame = 1
+
+[node name="Grenade" type="Sprite2D" parent="SpriteRoot"]
+visible = false
+position = Vector2(29, -34)
+rotation = 1.09207
+scale = Vector2(1, 1)
+texture = ExtResource("4_a6iif")
+hframes = 4
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteRoot"]

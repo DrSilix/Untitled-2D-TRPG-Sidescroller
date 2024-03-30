@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=67 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -132,6 +132,9 @@ radius = 40.0
 atlas = ExtResource("40_m8kxh")
 region = Rect2(176, 416, 16, 16)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ralmh"]
+bg_color = Color(1, 1, 1, 1)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -214,6 +217,7 @@ layer_2/tile_data = PackedInt32Array(786440, 262426, 15, 851976, 852250, 14, 917
 metadata/_edit_lock_ = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_ldg06")
 
 [node name="BackgroundObjects" type="Node" parent="NavigationRegion2D"]
@@ -1196,6 +1200,7 @@ position = Vector2(147.361, 7.131)
 shape = SubResource("RectangleShape2D_lnui5")
 
 [node name="CombatArea" type="Area2D" parent="." node_paths=PackedStringArray("spawns")]
+visible = false
 position = Vector2(934, 381)
 collision_layer = 2
 collision_mask = 2
@@ -1611,3 +1616,14 @@ autoplay = true
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("48_s32lj")
+
+[node name="ScreenTinting" type="Panel" parent="."]
+visible = false
+top_level = true
+z_index = 1200
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ralmh")

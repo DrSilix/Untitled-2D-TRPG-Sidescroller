@@ -6,6 +6,7 @@ class_name GameManager extends Node
 @onready var player_spawn_2 : Sprite2D = $"../PlayerSpawn2"
 @onready var player_spawn_3 : Sprite2D = $"../PlayerSpawn3"
 @onready var camera_2d : Camera2D = $"../Camera2D"
+@onready var screen_tinting : Panel = $"../ScreenTinting"
 
 var player1PackedScene : PackedScene = preload("res://Assets/Characters/Biker/biker_player.tscn")
 var player2PackedScene : PackedScene = preload("res://Assets/Characters/Punk/punk_player.tscn")
