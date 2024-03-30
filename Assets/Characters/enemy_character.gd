@@ -44,6 +44,12 @@ func ChooseCombatAction():
 	highlight_yellow.visible = true
 	aimA.weight = (-aimModifier + 1) if aimModifier < 0 else 1
 	attackA.weight = attackWeight if aimModifier <= 0 else 99
+	if currentCombatArea.currentlyActiveGrenade == null \
+		and currentCombatArea.numPlayersInCover > 2:
+		grenadeA.weight = currentCombatArea.numPlayersInCover - 1
+	else: grenadeA.weight = 0
+	grenadeAmmo = currentCombatArea.enemyGrenadeAmmo
+	print("Enemy grenade status: W", grenadeA.weight, ", A", grenadeAmmo)
 	await get_tree().create_timer(1).timeout
 	var combinedWeightActions := 0
 	var possibleActions : Array[CAction]
@@ -79,7 +85,8 @@ func ChooseCombatAction():
 		if burstSA.cost <= currentActionPoints and currentWeaponAmmo >= 3:
 			combinedWeightActions += burstSA.weight
 			possibleActions.append(burstSA)
-		if grenadeA.cost <= currentActionPoints and grenadeA.weight > 0:
+		if grenadeA.cost <= currentActionPoints and grenadeA.weight > 0 \
+		and grenadeAmmo > 0:
 			combinedWeightActions += grenadeA.weight
 			possibleActions.append(grenadeA)
 		if aimA.cost <= currentActionPoints and aimA.weight > 0 \
@@ -120,7 +127,10 @@ func ChooseAttackTarget():
 		if dist < champion:
 			attackTarget = player
 			champion = dist
-
+func GrenadeAction():
+	currentCombatArea.enemyGrenadeAmmo -= 1
+	super.GrenadeAction()
+	
 func MoveAction():
 	print("Moving")
 	self.connect("move_completed", _on_action_completed, CONNECT_ONE_SHOT)

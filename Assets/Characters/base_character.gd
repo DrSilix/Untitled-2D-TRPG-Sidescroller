@@ -12,6 +12,7 @@ signal move_completed
 @export var weaponDamage : int = 6
 @export var maxWeaponAmmo : int = 6
 @export var maxActionPoints : int = 6
+@export var grenadeAmmo : int = 1
 
 @export_group("Action Costs")
 @export var moveCost := 3
@@ -141,6 +142,7 @@ func GrenadeAction():
 	#attackTarget.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
 	#attackTarget.TakeDamage(20)
 	currentActionPoints -= grenadeCost
+	grenadeAmmo -= 1
 	SetFacingTowardsTarget(attackTarget)
 	self.connect("action_finished", InstantiateAndThrowGrenade, CONNECT_ONE_SHOT)
 	self.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
