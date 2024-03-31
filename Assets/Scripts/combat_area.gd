@@ -18,7 +18,7 @@ var activeGrenadesParent : BaseCharacter
 var activeGrenadesBackupIndex : int
 var numPlayersInCover : int = 0
 var enemyGrenadeAmmo : int = 1
-var playerGrenadeAmmo : int = 0
+var playerGrenadeAmmo : int = 1
 
 var _currentCombatant
 var _numberOfCombatParticipants : int
@@ -86,9 +86,9 @@ func CombatRound():
 		enemy.InitializeCombatant(self)
 		combatRoundParticipants.append(enemy)
 	if currentlyActiveGrenade:
-		var indexToInsert = activeGrenadesBackupIndex
+		var indexToInsert = activeGrenadesBackupIndex + 1
 		if activeGrenadesParent != null:
-			indexToInsert = combatRoundParticipants.find(activeGrenadesParent)
+			indexToInsert = combatRoundParticipants.find(activeGrenadesParent) + 1
 		combatRoundParticipants.insert(indexToInsert, currentlyActiveGrenade)
 	_turn = 0
 	CallNextCombatantToTakeTurn()

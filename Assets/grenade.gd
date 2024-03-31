@@ -5,9 +5,10 @@ class_name Grenade extends Node2D
 @export var distanceToLandBefore = 30
 @export var hangTime = 1500
 @export var rollTime = 400
-@export var turnsFuse = 1
+@export var turnsFuse = 5
 @export var toHitDC = 3
 @export var damage = 8
+@export var minDamageFalloffMultiplier : float = 0.2
 
 @onready var point_light_2d = $Sprites/PointLight2D
 @onready var animation_player = $Sprites/AnimationPlayer
@@ -26,6 +27,7 @@ var _startTime : float
 var _duration : float
 var _combatArea : CombatArea
 var _currentFuseTime : int
+var _squaredExplosionRadius : int
 
 var _toHit : int
 
@@ -34,6 +36,7 @@ var currentState = IN_AIR
 
 func _ready():
 	print("Grenade Instantiated")
+	_squaredExplosionRadius = pow(explosion_radius.get_child(0).get_shape().radius, 2)
 
 func ThrowAt(toHit : int, pos : Vector2, combatArea : CombatArea):
 	print("Throwing Grenade")
@@ -109,6 +112,9 @@ func _process(delta):
 			pass
 
 func ChooseCombatAction():
+	Explode()
+	
+func Explode():
 	var st : Panel = GameManager.screen_tinting
 	st.self_modulate = Color.WHITE
 	st.self_modulate.a = 0
@@ -139,41 +145,26 @@ func ChooseCombatAction():
 func CalculateHitAndDamage():
 	var bodiesInArea : Array[Node2D] = explosion_radius.get_overlapping_bodies()
 	for body : BaseCharacter in bodiesInArea:
-		var distanceTo = global_position.distance_squared_to(body.global_position)
-		print(body.name, " distance to ", distanceTo)
+		var squaredDistanceTo = Vector2ScaledDistanceSquared(global_position, body.global_position)
+		var damageMultiplier = CalculateDamageFalloffMultiplier(squaredDistanceTo, _squaredExplosionRadius)
 		var hitPenalty = 0
-		#var toAvoid : int = body.RollToAvoidAttack(hitPenalty)
-		#if toAvoid >= _toHit:
-			#body.activeState = body.MISSED
-			#continue
-		var damageToDeal : int = damage + (_toHit/2)
-		var damagetToResist : int = body.RollToResistDamage()
-		if damagetToResist >= damageToDeal:
+		var damageToDeal : int = roundi((damage + (_toHit/2)) * damageMultiplier)
+		var damageToResist : int = body.RollToResistDamage()
+		print(body.name, " distance:", squaredDistanceTo, " dmgMult:", damageMultiplier, " damage:", damageToDeal, " toResist:", damageToResist)
+		if damageToResist >= damageToDeal:
 			body.activeState = body.RESISTED
 			continue
-		body.TakeDamage(damageToDeal - damagetToResist)
-		
+		body.TakeDamage(damageToDeal - damageToResist)
+
+func Vector2ScaledDistanceSquared(v1 : Vector2, v2 : Vector2, xScale : float = 1, yScale : float = 1) -> int:
+	return pow(v2.x - v1.x, 2) + pow((v2.y - v1.y)/yScale, 2)
+
+func CalculateDamageFalloffMultiplier(distance : float, maxDistance : float) -> float:
+	var normalizedDistance = distance/maxDistance
+	return pow(minDamageFalloffMultiplier, normalizedDistance)
 
 func _on_turn_finished(currentCombatant : BaseCharacter, previousCombatant : BaseCharacter):
 	_currentFuseTime -= 1
 	print("Grenade explodes in ", _currentFuseTime, " turns")
 	if _currentFuseTime <= 0:
-		var st : Panel = GameManager.screen_tinting
-		st.self_modulate = Color.WHITE
-		st.self_modulate.a = 0
-		st.visible = true
-		var tween = get_tree().create_tween()
-		tween.tween_property(st, "self_modulate:a", 1, 0.05)
-		tween.tween_property(st, "self_modulate:a", 1, 0.5)
-		tween.tween_property(st, "self_modulate:a", 0, 1)
-		await tween.finished
-		animation_player.play("Explode")
-		print("BANG!!!")
-		currentState = EXPLODE
-		tween = get_tree().create_tween()
-		tween.tween_property(st, "self_modulate:a", 1, 0.05)
-		tween.tween_property(st, "self_modulate:a", 1, 0.5)
-		tween.tween_property(st, "self_modulate:a", 0, 1)
-		tween.tween_property(st, "self_modulate:a", 1, 0.05)
-		tween.tween_property(st, "self_modulate:a", 1, 1.5)
-		tween.tween_property(st, "self_modulate:a", 0, 1)
+		Explode()
