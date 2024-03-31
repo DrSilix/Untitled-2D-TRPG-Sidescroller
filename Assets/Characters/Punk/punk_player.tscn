@@ -3812,10 +3812,11 @@ motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
 script = ExtResource("1_7j6cw")
+moveSpeed = 8
 maxHealth = 7
-armor = 7
-weaponSkill = 15
-weaponDamage = 4
+armor = 9
+weaponSkill = 17
+weaponDamage = 7
 maxWeaponAmmo = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -3850,14 +3851,12 @@ texture = ExtResource("4_eryt2")
 hframes = 6
 
 [node name="Gun" type="Sprite2D" parent="SpriteRoot"]
-visible = false
 self_modulate = Color(0.658824, 0.658824, 0.658824, 1)
 position = Vector2(3, -8)
 rotation = 0.949178
 texture = ExtResource("5_axf4c")
 
 [node name="Arms" type="Sprite2D" parent="SpriteRoot"]
-visible = false
 position = Vector2(6.87, -20.405)
 rotation = -0.452639
 texture = ExtResource("6_rl1ef")
@@ -4063,6 +4062,6 @@ fill_mode = 3
 show_percentage = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("20_brc7h")
+stream = ExtResource("9_aq1rb")
 
 [connection signal="animation_finished" from="SpriteRoot/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

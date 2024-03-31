@@ -6,10 +6,11 @@ signal move_completed
 #region variables
 @export var moveSpeed : int = 6
 @export var maxHealth : int = 9
-@export var armor : int = 8
+@export var armor : int = 10
 @export var chanceToHitModifier : int = 0
 @export var weaponSkill : int = 12
 @export var weaponDamage : int = 6
+@export var weaponAccuracy : int = 5
 @export var maxWeaponAmmo : int = 6
 @export var maxActionPoints : int = 6
 
@@ -151,7 +152,7 @@ func GrenadeAction():
 	
 func InstantiateAndThrowGrenade():
 	print("Instantiating and Throwing Grenade")
-	var toHit : int = RollToHit() + CalculateDistancePenalty(attackTarget)
+	var toHit : int = RollToHit(CalculateDistancePenalty(attackTarget), 12, 6)
 	var grenade : Grenade = GRENADE.instantiate()
 	get_parent().add_child(grenade)
 	grenade.global_position = grenade_marker.global_position
@@ -167,7 +168,7 @@ func ReloadAction():
 	
 func TakeAimAction():
 	print("Taking Aim")
-	aimModifier = 2
+	aimModifier = 4
 	currentActionPoints -= takeAimCost
 	self.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
 	activeState = TAKE_AIM
@@ -212,22 +213,22 @@ func LeaveCover():
 # 4 5 6 = -2
 # 1 2 3 = -4
 func getHealthPenalty():
-	return ((maxHealth - currentHealth) / 3) * -2
+	return ((maxHealth - currentHealth) / 3) * -1
 
 func getHealthBonus():
-	return getHealthPenalty() + maxHealth
+	return getHealthPenalty() + (maxHealth/2)
 
 
 func AttackTarget(target : BaseCharacter) -> int:
 	print(self.name, " attacks ", target.name)
 	var attackResultDelayTime = 0.6
 	SetFacingTowardsTarget(target)
-	var toHit : int = RollToHit() + CalculateDistancePenalty(target)
-	var hitPenalty = 0
+	var toHit : int = RollToHit(CalculateDistancePenalty(target))
+	var defenderEvadePenalty = 0
 	if currentChosenAction == CombatActions.SHOOTBURST:
-		hitPenalty = -2
+		defenderEvadePenalty = -2
 		attackResultDelayTime = 1.2
-	var toAvoid : int = target.RollToAvoidAttack(hitPenalty)
+	var toAvoid : int = target.RollToAvoidAttack(defenderEvadePenalty)
 	if toAvoid >= toHit:
 		await get_tree().create_timer(attackResultDelayTime).timeout
 		target.activeState = MISSED
@@ -241,23 +242,25 @@ func AttackTarget(target : BaseCharacter) -> int:
 	
 	await get_tree().create_timer(attackResultDelayTime).timeout
 	target.TakeDamage(damageToDeal - damagetToResist)
-	return damageToDeal - damagetToResist
+	return damageToDeal - damagetToResist	
 
 func CalculateDistancePenalty(target : BaseCharacter) -> int:
 	var distanceSquared = global_position.distance_squared_to(target.global_position)
-	print(-floor(distanceSquared/15000), " - ", distanceSquared/15000)
-	return -floor(distanceSquared/15000)
+	print(-(floor(distanceSquared/15000)) * 2, " - ", distanceSquared/15000)
+	return -(floor(distanceSquared/15000) * 2)
 
 # ??Factor in distance to shoot??
-func RollToHit():
-	return RollUtil.GetRoll(weaponSkill + getHealthBonus() + aimModifier)
+func RollToHit(rangePenaly : int, skillOverride : int = 0, accOverride : int = 0):
+	var finalSkill = weaponSkill if skillOverride <= 0 else skillOverride
+	var finalAcc = weaponAccuracy if accOverride <= 0 else accOverride
+	return min(RollUtil.GetRoll(finalSkill + getHealthBonus() + aimModifier + rangePenaly), finalAcc)
 
 func CalculateDamageToDeal(netHits : int):
 	return weaponDamage + netHits
 
 func RollToAvoidAttack(penaltyFromAttacker : int):
-	return RollUtil.GetRoll(moveSpeed + getHealthBonus()) \
-	+ penaltyFromAttacker - chanceToHitModifier
+	return RollUtil.GetRoll(moveSpeed + getHealthBonus() \
+	+ penaltyFromAttacker - chanceToHitModifier)
 
 func RollToResistDamage():
 	return RollUtil.GetRoll(armor + getHealthBonus())

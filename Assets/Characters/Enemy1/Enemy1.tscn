@@ -1624,6 +1624,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
 script = ExtResource("1_roqyh")
+armor = 12
 weaponSkill = 11
 weaponDamage = 5
 

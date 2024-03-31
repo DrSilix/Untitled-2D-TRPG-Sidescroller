@@ -3408,9 +3408,6 @@ wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
 script = ExtResource("1_2gc5v")
 isOverworldControllable = true
-armor = 7
-weaponSkill = 13
-weaponDamage = 7
 maxWeaponAmmo = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
