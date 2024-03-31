@@ -12,7 +12,6 @@ signal move_completed
 @export var weaponDamage : int = 6
 @export var maxWeaponAmmo : int = 6
 @export var maxActionPoints : int = 6
-@export var grenadeAmmo : int = 1
 
 @export_group("Action Costs")
 @export var moveCost := 3
@@ -40,7 +39,7 @@ const GRENADE = preload("res://Assets/grenade.tscn")
 @onready var aim_icon : TextureRect = $StatusBar/AimIcon
 @onready var ammo_bar : ProgressBar = $StatusBar/AmmoIcon/AmmoBar
 
-enum {IDLE, WALKING, RUNNING, ATTACKING, ATTACKING_TWO, THROWING_GRENADE, RELOADING, HURT, MISSED, RESISTED, DEATH}
+enum {IDLE, WALKING, RUNNING, ATTACKING, ATTACKING_TWO, THROWING_GRENADE, RELOADING, TAKE_AIM, HURT, MISSED, RESISTED, DEATH}
 var activeState := IDLE
 
 enum CombatActions {ATTACK, SHOOTSINGLE, SHOOTBURST, GRENADE, MOVE, RELOAD, TAKEAIM, PASS}
@@ -53,6 +52,7 @@ var currentActionPoints : int
 var currentWeaponAmmo : int
 var moveTarget : Vector2
 var attackTarget : BaseCharacter
+var grenadeAmmo : int = 0
 
 var currentCombatArea : CombatArea
 #endregion
@@ -166,11 +166,11 @@ func ReloadAction():
 	currentWeaponAmmo = maxWeaponAmmo
 	
 func TakeAimAction():
+	print("Taking Aim")
 	aimModifier = 2
 	currentActionPoints -= takeAimCost
-	await get_tree().create_timer(0.5).timeout
-	_on_action_completed()
-	print("Taking Aim")
+	self.connect("action_finished", _on_action_completed, CONNECT_ONE_SHOT)
+	activeState = TAKE_AIM
 
 func MoveAction():
 	currentActionPoints -= moveCost
@@ -315,6 +315,9 @@ func _physics_process(delta):
 			velocity = Vector2.ZERO
 		RELOADING:
 			if animationPlayer.current_animation != "Reloading": animationPlayer.play("Reloading")
+			velocity = Vector2.ZERO
+		TAKE_AIM:
+			if animationPlayer.current_animation != "Take_Aim": animationPlayer.play("Take_Aim")
 			velocity = Vector2.ZERO
 		HURT:
 			animationPlayer.play("Hurt")

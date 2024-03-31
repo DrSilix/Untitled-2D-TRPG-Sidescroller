@@ -7,12 +7,13 @@ class_name Grenade extends Node2D
 @export var rollTime = 400
 @export var turnsFuse = 1
 @export var toHitDC = 3
-@export var damage = 6
+@export var damage = 8
 
 @onready var point_light_2d = $Sprites/PointLight2D
 @onready var animation_player = $Sprites/AnimationPlayer
 @onready var GameManager : GameManager = $/root/Node2D/GameManager
 @onready var explosion_radius : Area2D = $ExplosionRadius
+@onready var navigation_region_2d : NavigationRegion2D = $/root/Node2D/NavigationRegion2D
 
 var _startingPos : Vector2
 var _targetPos : Vector2
@@ -45,6 +46,7 @@ func ThrowAt(toHit : int, pos : Vector2, combatArea : CombatArea):
 	#combatArea.connect("turn_finished", _on_turn_finished)
 	_currentFuseTime = turnsFuse
 	_targetPos = pos + (randomVector * deviationDistance * toHitDeviation)
+	_targetPos = NavigationServer2D.map_get_closest_point(navigation_region_2d.get_navigation_map(), _targetPos)
 	z_index = (_targetPos.y as int) - 30
 	_startingPos = global_position
 	_landingPos = _targetPos + (_targetPos.direction_to(_startingPos).normalized() * distanceToLandBefore)
@@ -129,18 +131,22 @@ func ChooseCombatAction():
 	await tween.finished
 	CalculateHitAndDamage()
 	_combatArea.DeregisterGrenade()
+	# needed to allow all affected to finish animations/deaths
+	await get_tree().create_timer(2).timeout
 	_combatArea.CallNextCombatantToTakeTurn()
 	queue_free()
 	
 func CalculateHitAndDamage():
 	var bodiesInArea : Array[Node2D] = explosion_radius.get_overlapping_bodies()
 	for body : BaseCharacter in bodiesInArea:
+		var distanceTo = global_position.distance_squared_to(body.global_position)
+		print(body.name, " distance to ", distanceTo)
 		var hitPenalty = 0
 		#var toAvoid : int = body.RollToAvoidAttack(hitPenalty)
 		#if toAvoid >= _toHit:
 			#body.activeState = body.MISSED
 			#continue
-		var damageToDeal : int = damage + _toHit
+		var damageToDeal : int = damage + (_toHit/2)
 		var damagetToResist : int = body.RollToResistDamage()
 		if damagetToResist >= damageToDeal:
 			body.activeState = body.RESISTED

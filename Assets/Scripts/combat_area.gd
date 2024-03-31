@@ -18,6 +18,7 @@ var activeGrenadesParent : BaseCharacter
 var activeGrenadesBackupIndex : int
 var numPlayersInCover : int = 0
 var enemyGrenadeAmmo : int = 1
+var playerGrenadeAmmo : int = 0
 
 var _currentCombatant
 var _numberOfCombatParticipants : int
@@ -69,14 +70,14 @@ func BeginCombat():
 func CombatRound():
 	if _round > 1: print("Round ",_round ," Complete")
 	print("Round ",_round ," Starting")
+	if _round % 3 == 0: enemyGrenadeAmmo += 1
+	if _round % 2 == 0: playerGrenadeAmmo += 1
 	_round += 1
-	if _round % 2 == 0: enemyGrenadeAmmo += 1
 	numPlayersInCover = 0
 	for player : BaseCharacter in players:
 		player.main_status_bar.visible = true
 		player.currentActionPoints = player.maxActionPoints
 		if player.hasCover > 0: numPlayersInCover += 1
-		player.DisconnectFromMovableArea()
 		player.InitializeCombatant(self)
 		combatRoundParticipants.append(player)
 	for enemy : BaseCharacter in enemies:

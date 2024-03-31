@@ -1,9 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://bo8xebg0dyy5d"]
+[gd_scene load_steps=19 format=3 uid="uid://bo8xebg0dyy5d"]
 
 [ext_resource type="Script" path="res://Assets/grenade.gd" id="1_nkuhr"]
 [ext_resource type="Texture2D" uid="uid://b1hxuu6yvf0t6" path="res://Assets/Sprites/Sourcefiles/bombs-and-explosions-pixel-art-set/1 Bombs/4_1.png" id="2_g0gj5"]
+[ext_resource type="AudioStream" uid="uid://52vtipeohrgh" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Alarms Blip Beeps/Retro Blip 15.wav" id="3_aehkm"]
 [ext_resource type="AudioStream" uid="uid://b0hwhdrbu4ktf" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/Explosion/Retro Explosion Swoshes 04.wav" id="3_nc6ly"]
 [ext_resource type="Texture2D" uid="uid://cs3smtkpf6x48" path="res://Assets/Sprites/Sourcefiles/bombs-and-explosions-pixel-art-set/3 Effects/3 Middle/2.png" id="3_xkmiw"]
+[ext_resource type="AudioStream" uid="uid://oq3si2g4a8q8" path="res://Assets/Audio/Sourcefiles/FreeSFX/GameSFX/PickUp/Retro PickUp 18.wav" id="6_h1mne"]
 
 [sub_resource type="Gradient" id="Gradient_s6wvg"]
 offsets = PackedFloat32Array(0, 0.476415, 0.693396)
@@ -52,7 +54,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-3, 0)]
 }
 tracks/2/type = "value"
@@ -130,6 +132,42 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0.0, 1.0, 0.0, 1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../AudioStreamPlayer:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_aehkm")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../AudioStreamPlayer:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-7.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../AudioStreamPlayer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
 }
 
 [sub_resource type="Animation" id="Animation_0mjcj"]
@@ -280,7 +318,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-3, -2.38419e-07)]
 }
 tracks/1/type = "value"
@@ -292,7 +330,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [1.58652]
 }
 tracks/2/type = "value"
@@ -394,6 +432,54 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../AudioStreamPlayer:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_h1mne")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../AudioStreamPlayer:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../AudioStreamPlayer:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../AudioStreamPlayer:pitch_scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [2.45, 2.48, 2.45, 2.51, 1.0]
 }
 
 [sub_resource type="Animation" id="Animation_myiw3"]
@@ -506,6 +592,18 @@ tracks/8/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../AudioStreamPlayer:pitch_scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e1q01"]
 _data = {
@@ -554,7 +652,7 @@ libraries = {
 autoplay = "Airborne"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_nc6ly")
+stream = ExtResource("6_h1mne")
 
 [node name="ExplosionRadius" type="Area2D" parent="."]
 position = Vector2(-3, 0)

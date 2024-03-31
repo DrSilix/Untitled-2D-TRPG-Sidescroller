@@ -45,8 +45,8 @@ func ChooseCombatAction():
 	aimA.weight = (-aimModifier + 1) if aimModifier < 0 else 1
 	attackA.weight = attackWeight if aimModifier <= 0 else 99
 	if currentCombatArea.currentlyActiveGrenade == null \
-		and currentCombatArea.numPlayersInCover > 2:
-		grenadeA.weight = currentCombatArea.numPlayersInCover - 1
+		and currentCombatArea.numPlayersInCover > 1:
+		grenadeA.weight = currentCombatArea.numPlayersInCover
 	else: grenadeA.weight = 0
 	grenadeAmmo = currentCombatArea.enemyGrenadeAmmo
 	print("Enemy grenade status: W", grenadeA.weight, ", A", grenadeAmmo)
@@ -109,8 +109,9 @@ func ChooseCombatAction():
 				chosenPossibleAction = act
 				break
 	
-	ChooseAttackTarget()
 	currentChosenAction = chosenPossibleAction.combatAction
+	var chooseClosestEnemy = true if currentChosenAction != CombatActions.GRENADE else false
+	ChooseAttackTarget(chooseClosestEnemy)
 	print(CombatActions.keys()[currentChosenAction])
 	CompleteChosenAction()
 
@@ -119,14 +120,19 @@ func CompleteChosenAction():
 	await get_tree().create_timer(1).timeout
 	super.CompleteChosenAction()
 
-func ChooseAttackTarget():
+func ChooseAttackTarget(chooseClosest : bool = true):
 	var players := GameManager.current_players
-	var champion = 99999
+	var champion = players[0].global_position.distance_squared_to(global_position)
+	attackTarget = players[0]
 	for player in players:
 		var dist = player.global_position.distance_squared_to(global_position)
-		if dist < champion:
+		if chooseClosest and dist < champion:
 			attackTarget = player
 			champion = dist
+		if not chooseClosest and dist > champion:
+			attackTarget = player
+			champion = dist
+			
 func GrenadeAction():
 	currentCombatArea.enemyGrenadeAmmo -= 1
 	super.GrenadeAction()

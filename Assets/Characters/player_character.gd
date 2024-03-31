@@ -21,6 +21,7 @@ func DisconnectFromMovableArea():
 		get_node("../MovableArea").disconnect("input_event", _on_input_event)
 
 func ChooseCombatAction():
+	grenadeAmmo = currentCombatArea.playerGrenadeAmmo
 	highlight_yellow.visible = true
 	player_choose_action_menu.visible = true
 	player_choose_action_menu.Initialize(self)
@@ -52,6 +53,10 @@ func _on_action_chosen(action : String, data):
 
 func CompleteChosenAction():
 	super.CompleteChosenAction()
+	
+func GrenadeAction():
+	currentCombatArea.playerGrenadeAmmo -= 1
+	super.GrenadeAction()
 
 func Die():
 	super.Die()

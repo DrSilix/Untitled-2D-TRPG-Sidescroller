@@ -166,7 +166,8 @@ func BurstShotDisabledCheck():
 	
 func GrenadeDisabledCheck():
 	if _character.currentActionPoints < _character.grenadeCost or \
-	_character.currentCombatArea.currentlyActiveGrenade != null:
+	_character.currentCombatArea.currentlyActiveGrenade != null or \
+	_character.grenadeAmmo < 1:
 		grenade.disabled = true
 	else: grenade.disabled = false
 
