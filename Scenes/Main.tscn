@@ -45,7 +45,7 @@
 [ext_resource type="PackedScene" uid="uid://16cbe3kx3src" path="res://Assets/Characters/Enemy1/Enemy1.tscn" id="43_e7uyp"]
 [ext_resource type="Script" path="res://Assets/Scripts/enemy_spawn.gd" id="43_nnltu"]
 [ext_resource type="PackedScene" uid="uid://crl3xnu4uelc1" path="res://Assets/UI/stop_speech_bubble.tscn" id="44_k18i6"]
-[ext_resource type="AudioStream" uid="uid://h5oxl881alse" path="res://Assets/Audio/Sourcefiles/Ace Buchannon - For The Unbroken.wav" id="47_oqxrk"]
+[ext_resource type="AudioStream" uid="uid://bmcnd8yj0v8v7" path="res://Assets/Audio/Sourcefiles/Ace Buchannon - For The Unbroken.ogg" id="47_oqxrk"]
 [ext_resource type="PackedScene" uid="uid://x1j2btwuvqub" path="res://Assets/UI/player_choose_action.tscn" id="48_6fmxg"]
 [ext_resource type="Script" path="res://Assets/Scripts/game_manager.gd" id="48_s32lj"]
 
@@ -1200,7 +1200,6 @@ position = Vector2(147.361, 7.131)
 shape = SubResource("RectangleShape2D_lnui5")
 
 [node name="CombatArea" type="Area2D" parent="." node_paths=PackedStringArray("spawns")]
-visible = false
 position = Vector2(934, 381)
 collision_layer = 2
 collision_mask = 2
