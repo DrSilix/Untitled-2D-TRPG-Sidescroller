@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://by87kbdmx0pfh"]
+[gd_scene load_steps=6 format=3 uid="uid://by87kbdmx0pfh"]
 
 [ext_resource type="Script" path="res://Scenes/balance_tool_scene.gd" id="1_s1wbs"]
 [ext_resource type="Script" path="res://Assets/Scripts/game_manager.gd" id="3_yiy4h"]
 [ext_resource type="PackedScene" uid="uid://x1j2btwuvqub" path="res://Assets/UI/player_choose_action.tscn" id="4_21kq1"]
 [ext_resource type="PackedScene" uid="uid://16cbe3kx3src" path="res://Assets/Characters/Enemy1/Enemy1.tscn" id="4_qfmpf"]
+[ext_resource type="Script" path="res://Assets/Characters/base_character.gd" id="5_fph0j"]
 
 [node name="BalanceToolScene" type="Node2D"]
 script = ExtResource("1_s1wbs")
@@ -38,3 +39,6 @@ offset_bottom = 40.0
 
 [node name="PlayerChooseAction" parent="CanvasLayer" instance=ExtResource("4_21kq1")]
 visible = false
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("5_fph0j")

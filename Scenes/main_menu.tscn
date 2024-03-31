@@ -144,14 +144,16 @@ theme_override_constants/margin_bottom = 25
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Credits/MarginContainer"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/normal_font_size = 17
 text = "Credits:
-
-Sprites: craftpix.net - itch.io
-UI Art: Immunity - itch.io
-SFX - kronbits - itch.io
-SFX - Murkje -itch.io
-Music - Ace Buchannon - For The Unbroken
+Engine:	Godot
+Sprites:	craftpix.net - itch.io
+UI Art:		Immunity - itch.io
+Fonts:		Crang by Caveras
+				Superstar by Memesbruh03
+SFX:			kronbits - itch.io
+				Murkje -itch.io
+Music: 	Ace Buchannon - For The Unbroken
 
 Everything Else - Alex Hackl"
 

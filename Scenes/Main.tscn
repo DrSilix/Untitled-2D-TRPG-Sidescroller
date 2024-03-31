@@ -190,7 +190,7 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(784, 413)
+position = Vector2(256, 369)
 zoom = Vector2(4, 4)
 process_callback = 0
 limit_left = 0
@@ -1589,7 +1589,7 @@ mouse_filter = 1
 
 [node name="PlayerSpawn" type="Sprite2D" parent="."]
 modulate = Color(0.2, 1, 0.0588235, 1)
-position = Vector2(717, 401)
+position = Vector2(201, 357)
 scale = Vector2(2, 2)
 skew = -0.773181
 texture = SubResource("AtlasTexture_btrtx")

@@ -18,7 +18,7 @@ var activeGrenadesParent : BaseCharacter
 var activeGrenadesBackupIndex : int
 var numPlayersInCover : int = 0
 var enemyGrenadeAmmo : int = 1
-var playerGrenadeAmmo : int = 1
+var playerGrenadeAmmo : int = 0
 
 var _currentCombatant
 var _numberOfCombatParticipants : int
