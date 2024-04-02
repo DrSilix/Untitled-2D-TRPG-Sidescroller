@@ -9,7 +9,7 @@ extends BaseCharacter
 @export var burstShotWeight := 5
 @export var grenadeWeight := 0
 
-@onready var GameManager : GameManager = $/root/Node2D/GameManager
+@onready var game_manager : GameManager = $/root/Node2D/GameManager
 
 
 var associatedPathNode : PathNode
@@ -52,7 +52,7 @@ func ChooseCombatAction():
 	print("Enemy grenade status: W", grenadeA.weight, ", A", grenadeAmmo)
 	await get_tree().create_timer(1).timeout
 	var combinedWeightActions := 0
-	var possibleActions : Array[CAction]
+	var possibleActions : Array[CAction] = []
 	if attackA.cost <= currentActionPoints and attackA.weight > 0:
 		combinedWeightActions += attackA.weight
 		possibleActions.append(attackA)
@@ -121,7 +121,7 @@ func CompleteChosenAction():
 	super.CompleteChosenAction()
 
 func ChooseAttackTarget(chooseClosest : bool = true):
-	var players := GameManager.current_players
+	var players := game_manager.current_players
 	var champion = players[0].global_position.distance_squared_to(global_position)
 	attackTarget = players[0]
 	for player in players:

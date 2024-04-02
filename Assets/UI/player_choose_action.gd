@@ -5,7 +5,7 @@ signal action_chosen(action : String, data)
 @export var ui_positive : AudioStreamWAV
 @export var ui_negative : AudioStreamWAV
 
-@onready var GameManager : GameManager = $/root/Node2D/GameManager
+@onready var game_manager : GameManager = $/root/Node2D/GameManager
 
 @onready var main_menu := $Main
 @onready var sub_attack_menu := $SubAttack
@@ -44,14 +44,14 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 #must be called each time this action chooser is used
 func Initialize(character : BaseCharacter):
 	_character = character
 	moveable_area = _character.find_child("MovableArea")
-	_enemies = GameManager.current_enemies
+	_enemies = game_manager.current_enemies
 	ResetAllMenus()
 	BuildStatusInfo(character)
 	ChangeMenuState(State.MAINMENU)
@@ -69,14 +69,14 @@ func ResetAllMenus():
 	moveable_area.visible = false
 	IsDisabledCheck()
 
-func BuildStatusInfo(char : BaseCharacter):
-	status_name.text = char.name
-	status_health.text = "Health: " + str(char.currentHealth) + " (" + str(char.getHealthPenalty()) + ")"
-	var aimStatus = "Yes (" if char.aimModifier > 0 else "No ("
-	status_aim.text = "Aim: " + aimStatus + str(char.aimModifier) + ")"
-	var covertStatus = "Yes (3)" if char.hasCover > 0 else "No (0)"
+func BuildStatusInfo(character : BaseCharacter):
+	status_name.text = character.name
+	status_health.text = "Health: " + str(character.currentHealth) + " (" + str(character.getHealthPenalty()) + ")"
+	var aimStatus = "Yes (" if character.aimModifier > 0 else "No ("
+	status_aim.text = "Aim: " + aimStatus + str(character.aimModifier) + ")"
+	var covertStatus = "Yes (3)" if character.hasCover > 0 else "No (0)"
 	status_cover.text = "Cover: " + covertStatus
-	status_ammo.text = "Ammo: " + str(char.currentWeaponAmmo)
+	status_ammo.text = "Ammo: " + str(character.currentWeaponAmmo)
 
 func IsDisabledCheck():
 	AttackDisabledCheck()
@@ -199,7 +199,7 @@ func CancelMove():
 	moveable_area.disconnect("input_event", _on_move_location_chosen)
 	ChangeMenuState(State.MAINMENU)
 
-func _on_move_location_chosen(viewport: Node, event: InputEvent, shape_idx: int):
+func _on_move_location_chosen(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if event.is_action_pressed("Move"):
 		var moveTo : Vector2 = _character.get_canvas_transform().affine_inverse() * event.position
 		moveable_area.visible = false
@@ -233,7 +233,7 @@ func _on_grenade_pressed():
 func _on_reload_pressed():
 	ActionChosen("reload", null)
 	
-func _on_enemy_select_input_event(viewport, event : InputEvent, shape_rid, enemy : BaseCharacter):
+func _on_enemy_select_input_event(_viewport, event : InputEvent, _shape_rid, enemy : BaseCharacter):
 	if event.is_action_pressed("Move"):
 		DisconnectFromEnemies()
 		ActionChosen(attackType, enemy)

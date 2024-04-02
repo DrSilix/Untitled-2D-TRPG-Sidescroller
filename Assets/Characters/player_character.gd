@@ -3,7 +3,7 @@ extends BaseCharacter
 @export var isOverworldControllable = false;
 
 @onready var player_choose_action_menu := $/root/Node2D/CanvasLayer/PlayerChooseAction
-@onready var GameManager : GameManager = $/root/Node2D/GameManager
+@onready var game_manager : GameManager = $/root/Node2D/GameManager
 
 
 var isInputDisabled = false
@@ -62,7 +62,7 @@ func Die():
 	super.Die()
 	queue_free()
 
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if !isInputDisabled:
 		if event.is_action_pressed("Move"):
 			print(get_canvas_transform().affine_inverse() * event.position)

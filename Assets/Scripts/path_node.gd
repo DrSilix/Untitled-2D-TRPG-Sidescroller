@@ -12,7 +12,7 @@ func _ready():
 	connect("area_shape_entered", _on_area_shape_entered)
 	await get_tree().create_timer(0.4).timeout
 	var sprite : Sprite2D = find_child("Sprite2D")
-	sprite.self_modulate = Color().from_hsv(weight/8.0, 1, 1, 1)
+	sprite.self_modulate = Color.from_hsv(weight/8.0, 1, 1, 1)
 	sprite.z_index = 0
 	for n in get_child(0).get_children():
 		n.queue_free()
@@ -46,11 +46,11 @@ func GetMoveToNode() -> PathNode:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
-func _on_area_shape_entered(area_rid, area:Area2D, area_shape_index, local_shape_index):
+func _on_area_shape_entered(_area_rid, area:Area2D, _area_shape_index, _local_shape_index):
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position, area.global_position)
 	query.collision_mask = 0b00000000_00000000_00000000_00001001

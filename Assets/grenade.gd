@@ -12,7 +12,7 @@ class_name Grenade extends Node2D
 
 @onready var point_light_2d = $Sprites/PointLight2D
 @onready var animation_player = $Sprites/AnimationPlayer
-@onready var GameManager : GameManager = $/root/Node2D/GameManager
+@onready var game_manager : GameManager = $/root/Node2D/GameManager
 @onready var explosion_radius : Area2D = $ExplosionRadius
 @onready var navigation_region_2d : NavigationRegion2D = $/root/Node2D/NavigationRegion2D
 
@@ -22,7 +22,6 @@ var _controlPoint1 : Vector2
 var _controlPoint2 : Vector2
 var _landingPos : Vector2
 
-var _currentTravelDistance : float = 0
 var _startTime : float
 var _duration : float
 var _combatArea : CombatArea
@@ -36,7 +35,7 @@ var currentState = IN_AIR
 
 func _ready():
 	print("Grenade Instantiated")
-	_squaredExplosionRadius = pow(explosion_radius.get_child(0).get_shape().radius, 2)
+	_squaredExplosionRadius = roundi(pow(explosion_radius.get_child(0).get_shape().radius, 2))
 
 func ThrowAt(toHit : int, pos : Vector2, combatArea : CombatArea):
 	print("Throwing Grenade")
@@ -91,7 +90,7 @@ func GetPointOnLine(weight : float) -> Vector2:
 	return _startingPos.bezier_interpolate(_controlPoint1, _controlPoint2, _landingPos, weight)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	match currentState:
 		IN_AIR:
 			global_position = GetPointOnLine( \
@@ -115,7 +114,7 @@ func ChooseCombatAction():
 	Explode()
 	
 func Explode():
-	var st : Panel = GameManager.screen_tinting
+	var st : Panel = game_manager.screen_tinting
 	st.self_modulate = Color.WHITE
 	st.self_modulate.a = 0
 	st.visible = true
@@ -147,8 +146,7 @@ func CalculateHitAndDamage():
 	for body : BaseCharacter in bodiesInArea:
 		var squaredDistanceTo = Vector2ScaledDistanceSquared(global_position, body.global_position)
 		var damageMultiplier = CalculateDamageFalloffMultiplier(squaredDistanceTo, _squaredExplosionRadius)
-		var hitPenalty = 0
-		var damageToDeal : int = roundi((damage + (_toHit/2)) * damageMultiplier)
+		var damageToDeal : int = roundi((float(_toHit)/2 + damage) * damageMultiplier)
 		var damageToResist : int = body.RollToResistDamage()
 		print(body.name, " distance:", squaredDistanceTo, " dmgMult:", damageMultiplier, " damage:", damageToDeal, " toResist:", damageToResist)
 		if damageToResist >= damageToDeal:
@@ -156,14 +154,14 @@ func CalculateHitAndDamage():
 			continue
 		body.TakeDamage(damageToDeal - damageToResist)
 
-func Vector2ScaledDistanceSquared(v1 : Vector2, v2 : Vector2, xScale : float = 1, yScale : float = 1) -> int:
-	return pow(v2.x - v1.x, 2) + pow((v2.y - v1.y)/yScale, 2)
+func Vector2ScaledDistanceSquared(v1 : Vector2, v2 : Vector2, _xScale : float = 1, yScale : float = 1) -> int:
+	return roundi(pow(v2.x - v1.x, 2) + pow((v2.y - v1.y)/yScale, 2))
 
 func CalculateDamageFalloffMultiplier(distance : float, maxDistance : float) -> float:
 	var normalizedDistance = distance/maxDistance
 	return pow(minDamageFalloffMultiplier, normalizedDistance)
 
-func _on_turn_finished(currentCombatant : BaseCharacter, previousCombatant : BaseCharacter):
+func _on_turn_finished(_currentCombatant : BaseCharacter, _previousCombatant : BaseCharacter):
 	_currentFuseTime -= 1
 	print("Grenade explodes in ", _currentFuseTime, " turns")
 	if _currentFuseTime <= 0:

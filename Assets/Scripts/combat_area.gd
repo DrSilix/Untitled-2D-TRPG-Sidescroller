@@ -5,7 +5,7 @@ signal turn_finished(nextCombatant, prevCombatant)
 @export var spawns : Array[EnemySpawn]
 
 @onready var stop_ = $"../CanvasLayer/Stop!"
-@onready var GameManager := $/root/Node2D/GameManager
+@onready var game_manager := $/root/Node2D/GameManager
 
 var camera_2d : Camera2D
 
@@ -30,7 +30,7 @@ func _ready():
 	connect("body_entered", _on_body_entered,)
 
 func PlayCutscene():
-	camera_2d = GameManager.camera_2d
+	camera_2d = game_manager.camera_2d
 	camera_2d.position_smoothing_enabled = false
 	camera_2d.reparent(get_parent())
 	await get_tree().create_timer(0.1).timeout
@@ -50,16 +50,16 @@ func PlayCutscene():
 		enemies.append(enemy)
 	var tween = get_tree().create_tween()
 	tween.tween_property(camera_2d, "global_position", global_position, 1)
-	GameManager.punk_player.visible = true
-	GameManager.cyborg_player.visible = true
+	game_manager.punk_player.visible = true
+	game_manager.cyborg_player.visible = true
 	await get_tree().create_timer(2).timeout
 	BeginCombat()
 
 func BeginCombat():
 	print("Beginning Combat")
 	_round = 1
-	GameManager.current_enemies = enemies
-	players = GameManager.current_players
+	game_manager.current_enemies = enemies
+	players = game_manager.current_players
 	for player in players:
 		player.main_status_bar.visible = true
 		player.DisconnectFromMovableArea()
@@ -78,12 +78,12 @@ func CombatRound():
 		player.main_status_bar.visible = true
 		player.currentActionPoints = player.maxActionPoints
 		if player.hasCover > 0: numPlayersInCover += 1
-		player.InitializeCombatant(self)
+		player.AssignCombatArea(self)
 		combatRoundParticipants.append(player)
 	for enemy : BaseCharacter in enemies:
 		enemy.main_status_bar.visible = true
 		enemy.currentActionPoints = enemy.maxActionPoints
-		enemy.InitializeCombatant(self)
+		enemy.AssignCombatArea(self)
 		combatRoundParticipants.append(enemy)
 	if currentlyActiveGrenade:
 		var indexToInsert = activeGrenadesBackupIndex + 1
@@ -113,8 +113,8 @@ func TakeTurn(actor):
 func RemoveCombatantFromRound(actor : BaseCharacter):
 	combatRoundParticipants.erase(actor)
 	#only one has an effect. max array size is like 5, usually 3
-	GameManager.current_players.erase(actor)
-	GameManager.current_enemies.erase(actor)
+	game_manager.current_players.erase(actor)
+	game_manager.current_enemies.erase(actor)
 	
 func RegisterGrenade(grenade : Grenade, combatant : BaseCharacter):
 	currentlyActiveGrenade = grenade
@@ -151,6 +151,7 @@ func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		disconnect("body_entered", _on_body_entered,)
 		body.isInputDisabled = true
-		body.HaltActions()
+		body.velocity = Vector2.ZERO
+		body.activeState = body.IDLE
 		#print(spawnAreas[0].moveTarget.name)
 		PlayCutscene()
