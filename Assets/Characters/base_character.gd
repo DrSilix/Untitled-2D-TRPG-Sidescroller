@@ -118,6 +118,9 @@ func CompleteChosenAction():
 func _on_action_completed():
 	print("Actions points: ", currentActionPoints)
 	highlight_yellow.visible = false
+	# this breaks the assumption from combatarea.CallNextCombatantToTakeTurn
+	# if someone has won. unlike the similar check there, this will check between
+	# actions of the same character
 	if not await currentCombatArea.CheckIfGameOver():
 		if currentActionPoints > 0:
 			ChooseCombatAction()

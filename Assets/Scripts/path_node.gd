@@ -25,7 +25,7 @@ func _ready():
 		path.add_point(Vector2.ZERO)
 		path.add_point(pnode.global_position - global_position)
 
-# >16 backwards
+# any movement >16 units in the x direction to the right is considered backwards
 func GetMoveToNode() -> PathNode:
 	var connectedNodesCombinedWeight : int = 0
 	# TODO: optimize this so that there isn't two similar loops through the path nodes
@@ -41,7 +41,6 @@ func GetMoveToNode() -> PathNode:
 		if pnode.position.x - position.x > 16: modifiedPnodeWeight += 2
 		counter -= MAX_NODE_WEIGHT - modifiedPnodeWeight
 		if counter <= 0: return pnode
-	print("crap")
 	return self
 
 
