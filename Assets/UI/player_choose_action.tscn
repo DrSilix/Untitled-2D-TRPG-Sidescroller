@@ -60,7 +60,7 @@ bg_color = Color(0.337255, 0.337255, 0.337255, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1aijj"]
 content_margin_left = 5.0
-bg_color = Color(0.305882, 0.305882, 0.305882, 1)
+bg_color = Color(0.772549, 0.772549, 0.772549, 1)
 border_width_left = 4
 border_width_bottom = 4
 border_color = Color(0.0862745, 0.0862745, 0.0862745, 1)

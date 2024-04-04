@@ -1,5 +1,5 @@
 class_name GameManager extends Node
-
+## stores common elements for global access and handles initializing the game
 @onready var rootNode := $".."
 
 @onready var player_spawn : Sprite2D = $"../PlayerSpawn"
@@ -21,7 +21,9 @@ var current_enemies : Array[BaseCharacter]
 func _ready():
 	await get_tree().create_timer(0.1).timeout
 	SpawnPlayers()
-	
+
+## Spawns the 3 players, two of which are immobile and hidden at the start of
+## the combat area
 func SpawnPlayers():
 	player_spawn_2.visible = false
 	player_spawn_3.visible = false
@@ -33,6 +35,8 @@ func SpawnPlayers():
 	camera_2d.position_smoothing_enabled = false
 	camera_2d.reparent.call_deferred(biker_player)
 	camera_2d.position = player_spawn.global_position
+	# This is necessary to snap the camera before the first frame render. Despite position
+	# smoothing being disabled without this the camera will smoothly pan to the character
 	await get_tree().create_timer(0.1).timeout
 	camera_2d.position_smoothing_enabled = true
 	current_players.append(biker_player)
