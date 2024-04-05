@@ -35,8 +35,12 @@ var _enemies : Array[BaseCharacter]
 var attackType : String
 var moveable_area : Area2D
 
-enum State {MAINMENU, ATTACKMENU, TARGETMENU, MOVEMENU}
+enum State {MAINMENU, ATTACKMENU, TARGETMENU, CONFIRMTARGETMENU, MOVEMENU}
 var currentState : State
+
+var _currentTarget : BaseCharacter
+var _currentTargetSelectableArea : Area2D
+var _currentTargetRedHighlight : NinePatchRect
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -105,7 +109,7 @@ func IsDisabledCheck():
 ##
 ## On any configuration but the main menu a cancel button is made visible in the upper
 ## right
-## [param state] enum representing the 4 possible menu configurations
+## [param state] enum representing the 5 possible menu configurations
 func ChangeMenuState(state : State):
 	main_menu.visible = false
 	sub_attack_menu.visible = false
@@ -123,10 +127,12 @@ func ChangeMenuState(state : State):
 		State.TARGETMENU:
 			PlayPositiveSound()
 			currentState = State.TARGETMENU
-			for enemy in _enemies:
-				print(enemy.name, " connected")
-				var clickArea := enemy.find_child("SelectableArea")
-				clickArea.connect("input_event", _on_enemy_select_input_event.bind(enemy))
+			ConnectToEnemies()
+			cancel_button.visible = true
+		State.CONFIRMTARGETMENU:
+			PlayPositiveSound()
+			currentState = State.CONFIRMTARGETMENU
+			DisconnectFromEnemies()
 			cancel_button.visible = true
 		State.MOVEMENU:
 			PlayPositiveSound()
@@ -142,24 +148,34 @@ func _on_cancel_pressed():
 		State.ATTACKMENU:
 			ChangeMenuState(State.MAINMENU)
 		State.TARGETMENU:
+			DisconnectFromEnemies()
 			ChangeMenuState(State.ATTACKMENU)
+		State.CONFIRMTARGETMENU:
+			_currentTargetSelectableArea.disconnect("input_event", _on_confirm_enemy_select_input_event)
+			ChangeMenuState(State.TARGETMENU)
 		State.MOVEMENU:
 			CancelMove()
 			ChangeMenuState(State.MAINMENU)
 
 ## Connects to each enemies selectable area to allow the user to click directly
-## on the enemy to select them
+## on the enemy to select them. Also activates red pusling highlight
 func ConnectToEnemies():
 	for enemy in _enemies:
 				print(enemy.name, " connected")
 				var clickArea := enemy.find_child("SelectableArea")
+				var redHighlight := enemy.find_child("HighlightRed")
+				redHighlight.visible = true
+				redHighlight.get_child(0).play("pulse")
 				clickArea.connect("input_event", _on_enemy_select_input_event.bind(enemy))
 
-## Disconnects the enemies from user input
+## Disconnects the enemies from user input and removes red pulsing highlight
 func DisconnectFromEnemies():
 	for enemy in _enemies:
 				print(enemy.name, " connected")
 				var clickArea := enemy.find_child("SelectableArea")
+				var redHighlight := enemy.find_child("HighlightRed")
+				redHighlight.visible = false
+				redHighlight.get_child(0).stop()
 				clickArea.disconnect("input_event", _on_enemy_select_input_event)
 
 #region button disabled checks
@@ -265,11 +281,25 @@ func _on_grenade_pressed():
 
 func _on_reload_pressed():
 	ActionChosen("reload", null)
-	
+
+# first step, activated on chose one enemy of those available
 func _on_enemy_select_input_event(_viewport, event : InputEvent, _shape_rid, enemy : BaseCharacter):
+	print(enemy.name)
 	if event.is_action_pressed("Move"):
-		DisconnectFromEnemies()
-		ActionChosen(attackType, enemy)
+		_currentTarget = enemy
+		_currentTargetSelectableArea = _currentTarget.find_child("SelectableArea")
+		_currentTargetRedHighlight = _currentTarget.find_child("HighlightRed")
+		ChangeMenuState(State.CONFIRMTARGETMENU)
+		_currentTargetRedHighlight.visible = true
+		_currentTargetSelectableArea.connect("input_event", _on_confirm_enemy_select_input_event)
+
+# second step, confirm the chosen enemy by selecting them again
+func _on_confirm_enemy_select_input_event(_viewport, event : InputEvent, _shape_rid):
+	if event.is_action_pressed("Move"):
+		_currentTargetRedHighlight.visible = false
+		_currentTargetSelectableArea.disconnect("input_event", _on_confirm_enemy_select_input_event)
+		ActionChosen(attackType, _currentTarget)
+		
 
 func PlayPositiveSound():
 	ui_sfx.stream = ui_positive

@@ -1589,7 +1589,7 @@ mouse_filter = 1
 
 [node name="PlayerSpawn" type="Sprite2D" parent="."]
 modulate = Color(0.2, 1, 0.0588235, 1)
-position = Vector2(201, 357)
+position = Vector2(729, 402)
 scale = Vector2(2, 2)
 skew = -0.773181
 texture = SubResource("AtlasTexture_btrtx")
