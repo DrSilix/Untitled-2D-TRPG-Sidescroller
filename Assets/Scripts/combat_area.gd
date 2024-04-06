@@ -91,13 +91,11 @@ func CombatRound():
 	_round += 1
 	numPlayersInCover = 0
 	for player : BaseCharacter in players:
-		player.main_status_bar.visible = true
 		player.currentActionPoints = player.maxActionPoints
 		if player.hasCover > 0: numPlayersInCover += 1
 		player.AssignCombatArea(self)
 		combatRoundParticipants.append(player)
 	for enemy : BaseCharacter in enemies:
-		enemy.main_status_bar.visible = true
 		enemy.currentActionPoints = enemy.maxActionPoints
 		enemy.AssignCombatArea(self)
 		combatRoundParticipants.append(enemy)

@@ -262,6 +262,7 @@ func TakeCover():
 	hasCover += 1
 	if hasCover > 1: return
 	print("Taking cover")
+	# TODO: make it so cover icon only shows while in combat
 	cover_icon.visible = true
 	cover_icon.self_modulate.a = 0
 	var tween = get_tree().create_tween()

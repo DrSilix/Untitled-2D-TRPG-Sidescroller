@@ -1,6 +1,8 @@
 extends BaseCharacter
 ## Inherits base character and provides more specific mechanisms for Players
 ## that are controlled by user input
+const MOUSE_MOVE_CHECK_FREQ = 30
+
 @export var isOverworldControllable = false;
 
 @onready var player_choose_action_menu := $/root/Node2D/CanvasLayer/PlayerChooseAction
@@ -8,6 +10,7 @@ extends BaseCharacter
 
 # TODO: this may be redundant, the connected area has the same effect
 var isInputDisabled = false
+var _mouseMoveCheckCounter = MOUSE_MOVE_CHECK_FREQ
 
 func _ready():
 	ConnectToMovableArea()
@@ -80,6 +83,14 @@ func Die():
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if !isInputDisabled:
+		if event is InputEventMouseMotion:
+			var mm = event as InputEventMouseMotion
+			if mm.button_mask == 1 && _mouseMoveCheckCounter <= 0:
+				_mouseMoveCheckCounter = MOUSE_MOVE_CHECK_FREQ
+				print((event as InputEventMouseMotion).position)
+				MoveTo(get_canvas_transform().affine_inverse() * event.position)
+			elif mm.button_mask == 1:
+				_mouseMoveCheckCounter -= 1
 		if event.is_action_pressed("Move"):
 			print(get_canvas_transform().affine_inverse() * event.position)
 			MoveTo(get_canvas_transform().affine_inverse() * event.position)

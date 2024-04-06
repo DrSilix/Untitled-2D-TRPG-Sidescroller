@@ -284,7 +284,6 @@ func _on_reload_pressed():
 
 # first step, activated on chose one enemy of those available
 func _on_enemy_select_input_event(_viewport, event : InputEvent, _shape_rid, enemy : BaseCharacter):
-	print(enemy.name)
 	if event.is_action_pressed("Move"):
 		_currentTarget = enemy
 		_currentTargetSelectableArea = _currentTarget.find_child("SelectableArea")
