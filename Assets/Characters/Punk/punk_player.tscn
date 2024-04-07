@@ -3812,6 +3812,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
 script = ExtResource("1_7j6cw")
+characterAlias = "Punk"
 moveSpeed = 8
 maxHealth = 7
 armor = 9

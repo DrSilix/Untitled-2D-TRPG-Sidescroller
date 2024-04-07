@@ -6,6 +6,7 @@ signal turn_finished(nextCombatant, prevCombatant)
 
 @onready var stop_ = $"../CanvasLayer/Stop!"
 @onready var game_manager := $/root/Node2D/GameManager
+@onready var hud: Control = $"../CanvasLayer/HUD"
 
 var camera_2d : Camera2D
 
@@ -69,6 +70,8 @@ func PlayCutscene():
 ## the controllable player is also disconnected from world move input and status
 ## bars are displayed above actors heads
 func BeginCombat():
+	hud.visible = true
+	hud.ResetHUD()
 	print("Beginning Combat")
 	_round = 1
 	game_manager.current_enemies = enemies
@@ -116,6 +119,7 @@ func CombatRound():
 ## will eventually call this method again. When no more actors are in the queue
 ## the next round is initiated
 func CallNextCombatantToTakeTurn():
+	hud.ResetHUD()
 	# this is a check that intentionally breaks the loop if someone won/lost.
 	if players.size() == 0 or enemies.size() == 0:
 		return

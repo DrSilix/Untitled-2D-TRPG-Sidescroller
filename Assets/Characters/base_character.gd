@@ -4,6 +4,7 @@ extends CharacterBody2D
 signal action_finished
 signal move_completed
 #region variables
+@export var characterAlias : String = "unassigned"
 @export var moveSpeed : int = 6
 @export var maxHealth : int = 9
 @export var armor : int = 10

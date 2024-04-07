@@ -3420,6 +3420,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0872665
 safe_margin = 2.0
 script = ExtResource("1_nld74")
+characterAlias = "Cyborg"
 maxHealth = 10
 armor = 12
 weaponDamage = 5

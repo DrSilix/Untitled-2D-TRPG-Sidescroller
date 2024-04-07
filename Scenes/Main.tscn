@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://cpg77cqx30nsl"]
+[gd_scene load_steps=71 format=3 uid="uid://cpg77cqx30nsl"]
 
 [ext_resource type="Texture2D" uid="uid://b10uwb5ip21r2" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/1.png" id="2_csmr8"]
 [ext_resource type="Texture2D" uid="uid://wq1li38o07jt" path="res://Assets/Spritesheets/Sourcefiles/chinese-street-tileset-pixel-art/2 Background/Day/2.png" id="3_ywchf"]
@@ -48,6 +48,7 @@
 [ext_resource type="AudioStream" uid="uid://bmcnd8yj0v8v7" path="res://Assets/Audio/Sourcefiles/Ace Buchannon - For The Unbroken.ogg" id="47_oqxrk"]
 [ext_resource type="PackedScene" uid="uid://x1j2btwuvqub" path="res://Assets/UI/player_choose_action.tscn" id="48_6fmxg"]
 [ext_resource type="Script" path="res://Assets/Scripts/game_manager.gd" id="48_s32lj"]
+[ext_resource type="FontFile" uid="uid://rk5ygevjqcej" path="res://Assets/UI/Fonts/superstar_memesbruh03.ttf" id="49_k0lmn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ldg06"]
 vertices = PackedVector2Array(275, 443, 421, 432, 895, 431, 933, 431, 1288, 443, 903, 360, 1011, 369, 973, 369, 713, 366, 871, 360, 539, 401, 1187, 391, 1209, 391, 933, 414, 895, 414, 870, 390, 836, 391, 1209, 376, 1187, 376, 903, 344, 1288, 325, 356, 432, 275, 427, 356, 416, 1011, 386, 713, 349, 871, 344, 488, 383, 488, 399, 421, 415, 384, 415, 161, 391, 161, 376, 251, 358, 289, 358, 507, 376, 289, 342, 629, 350, 629, 366, 529, 376, 501, 401, 69, 325, 676, 349, 676, 350, 973, 371, 954, 371, 991, 387, 991, 386, 778, 388, 798, 388, 798, 391, 836, 390, 539, 385, 778, 374, 529, 385, 507, 383, 501, 399, 384, 416, 266, 427, 266, 424, 219, 440, 249, 440, 249, 443, 68, 443, 219, 424, 139, 391, 251, 342, 139, 376, 870, 374, 954, 387)
@@ -127,6 +128,27 @@ region = Rect2(52, 452, 8, 8)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxwgc"]
 radius = 40.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqfug"]
+content_margin_left = 5.0
+bg_color = Color(0.772549, 0.772549, 0.772549, 1)
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4pqm"]
+content_margin_left = 5.0
+bg_color = Color(0.435294, 0.435294, 0.435294, 1)
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6w8ca"]
+content_margin_left = 5.0
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_btrtx"]
 atlas = ExtResource("40_m8kxh")
@@ -1586,6 +1608,35 @@ mouse_filter = 1
 [node name="PlayerChooseAction" parent="CanvasLayer" instance=ExtResource("48_6fmxg")]
 visible = false
 mouse_filter = 1
+
+[node name="CancelButton" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Cancel" type="Button" parent="CanvasLayer/CancelButton"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 95.0
+scale = Vector2(1.2, 1)
+theme_override_colors/font_color = Color(0.160784, 0.160784, 0.160784, 1)
+theme_override_colors/font_pressed_color = Color(0.160784, 0.160784, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.160784, 0.160784, 0.160784, 1)
+theme_override_colors/font_focus_color = Color(0.160784, 0.160784, 0.160784, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.160784, 0.160784, 0.160784, 1)
+theme_override_colors/font_disabled_color = Color(0.160784, 0.160784, 0.160784, 1)
+theme_override_colors/font_outline_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("49_k0lmn")
+theme_override_font_sizes/font_size = 54
+theme_override_styles/normal = SubResource("StyleBoxFlat_kqfug")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kqfug")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b4pqm")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_6w8ca")
+theme_override_styles/focus = SubResource("StyleBoxFlat_kqfug")
+text = "☰"
+text_overrun_behavior = 1
 
 [node name="PlayerSpawn" type="Sprite2D" parent="."]
 modulate = Color(0.2, 1, 0.0588235, 1)

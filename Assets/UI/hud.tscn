@@ -1,53 +1,74 @@
-[gd_scene load_steps=16 format=3 uid="uid://bbbpdf2yli53k"]
+[gd_scene load_steps=27 format=3 uid="uid://bbbpdf2yli53k"]
 
-[ext_resource type="Texture2D" uid="uid://ddfcsuakgrrp" path="res://Assets/UI/Sourcefiles/CBUI/CyberpunkUI.png" id="1_sxhih"]
+[ext_resource type="Script" path="res://Assets/UI/hud.gd" id="1_gecaf"]
 [ext_resource type="FontFile" uid="uid://rk5ygevjqcej" path="res://Assets/UI/Fonts/superstar_memesbruh03.ttf" id="2_pla1m"]
+[ext_resource type="Texture2D" uid="uid://h7rgm0xmgf8c" path="res://Assets/Sprites/Sourcefiles/sheild-32.png" id="3_g4f01"]
+[ext_resource type="Texture2D" uid="uid://dxq3u4h8w3xyj" path="res://Assets/Sprites/Sourcefiles/crosshair-32.png" id="4_kmrx1"]
+[ext_resource type="Texture2D" uid="uid://c42ym0pkh7vfw" path="res://Assets/Sprites/Sourcefiles/bullet-32.png" id="5_68i7l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aggfx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4naw6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p2pgl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mji4l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5b1c"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aes8k"]
 load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m0lmh"]
 atlas = SubResource("CompressedTexture2D_aes8k")
-region = Rect2(352, 290, 16, 12)
+region = Rect2(352, 274, 48, 11)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kxlr6"]
 texture = SubResource("AtlasTexture_m0lmh")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lp7ky"]
-atlas = ExtResource("1_sxhih")
-region = Rect2(368, 130, 16, 12)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_os5dc"]
+load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_afd7u"]
-texture = SubResource("AtlasTexture_lp7ky")
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7bnm"]
+atlas = SubResource("CompressedTexture2D_os5dc")
+region = Rect2(353, 363, 46, 3)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_41gti"]
-atlas = ExtResource("1_sxhih")
-region = Rect2(384, 130, 15, 12)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b1i70"]
-texture = SubResource("AtlasTexture_41gti")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mxt0o"]
+texture = SubResource("AtlasTexture_g7bnm")
 
 [sub_resource type="LabelSettings" id="LabelSettings_0dspq"]
 line_spacing = 0.0
 font = ExtResource("2_pla1m")
 font_size = 28
 
-[sub_resource type="LabelSettings" id="LabelSettings_7vtj7"]
+[sub_resource type="LabelSettings" id="LabelSettings_pnbwu"]
 line_spacing = 0.0
 font = ExtResource("2_pla1m")
-font_size = 18
+font_size = 46
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kinyf"]
-bg_color = Color(0.301961, 0.301961, 0.301961, 1)
+bg_color = Color(0.870588, 0.207843, 0.188235, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jm31u"]
-bg_color = Color(0.568627, 0.858824, 0.411765, 1)
+bg_color = Color(0.576471, 0.858824, 0.411765, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w087p"]
 bg_color = Color(0.301961, 0.301961, 0.301961, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tatk0"]
 bg_color = Color(1, 0.858824, 0.411765, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h35nr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oiomm"]
+bg_color = Color(1, 0.894118, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imoh8"]
+atlas = SubResource("CompressedTexture2D_aes8k")
+region = Rect2(353, 305, 46, 14)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fujnc"]
+texture = SubResource("AtlasTexture_imoh8")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -56,84 +77,80 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gecaf")
 
-[node name="BikerNameplate" type="Control" parent="."]
+[node name="AttackerInfoPanel" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 0
-offset_top = -1.0
-offset_right = 183.0
-offset_bottom = 39.0
+offset_left = 225.0
+offset_right = 408.0
+offset_bottom = 40.0
 scale = Vector2(1.7, 1.7)
 
-[node name="Panel" type="Panel" parent="BikerNameplate"]
-self_modulate = Color(1, 1, 1, 0.862745)
+[node name="ClickableArea" type="Button" parent="AttackerInfoPanel"]
 layout_mode = 0
-offset_right = 40.0
+offset_right = 180.0
 offset_bottom = 40.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_aggfx")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4naw6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_p2pgl")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mji4l")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t5b1c")
+
+[node name="Panel4" type="Panel" parent="AttackerInfoPanel"]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 32.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_kxlr6")
 
-[node name="Panel2" type="Panel" parent="BikerNameplate"]
-self_modulate = Color(1, 1, 1, 0.862745)
+[node name="Panel5" type="Panel" parent="AttackerInfoPanel"]
 layout_mode = 0
-offset_left = 40.0
-offset_right = 154.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_afd7u")
+offset_left = 21.1764
+offset_top = 31.7647
+offset_right = 161.176
+offset_bottom = 41.7647
+theme_override_styles/panel = SubResource("StyleBoxTexture_mxt0o")
 
-[node name="Panel3" type="Panel" parent="BikerNameplate"]
-self_modulate = Color(1, 1, 1, 0.862745)
+[node name="Name" type="Label" parent="AttackerInfoPanel"]
 layout_mode = 0
-offset_left = 153.529
-offset_right = 194.529
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_b1i70")
-
-[node name="Label" type="Label" parent="BikerNameplate"]
-layout_mode = 0
-offset_left = 10.7385
-offset_top = 11.7817
-offset_right = 73.7385
-offset_bottom = 34.7817
+offset_left = 14.1176
+offset_top = 3.52941
+offset_right = 82.1176
+offset_bottom = 31.5294
+scale = Vector2(0.5, 0.5)
 text = "Biker"
 label_settings = SubResource("LabelSettings_0dspq")
 
-[node name="Label2" type="Label" parent="BikerNameplate"]
+[node name="Label8" type="Label" parent="AttackerInfoPanel"]
 layout_mode = 0
-offset_left = 93.7392
-offset_top = 12.0065
-offset_right = 111.739
-offset_bottom = 31.0065
-text = "AP"
-label_settings = SubResource("LabelSettings_7vtj7")
+offset_left = 78.824
+offset_top = 32.9628
+offset_right = 187.824
+offset_bottom = 79.9628
+scale = Vector2(0.2, 0.2)
+text = "Stats"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
 
-[node name="Label3" type="Label" parent="BikerNameplate"]
+[node name="HealthBar" type="ProgressBar" parent="AttackerInfoPanel"]
 layout_mode = 0
-offset_left = 93.7392
-offset_top = 23.5511
-offset_right = 147.739
-offset_bottom = 42.5511
-text = "Ammo: 6"
-label_settings = SubResource("LabelSettings_7vtj7")
-
-[node name="ProgressBar" type="ProgressBar" parent="BikerNameplate"]
-layout_mode = 0
-offset_left = 11.4578
-offset_top = 4.15608
-offset_right = 171.458
-offset_bottom = 11.1561
+offset_left = 12.3529
+offset_top = 20.5882
+offset_right = 167.353
+offset_bottom = 28.5882
 theme_override_font_sizes/font_size = 10
 theme_override_styles/background = SubResource("StyleBoxFlat_kinyf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jm31u")
 step = 1.0
-value = 48.0
+value = 50.0
 show_percentage = false
 
-[node name="ProgressBar2" type="ProgressBar" parent="BikerNameplate"]
+[node name="APBar" type="ProgressBar" parent="AttackerInfoPanel"]
 layout_mode = 0
-offset_left = 112.955
-offset_top = 16.8616
-offset_right = 182.955
-offset_bottom = 24.8616
+offset_left = 62.9411
+offset_top = 6.47059
+offset_right = 92.9411
+offset_bottom = 14.4706
 theme_override_font_sizes/font_size = 10
 theme_override_styles/background = SubResource("StyleBoxFlat_w087p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tatk0")
@@ -142,118 +159,300 @@ step = 1.0
 value = 6.0
 show_percentage = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BikerNameplate/ProgressBar2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="BikerNameplate/ProgressBar2/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="AttackerInfoPanel/APBar"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
+offset_left = 13.5294
+offset_right = 15.5294
+offset_bottom = 8.0
 color = Color(0.301961, 0.301961, 0.301961, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="BikerNameplate/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
+[node name="CoverIcon" type="TextureRect" parent="AttackerInfoPanel"]
+modulate = Color(0.568627, 1, 0.494118, 1)
+offset_left = 95.8823
+offset_top = -1.17647
+offset_right = 119.882
+offset_bottom = 22.8235
+texture = ExtResource("3_g4f01")
+expand_mode = 1
 
-[node name="ColorRect3" type="ColorRect" parent="BikerNameplate/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
+[node name="AimIcon" type="TextureRect" parent="AttackerInfoPanel"]
+self_modulate = Color(0.568627, 1, 0.494118, 1)
+offset_left = 115.294
+offset_top = -1.17647
+offset_right = 139.294
+offset_bottom = 22.8235
+texture = ExtResource("4_kmrx1")
+expand_mode = 1
 
-[node name="ColorRect4" type="ColorRect" parent="BikerNameplate/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
+[node name="AmmoIcon" type="TextureRect" parent="AttackerInfoPanel"]
+self_modulate = Color(0.054902, 0.0431373, 0, 1)
+clip_children = 2
+offset_left = 132.353
+offset_top = -1.17647
+offset_right = 156.353
+offset_bottom = 22.8235
+texture = ExtResource("5_68i7l")
+expand_mode = 1
 
-[node name="ColorRect5" type="ColorRect" parent="BikerNameplate/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
+[node name="AmmoBar" type="ProgressBar" parent="AttackerInfoPanel/AmmoIcon"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.025
+offset_right = 49.0
+offset_bottom = 35.44
+scale = Vector2(0.5, 0.5)
+theme_override_styles/background = SubResource("StyleBoxEmpty_h35nr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oiomm")
+step = 1.0
+value = 100.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Nameplate2" type="Control" parent="."]
-layout_mode = 3
+[node name="ColorRect" type="ColorRect" parent="AttackerInfoPanel"]
+layout_mode = 0
+offset_left = 24.1176
+offset_top = 31.1765
+offset_right = 158.118
+offset_bottom = 33.1765
+color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+
+[node name="Stats" type="Control" parent="AttackerInfoPanel"]
+visible = false
 anchors_preset = 0
-offset_top = 69.0
-offset_right = 183.0
-offset_bottom = 109.0
+offset_left = -1.52588e-05
+offset_top = 31.1765
+offset_right = 40.0
+offset_bottom = 71.1765
+
+[node name="Panel4" type="Panel" parent="AttackerInfoPanel/Stats"]
+offset_top = -4.70588
+offset_right = 180.0
+offset_bottom = 61.9291
+theme_override_styles/panel = SubResource("StyleBoxTexture_fujnc")
+
+[node name="label1" type="Label" parent="AttackerInfoPanel/Stats"]
+layout_mode = 0
+offset_left = 5.88235
+offset_top = 1.78169
+offset_right = 117.882
+offset_bottom = 142.782
+scale = Vector2(0.25, 0.28)
+text = "
+skill
+dmg
+acc"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
+
+[node name="data1" type="Label" parent="AttackerInfoPanel/Stats"]
+layout_mode = 0
+offset_left = 7.0589
+offset_top = 1.78169
+offset_right = 171.059
+offset_bottom = 189.782
+scale = Vector2(0.25, 0.28)
+text = "
+12
+6
+5"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
+
+[node name="title1" type="Label" parent="AttackerInfoPanel/Stats"]
+layout_mode = 0
+offset_left = 6.47061
+offset_top = 1.78169
+offset_right = 170.471
+offset_bottom = 189.782
+scale = Vector2(0.25, 0.28)
+text = "weapon"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 1
+
+[node name="label2" type="Label" parent="AttackerInfoPanel/Stats"]
+layout_mode = 0
+offset_left = 57.6468
+offset_top = 1.78169
+offset_right = 192.647
+offset_bottom = 189.782
+scale = Vector2(0.25, 0.28)
+text = "health
+wound
+armor
+speed"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
+
+[node name="data2" type="Label" parent="AttackerInfoPanel/Stats"]
+layout_mode = 0
+offset_left = 92.9407
+offset_top = 1.78169
+offset_right = 191.941
+offset_bottom = 189.782
+scale = Vector2(0.25, 0.28)
+text = "10/10
+-2
+10
+6"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
+
+[node name="label3" type="Label" parent="AttackerInfoPanel/Stats"]
+layout_mode = 0
+offset_left = 121.765
+offset_top = 1.7647
+offset_right = 245.765
+offset_bottom = 189.765
+scale = Vector2(0.25, 0.28)
+text = "cover
+aim
+ammo
+gren"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
+
+[node name="data3" type="Label" parent="AttackerInfoPanel/Stats"]
+layout_mode = 0
+offset_left = 155.882
+offset_top = 1.78169
+offset_right = 230.882
+offset_bottom = 142.782
+scale = Vector2(0.25, 0.28)
+text = "yes
++4
+6/6
+1"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="AttackerInfoPanel/Stats"]
+layout_mode = 0
+offset_left = 49.4116
+offset_top = 1.76472
+offset_right = 52.4116
+offset_bottom = 54.0297
+color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="AttackerInfoPanel/Stats"]
+layout_mode = 0
+offset_left = 118.235
+offset_top = 1.76472
+offset_right = 121.235
+offset_bottom = 54.0297
+color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[node name="DefenderInfoPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 776.0
+offset_right = 959.0
+offset_bottom = 40.0
 scale = Vector2(1.7, 1.7)
 
-[node name="Panel" type="Panel" parent="Nameplate2"]
-self_modulate = Color(1, 1, 1, 0.862745)
+[node name="Panel4" type="Panel" parent="DefenderInfoPanel"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 180.0
+offset_bottom = 32.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_kxlr6")
 
-[node name="Panel2" type="Panel" parent="Nameplate2"]
-self_modulate = Color(1, 1, 1, 0.862745)
+[node name="Panel5" type="Panel" parent="DefenderInfoPanel"]
+visible = false
 layout_mode = 0
-offset_left = 40.0
-offset_right = 154.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_afd7u")
+offset_left = 21.1764
+offset_top = 31.7647
+offset_right = 161.176
+offset_bottom = 41.7647
+theme_override_styles/panel = SubResource("StyleBoxTexture_mxt0o")
 
-[node name="Panel3" type="Panel" parent="Nameplate2"]
-self_modulate = Color(1, 1, 1, 0.862745)
+[node name="Name" type="Label" parent="DefenderInfoPanel"]
 layout_mode = 0
-offset_left = 153.529
-offset_right = 194.529
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_b1i70")
-
-[node name="Label" type="Label" parent="Nameplate2"]
-layout_mode = 0
-offset_left = 10.7385
-offset_top = 11.7817
-offset_right = 73.7385
-offset_bottom = 34.7817
-text = "Punk"
+offset_left = 14.1176
+offset_top = 3.52941
+offset_right = 82.1176
+offset_bottom = 31.5294
+scale = Vector2(0.5, 0.5)
+text = "Biker"
 label_settings = SubResource("LabelSettings_0dspq")
 
-[node name="Label2" type="Label" parent="Nameplate2"]
+[node name="Label8" type="Label" parent="DefenderInfoPanel"]
 layout_mode = 0
-offset_left = 93.7392
-offset_top = 12.0065
-offset_right = 111.739
-offset_bottom = 31.0065
-text = "AP"
-label_settings = SubResource("LabelSettings_7vtj7")
+offset_left = 98.8235
+offset_top = 2.35294
+offset_right = 213.823
+offset_bottom = 49.353
+scale = Vector2(0.2, 0.2)
+text = "Range"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
 
-[node name="Label3" type="Label" parent="Nameplate2"]
+[node name="ColorRect" type="ColorRect" parent="DefenderInfoPanel"]
 layout_mode = 0
-offset_left = 93.7392
-offset_top = 23.5511
-offset_right = 147.739
-offset_bottom = 42.5511
-text = "Ammo: 6"
-label_settings = SubResource("LabelSettings_7vtj7")
+offset_left = 99.5884
+offset_top = 10.0002
+offset_right = 119.588
+offset_bottom = 11.0002
 
-[node name="ProgressBar" type="ProgressBar" parent="Nameplate2"]
+[node name="Range" type="Label" parent="DefenderInfoPanel"]
 layout_mode = 0
-offset_left = 11.4578
-offset_top = 4.15608
-offset_right = 171.458
-offset_bottom = 11.1561
+offset_left = 91.1764
+offset_top = 11.1765
+offset_right = 284.176
+offset_bottom = 58.1765
+scale = Vector2(0.2, 0.2)
+text = "MEDIUM(-2)"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 1
+
+[node name="Label11" type="Label" parent="DefenderInfoPanel"]
+layout_mode = 0
+offset_left = 134.706
+offset_top = 2.35294
+offset_right = 272.706
+offset_bottom = 49.353
+scale = Vector2(0.2, 0.2)
+text = "Chance"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
+
+[node name="ColorRect2" type="ColorRect" parent="DefenderInfoPanel"]
+layout_mode = 0
+offset_left = 137.824
+offset_top = 10.0002
+offset_right = 157.824
+offset_bottom = 11.0002
+
+[node name="Chance" type="Label" parent="DefenderInfoPanel"]
+layout_mode = 0
+offset_left = 137.059
+offset_top = 10.5882
+offset_right = 252.059
+offset_bottom = 57.5883
+scale = Vector2(0.2, 0.2)
+text = "39%"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="DefenderInfoPanel"]
+layout_mode = 0
+offset_left = 12.3529
+offset_top = 20.5882
+offset_right = 167.353
+offset_bottom = 28.5882
 theme_override_font_sizes/font_size = 10
 theme_override_styles/background = SubResource("StyleBoxFlat_kinyf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jm31u")
 step = 1.0
-value = 48.0
+value = 50.0
 show_percentage = false
 
-[node name="ProgressBar2" type="ProgressBar" parent="Nameplate2"]
+[node name="ProgressBar2" type="ProgressBar" parent="DefenderInfoPanel"]
+visible = false
 layout_mode = 0
-offset_left = 112.955
-offset_top = 16.8616
-offset_right = 182.955
-offset_bottom = 24.8616
+offset_left = 62.9411
+offset_top = 6.47059
+offset_right = 92.9411
+offset_bottom = 14.4706
 theme_override_font_sizes/font_size = 10
 theme_override_styles/background = SubResource("StyleBoxFlat_w087p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tatk0")
@@ -262,157 +461,181 @@ step = 1.0
 value = 6.0
 show_percentage = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Nameplate2/ProgressBar2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="Nameplate2/ProgressBar2/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="DefenderInfoPanel/ProgressBar2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
+offset_left = 13.5294
+offset_right = 15.5294
+offset_bottom = 8.0
 color = Color(0.301961, 0.301961, 0.301961, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="Nameplate2/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
+[node name="CoverIcon" type="TextureRect" parent="DefenderInfoPanel"]
+modulate = Color(0.568627, 1, 0.494118, 1)
+offset_left = 66.4706
+offset_top = -1.176
+offset_right = 90.4706
+offset_bottom = 22.824
+texture = ExtResource("3_g4f01")
+expand_mode = 1
 
-[node name="ColorRect3" type="ColorRect" parent="Nameplate2/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
+[node name="AimIcon" type="TextureRect" parent="DefenderInfoPanel"]
+visible = false
+self_modulate = Color(0.568627, 1, 0.494118, 1)
+offset_left = 118.235
+offset_top = -1.17647
+offset_right = 142.235
+offset_bottom = 22.8235
+texture = ExtResource("4_kmrx1")
+expand_mode = 1
 
-[node name="ColorRect4" type="ColorRect" parent="Nameplate2/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
+[node name="AmmoIcon" type="TextureRect" parent="DefenderInfoPanel"]
+visible = false
+self_modulate = Color(0.054902, 0.0431373, 0, 1)
+clip_children = 2
+offset_left = 140.588
+offset_top = -1.17647
+offset_right = 164.588
+offset_bottom = 22.8235
+texture = ExtResource("5_68i7l")
+expand_mode = 1
 
-[node name="ColorRect5" type="ColorRect" parent="Nameplate2/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
+[node name="AmmoBar" type="ProgressBar" parent="DefenderInfoPanel/AmmoIcon"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.025
+offset_right = 49.0
+offset_bottom = 35.44
+scale = Vector2(0.5, 0.5)
+theme_override_styles/background = SubResource("StyleBoxEmpty_h35nr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oiomm")
+step = 1.0
+value = 100.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Nameplate3" type="Control" parent="."]
-layout_mode = 3
+[node name="stats" type="Control" parent="DefenderInfoPanel"]
+visible = false
 anchors_preset = 0
-offset_top = 138.0
-offset_right = 183.0
-offset_bottom = 178.0
-scale = Vector2(1.7, 1.7)
-
-[node name="Panel" type="Panel" parent="Nameplate3"]
-self_modulate = Color(1, 1, 1, 0.862745)
-layout_mode = 0
+offset_left = -1.52588e-05
+offset_top = 31.1765
 offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_kxlr6")
+offset_bottom = 71.1765
 
-[node name="Panel2" type="Panel" parent="Nameplate3"]
-self_modulate = Color(1, 1, 1, 0.862745)
+[node name="Panel4" type="Panel" parent="DefenderInfoPanel/stats"]
+offset_top = -4.70588
+offset_right = 180.0
+offset_bottom = 61.9291
+theme_override_styles/panel = SubResource("StyleBoxTexture_fujnc")
+
+[node name="label1" type="Label" parent="DefenderInfoPanel/stats"]
 layout_mode = 0
-offset_left = 40.0
-offset_right = 154.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_afd7u")
+offset_left = 5.88235
+offset_top = 1.78169
+offset_right = 117.882
+offset_bottom = 142.782
+scale = Vector2(0.25, 0.28)
+text = "
+skill
+dmg
+acc"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
 
-[node name="Panel3" type="Panel" parent="Nameplate3"]
-self_modulate = Color(1, 1, 1, 0.862745)
+[node name="data1" type="Label" parent="DefenderInfoPanel/stats"]
 layout_mode = 0
-offset_left = 153.529
-offset_right = 194.529
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_b1i70")
+offset_left = 6.47061
+offset_top = 1.78169
+offset_right = 170.471
+offset_bottom = 189.782
+scale = Vector2(0.25, 0.28)
+text = "
+12
+6
+5"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
 
-[node name="Label" type="Label" parent="Nameplate3"]
+[node name="title1" type="Label" parent="DefenderInfoPanel/stats"]
 layout_mode = 0
-offset_left = 10.7385
-offset_top = 11.7817
-offset_right = 73.7385
-offset_bottom = 34.7817
-text = "Cyber"
-label_settings = SubResource("LabelSettings_0dspq")
+offset_left = 6.47061
+offset_top = 1.78169
+offset_right = 170.471
+offset_bottom = 189.782
+scale = Vector2(0.25, 0.28)
+text = "weapon"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="Nameplate3"]
+[node name="label2" type="Label" parent="DefenderInfoPanel/stats"]
 layout_mode = 0
-offset_left = 93.7392
-offset_top = 12.0065
-offset_right = 111.739
-offset_bottom = 31.0065
-text = "AP"
-label_settings = SubResource("LabelSettings_7vtj7")
+offset_left = 57.6468
+offset_top = 1.78169
+offset_right = 192.647
+offset_bottom = 189.782
+scale = Vector2(0.25, 0.28)
+text = "health
+wound
+armor
+speed"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
 
-[node name="Label3" type="Label" parent="Nameplate3"]
+[node name="data2" type="Label" parent="DefenderInfoPanel/stats"]
 layout_mode = 0
-offset_left = 93.7392
-offset_top = 23.5511
-offset_right = 147.739
-offset_bottom = 42.5511
-text = "Ammo: 6"
-label_settings = SubResource("LabelSettings_7vtj7")
+offset_left = 95.8819
+offset_top = 1.78169
+offset_right = 170.882
+offset_bottom = 189.782
+scale = Vector2(0.25, 0.28)
+text = "9/9
+-2
+10
+6"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="Nameplate3"]
+[node name="label3" type="Label" parent="DefenderInfoPanel/stats"]
 layout_mode = 0
-offset_left = 11.4578
-offset_top = 4.15608
-offset_right = 171.458
-offset_bottom = 11.1561
-theme_override_font_sizes/font_size = 10
-theme_override_styles/background = SubResource("StyleBoxFlat_kinyf")
-theme_override_styles/fill = SubResource("StyleBoxFlat_jm31u")
-step = 1.0
-value = 48.0
-show_percentage = false
+offset_left = 121.765
+offset_top = 1.7647
+offset_right = 245.765
+offset_bottom = 189.765
+scale = Vector2(0.25, 0.28)
+text = "cover
+aim
+ammo
+gren"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
 
-[node name="ProgressBar2" type="ProgressBar" parent="Nameplate3"]
+[node name="data3" type="Label" parent="DefenderInfoPanel/stats"]
 layout_mode = 0
-offset_left = 112.955
-offset_top = 16.8616
-offset_right = 182.955
-offset_bottom = 24.8616
-theme_override_font_sizes/font_size = 10
-theme_override_styles/background = SubResource("StyleBoxFlat_w087p")
-theme_override_styles/fill = SubResource("StyleBoxFlat_tatk0")
-max_value = 6.0
-step = 1.0
-value = 6.0
-show_percentage = false
+offset_left = 155.882
+offset_top = 1.78169
+offset_right = 230.882
+offset_bottom = 142.782
+scale = Vector2(0.25, 0.28)
+text = "yes
++4
+6/6
+1"
+label_settings = SubResource("LabelSettings_pnbwu")
+horizontal_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Nameplate3/ProgressBar2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-alignment = 1
+[node name="ColorRect" type="ColorRect" parent="DefenderInfoPanel/stats"]
+layout_mode = 0
+offset_left = 49.4116
+offset_top = 1.76472
+offset_right = 52.4116
+offset_bottom = 54.0297
+color = Color(0.180392, 0.180392, 0.180392, 1)
 
-[node name="ColorRect" type="ColorRect" parent="Nameplate3/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
+[node name="ColorRect2" type="ColorRect" parent="DefenderInfoPanel/stats"]
+layout_mode = 0
+offset_left = 118.235
+offset_top = 1.76472
+offset_right = 121.235
+offset_bottom = 54.0297
+color = Color(0.180392, 0.180392, 0.180392, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="Nameplate3/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="Nameplate3/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
-
-[node name="ColorRect4" type="ColorRect" parent="Nameplate3/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
-
-[node name="ColorRect5" type="ColorRect" parent="Nameplate3/ProgressBar2/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 1)
+[connection signal="pressed" from="AttackerInfoPanel/ClickableArea" to="." method="_on_clickable_area_gui_input"]
