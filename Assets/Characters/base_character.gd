@@ -340,7 +340,7 @@ func AttackTarget(target : BaseCharacter) -> int:
 ## [return int]: the distance penalty <= 0
 func CalculateDistancePenalty(target : BaseCharacter) -> int:
 	var distanceSquared = global_position.distance_squared_to(target.global_position)
-	print(floor(distanceSquared/15000) * -2, " - ", distanceSquared/15000)
+	#print(floor(distanceSquared/15000) * -2, " - ", distanceSquared/15000)
 	return floor(distanceSquared/15000) * -2
 
 ## Calculates attack toHit value which the defender must meet or beat to evade
@@ -359,6 +359,10 @@ func RollToHit(rangePenalty : int, skillOverride : int = 0, accOverride : int = 
 	var finalAcc = weaponAccuracy if accOverride <= 0 else accOverride
 	# TODO: move aimModifier into arguments for consistency
 	return min(RollUtil.GetRoll(finalSkill + getHealthBonus() + aimModifier + rangePenalty), finalAcc)
+
+func GetToHitDiceCount(rangePenalty : int, skillOverride : int = 0) -> int:
+	var finalSkill = weaponSkill if skillOverride <= 0 else skillOverride
+	return finalSkill + getHealthBonus() + aimModifier + rangePenalty
 
 ## Calculates the modified damage value which is the attack net hits (toHit - toAvoid)
 ## plus the weapon damage
@@ -382,6 +386,9 @@ func RollToAvoidAttack(penaltyFromAttacker : int) -> int:
 	return RollUtil.GetRoll(moveSpeed + getHealthBonus() \
 	+ penaltyFromAttacker - chanceToHitModifier)
 
+func GetToAvoidDiceCount(penaltyFromAttacker : int) -> int:
+	return moveSpeed + getHealthBonus() + penaltyFromAttacker - chanceToHitModifier
+
 ## Calculates a damage resist roll for absorbing incoming damage
 ##
 ## See [method RollUtil.GetRoll]
@@ -391,6 +398,9 @@ func RollToAvoidAttack(penaltyFromAttacker : int) -> int:
 ## [return int]: a number representing this ones ability to resist damage
 func RollToResistDamage() -> int:
 	return RollUtil.GetRoll(armor + getHealthBonus())
+
+func GetToResistDiceCount() -> int:
+	return armor + getHealthBonus()
 
 ## Applies incoming damage and activates hurt or death state which plays the animations
 ## When the hurt animation is finished a [method _on_action_completed] signal will be

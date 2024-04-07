@@ -1596,11 +1596,6 @@ shape = SubResource("CircleShape2D_sxwgc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("41_lftf4")]
-visible = false
-mouse_filter = 1
-metadata/_edit_lock_ = true
-
 [node name="Stop!" parent="CanvasLayer" instance=ExtResource("44_k18i6")]
 visible = false
 mouse_filter = 1
@@ -1608,6 +1603,10 @@ mouse_filter = 1
 [node name="PlayerChooseAction" parent="CanvasLayer" instance=ExtResource("48_6fmxg")]
 visible = false
 mouse_filter = 1
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("41_lftf4")]
+visible = false
+metadata/_edit_lock_ = true
 
 [node name="CancelButton" type="Control" parent="CanvasLayer"]
 layout_mode = 3

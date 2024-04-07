@@ -6,16 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://dxq3u4h8w3xyj" path="res://Assets/Sprites/Sourcefiles/crosshair-32.png" id="4_kmrx1"]
 [ext_resource type="Texture2D" uid="uid://c42ym0pkh7vfw" path="res://Assets/Sprites/Sourcefiles/bullet-32.png" id="5_68i7l"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aggfx"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4naw6"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p2pgl"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mji4l"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5b1c"]
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aes8k"]
 load_path = "res://.godot/imported/CyberpunkUI.png-b980f83f02ea610e088c9fde2e9968ca.ctex"
 
@@ -70,6 +60,16 @@ region = Rect2(353, 305, 46, 14)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fujnc"]
 texture = SubResource("AtlasTexture_imoh8")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aggfx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4naw6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p2pgl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mji4l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5b1c"]
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -77,6 +77,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_gecaf")
 
 [node name="AttackerInfoPanel" type="Control" parent="."]
@@ -86,21 +87,13 @@ offset_left = 225.0
 offset_right = 408.0
 offset_bottom = 40.0
 scale = Vector2(1.7, 1.7)
-
-[node name="ClickableArea" type="Button" parent="AttackerInfoPanel"]
-layout_mode = 0
-offset_right = 180.0
-offset_bottom = 40.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_aggfx")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_4naw6")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_p2pgl")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_mji4l")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_t5b1c")
+mouse_filter = 1
 
 [node name="Panel4" type="Panel" parent="AttackerInfoPanel"]
 layout_mode = 0
 offset_right = 180.0
 offset_bottom = 32.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_kxlr6")
 
 [node name="Panel5" type="Panel" parent="AttackerInfoPanel"]
@@ -109,6 +102,7 @@ offset_left = 21.1764
 offset_top = 31.7647
 offset_right = 161.176
 offset_bottom = 41.7647
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_mxt0o")
 
 [node name="Name" type="Label" parent="AttackerInfoPanel"]
@@ -224,11 +218,13 @@ offset_left = -1.52588e-05
 offset_top = 31.1765
 offset_right = 40.0
 offset_bottom = 71.1765
+mouse_filter = 1
 
 [node name="Panel4" type="Panel" parent="AttackerInfoPanel/Stats"]
 offset_top = -4.70588
 offset_right = 180.0
 offset_bottom = 61.9291
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_fujnc")
 
 [node name="label1" type="Label" parent="AttackerInfoPanel/Stats"]
@@ -342,6 +338,17 @@ offset_right = 121.235
 offset_bottom = 54.0297
 color = Color(0.180392, 0.180392, 0.180392, 1)
 
+[node name="ClickableArea" type="Button" parent="AttackerInfoPanel"]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 40.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_aggfx")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4naw6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_p2pgl")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mji4l")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t5b1c")
+
 [node name="DefenderInfoPanel" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 0
@@ -349,11 +356,13 @@ offset_left = 776.0
 offset_right = 959.0
 offset_bottom = 40.0
 scale = Vector2(1.7, 1.7)
+mouse_filter = 1
 
 [node name="Panel4" type="Panel" parent="DefenderInfoPanel"]
 layout_mode = 0
 offset_right = 180.0
 offset_bottom = 32.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_kxlr6")
 
 [node name="Panel5" type="Panel" parent="DefenderInfoPanel"]
@@ -363,6 +372,7 @@ offset_left = 21.1764
 offset_top = 31.7647
 offset_right = 161.176
 offset_bottom = 41.7647
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_mxt0o")
 
 [node name="Name" type="Label" parent="DefenderInfoPanel"]
@@ -525,6 +535,7 @@ offset_bottom = 71.1765
 offset_top = -4.70588
 offset_right = 180.0
 offset_bottom = 61.9291
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_fujnc")
 
 [node name="label1" type="Label" parent="DefenderInfoPanel/stats"]

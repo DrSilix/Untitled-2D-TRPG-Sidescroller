@@ -22,14 +22,15 @@ extends Control
 @onready var defender_health_bar: ProgressBar = $DefenderInfoPanel/HealthBar
 @onready var defender_cover_icon: TextureRect = $DefenderInfoPanel/CoverIcon
 
+var cachedChanceCalculations : Dictionary
 
 func _ready():
 	player_choose_action.connect("hud_combat_state_changed", _on_hud_state_change)
 
 func ResetHUD():
-	_on_hud_state_change(null, null)
+	_on_hud_state_change(null, null, "")
 	
-func _on_hud_state_change(attacker : BaseCharacter, defender : BaseCharacter):
+func _on_hud_state_change(attacker : BaseCharacter, defender : BaseCharacter, attackType : String):
 	if attacker:
 		attacker_info_panel.visible = true
 		attacker_name.text = attacker.characterAlias
@@ -41,7 +42,7 @@ func _on_hud_state_change(attacker : BaseCharacter, defender : BaseCharacter):
 		var badColor = Color("#d31f41")
 		attacker_aim_icon.self_modulate = goodColor if attacker.aimModifier > 0 else badColor
 		attacker_ammo_bar.value = ceil((attacker.currentWeaponAmmo as float / attacker.maxWeaponAmmo) * 100)
-		attacker_data_1.text = str(attacker.weaponSkill) + "\n" \
+		attacker_data_1.text = "\n" + str(attacker.weaponSkill) + "\n" \
 				+ str(attacker.weaponDamage) + "\n" \
 				+ str(attacker.weaponAccuracy)
 		attacker_data_2.text = str(attacker.currentHealth) + "/" + str(attacker.maxHealth) + "\n" \
@@ -71,15 +72,40 @@ func _on_hud_state_change(attacker : BaseCharacter, defender : BaseCharacter):
 		defender_range.text += "(" + str(distancePenalty) + ")"
 		defender_health_bar.value = ceil((defender.currentHealth as float / defender.maxHealth) * 100)
 		defender_cover_icon.visible = true if defender.hasCover > 0 else false
-		defender_chance.text = "40%"
+		var chanceToHitDefender = 0
+		if cachedChanceCalculations.has(defender.name):
+			print("found cached chance calc for " + defender.name)
+			chanceToHitDefender = cachedChanceCalculations[defender.name]
+		else:
+			print("creating cached chance calc for " + defender.name)
+			chanceToHitDefender = CalculateHitChance(attacker, defender, attackType)
+			cachedChanceCalculations[defender.name] = chanceToHitDefender
+		defender_chance.text = str(chanceToHitDefender) + "%"
 	else:
 		defender_info_panel.visible = false
 
-func _on_clickable_area_gui_input():
+func CalculateHitChance(attacker : BaseCharacter, defender : BaseCharacter, attackType : String) -> int:
+	var successCount = 0
+	for i in range(1000):
+		if TestForSingleAttackSuccess(attacker, defender, attackType):
+			successCount += 1
+	return successCount/10
+
+func TestForSingleAttackSuccess(attacker : BaseCharacter, defender : BaseCharacter, attackType : String) -> bool:
+	var toHit = attacker.RollToHit(attacker.CalculateDistancePenalty(defender))
+	var defenderToAvoidPenalty = 0 if attackType != "shootburst" else -2
+	var toAvoid = defender.RollToAvoidAttack(defenderToAvoidPenalty)
+	if toAvoid < toHit:
+		var damageToDeal = attacker.CalculateDamageToDeal(toHit - toAvoid)
+		var damageToResist = defender.RollToResistDamage()
+		if damageToResist < damageToDeal:
+			return true
+	return false
+
+func _on_clickable_area_gui_input() -> void:
 	if attacker_stats.visible:
 		attacker_stats.visible = false
 		attacker_clickable_area.size.y = 40
 	else:
 		attacker_stats.visible = true
 		attacker_clickable_area.size.y = 90
-		

@@ -1,7 +1,7 @@
 extends Control
 ## Handles player combat input
 signal action_chosen(action : String, data)
-signal hud_combat_state_changed(attacker : BaseCharacter, defender : BaseCharacter)
+signal hud_combat_state_changed(attacker : BaseCharacter, defender : BaseCharacter, attack : String)
 
 @export var ui_positive : AudioStreamWAV
 @export var ui_negative : AudioStreamWAV
@@ -60,7 +60,7 @@ func Initialize(character : BaseCharacter):
 	_character = character
 	moveable_area = _character.find_child("MovableArea")
 	_enemies = game_manager.current_enemies
-	hud_combat_state_changed.emit(character, null)
+	hud_combat_state_changed.emit(character, null, "")
 	ResetAllMenus()
 	BuildStatusInfo(character)
 	ChangeMenuState(State.MAINMENU)
@@ -133,7 +133,7 @@ func ChangeMenuState(state : State):
 			cancel_button.visible = true
 		State.CONFIRMTARGETMENU:
 			PlayPositiveSound()
-			hud_combat_state_changed.emit(_character, _currentTarget)
+			hud_combat_state_changed.emit(_character, _currentTarget, attackType)
 			currentState = State.CONFIRMTARGETMENU
 			DisconnectFromEnemies()
 			cancel_button.visible = true
@@ -154,7 +154,7 @@ func _on_cancel_pressed():
 			DisconnectFromEnemies()
 			ChangeMenuState(State.ATTACKMENU)
 		State.CONFIRMTARGETMENU:
-			hud_combat_state_changed.emit(_character, null)
+			hud_combat_state_changed.emit(_character, null, "")
 			_currentTargetSelectableArea.disconnect("input_event", _on_confirm_enemy_select_input_event)
 			ChangeMenuState(State.TARGETMENU)
 		State.MOVEMENU:
