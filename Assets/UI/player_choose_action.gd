@@ -71,6 +71,7 @@ func Initialize(character : BaseCharacter):
 ## [param data] generalized additional data needed to complete the chosen action
 func ActionChosen(action : String, data):
 	PlayPositiveSound()
+	#hud_combat_state_changed.emit(null, null, "")
 	ResetAllMenus()
 	visible = false
 	action_chosen.emit(action, data)
@@ -152,6 +153,7 @@ func _on_cancel_pressed():
 			ChangeMenuState(State.MAINMENU)
 		State.TARGETMENU:
 			DisconnectFromEnemies()
+			hud_combat_state_changed.emit(null, null, "")
 			ChangeMenuState(State.ATTACKMENU)
 		State.CONFIRMTARGETMENU:
 			hud_combat_state_changed.emit(_character, null, "")
@@ -175,7 +177,7 @@ func ConnectToEnemies():
 ## Disconnects the enemies from user input and removes red pulsing highlight
 func DisconnectFromEnemies():
 	for enemy in _enemies:
-				print(enemy.name, " connected")
+				print(enemy.name, " disconnected")
 				var clickArea := enemy.find_child("SelectableArea")
 				var redHighlight := enemy.find_child("HighlightRed")
 				redHighlight.visible = false

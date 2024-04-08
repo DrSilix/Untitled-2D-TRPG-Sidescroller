@@ -31,6 +31,10 @@ func ResetHUD():
 	_on_hud_state_change(null, null, "")
 	
 func _on_hud_state_change(attacker : BaseCharacter, defender : BaseCharacter, attackType : String):
+	if not attacker and not defender:
+		attacker_info_panel.visible = false
+		defender_info_panel.visible = false
+		cachedChanceCalculations = {}
 	if attacker:
 		attacker_info_panel.visible = true
 		attacker_name.text = attacker.characterAlias
@@ -73,13 +77,14 @@ func _on_hud_state_change(attacker : BaseCharacter, defender : BaseCharacter, at
 		defender_health_bar.value = ceil((defender.currentHealth as float / defender.maxHealth) * 100)
 		defender_cover_icon.visible = true if defender.hasCover > 0 else false
 		var chanceToHitDefender = 0
-		if cachedChanceCalculations.has(defender.name):
+		var ap = attacker.currentActionPoints
+		if cachedChanceCalculations.has(defender.name + attackType + str(ap)):
 			print("found cached chance calc for " + defender.name)
-			chanceToHitDefender = cachedChanceCalculations[defender.name]
+			chanceToHitDefender = cachedChanceCalculations[defender.name + attackType + str(ap)]
 		else:
 			print("creating cached chance calc for " + defender.name)
 			chanceToHitDefender = CalculateHitChance(attacker, defender, attackType)
-			cachedChanceCalculations[defender.name] = chanceToHitDefender
+			cachedChanceCalculations[defender.name + attackType + str(ap)] = chanceToHitDefender
 		defender_chance.text = str(chanceToHitDefender) + "%"
 	else:
 		defender_info_panel.visible = false

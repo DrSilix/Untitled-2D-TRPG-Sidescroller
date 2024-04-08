@@ -77,10 +77,11 @@ func BeginCombat():
 	game_manager.current_enemies = enemies
 	players = game_manager.current_players
 	for player in players:
-		player.main_status_bar.visible = true
+		#player.main_status_bar.visible = true
 		player.DisconnectFromMovableArea()
 	for enemy in enemies:
-		enemy.main_status_bar.visible = true
+		#enemy.main_status_bar.visible = true
+		pass
 	CombatRound()
 
 ## Initializes and kicks off a single combat round which iterates through all
