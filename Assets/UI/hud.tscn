@@ -163,6 +163,7 @@ color = Color(0.301961, 0.301961, 0.301961, 1)
 
 [node name="CoverIcon" type="TextureRect" parent="AttackerInfoPanel"]
 modulate = Color(0.568627, 1, 0.494118, 1)
+layout_mode = 0
 offset_left = 95.8823
 offset_top = -1.17647
 offset_right = 119.882
@@ -172,6 +173,7 @@ expand_mode = 1
 
 [node name="AimIcon" type="TextureRect" parent="AttackerInfoPanel"]
 self_modulate = Color(0.568627, 1, 0.494118, 1)
+layout_mode = 0
 offset_left = 115.294
 offset_top = -1.17647
 offset_right = 139.294
@@ -182,6 +184,7 @@ expand_mode = 1
 [node name="AmmoIcon" type="TextureRect" parent="AttackerInfoPanel"]
 self_modulate = Color(0.054902, 0.0431373, 0, 1)
 clip_children = 2
+layout_mode = 0
 offset_left = 132.353
 offset_top = -1.17647
 offset_right = 156.353
@@ -221,6 +224,7 @@ offset_bottom = 71.1765
 mouse_filter = 1
 
 [node name="Panel4" type="Panel" parent="AttackerInfoPanel/Stats"]
+layout_mode = 0
 offset_top = -4.70588
 offset_right = 180.0
 offset_bottom = 61.9291
@@ -481,6 +485,7 @@ color = Color(0.301961, 0.301961, 0.301961, 1)
 
 [node name="CoverIcon" type="TextureRect" parent="DefenderInfoPanel"]
 modulate = Color(0.568627, 1, 0.494118, 1)
+layout_mode = 0
 offset_left = 66.4706
 offset_top = -1.176
 offset_right = 90.4706
@@ -491,6 +496,7 @@ expand_mode = 1
 [node name="AimIcon" type="TextureRect" parent="DefenderInfoPanel"]
 visible = false
 self_modulate = Color(0.568627, 1, 0.494118, 1)
+layout_mode = 0
 offset_left = 118.235
 offset_top = -1.17647
 offset_right = 142.235
@@ -502,6 +508,7 @@ expand_mode = 1
 visible = false
 self_modulate = Color(0.054902, 0.0431373, 0, 1)
 clip_children = 2
+layout_mode = 0
 offset_left = 140.588
 offset_top = -1.17647
 offset_right = 164.588
@@ -532,6 +539,7 @@ offset_right = 40.0
 offset_bottom = 71.1765
 
 [node name="Panel4" type="Panel" parent="DefenderInfoPanel/stats"]
+layout_mode = 0
 offset_top = -4.70588
 offset_right = 180.0
 offset_bottom = 61.9291
