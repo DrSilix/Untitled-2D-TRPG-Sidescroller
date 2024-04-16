@@ -3,6 +3,7 @@ extends CharacterBody2D
 ## Base class which contains all common character parameters and functionality
 signal action_finished
 signal move_completed
+signal character_stats_changed
 #region variables
 @export var characterAlias : String = "unassigned"
 @export var moveSpeed : int = 6
@@ -262,6 +263,7 @@ func PassAction():
 func TakeCover():
 	hasCover += 1
 	if hasCover > 1: return
+	character_stats_changed.emit()
 	print("Taking cover")
 	# TODO: make it so cover icon only shows while in combat
 	cover_icon.visible = true
@@ -278,6 +280,7 @@ func TakeCover():
 func LeaveCover():
 	hasCover -= 1
 	if hasCover > 0: return
+	character_stats_changed.emit()
 	print("Leaving cover")
 	cover_icon.visible = false
 	chanceToHitModifier = 0
@@ -409,6 +412,7 @@ func GetToResistDiceCount() -> int:
 func TakeDamage(damage: int):
 	currentHealth -= damage
 	activeState = HURT if currentHealth > 0 else DEATH
+	character_stats_changed.emit()
 #endregion
 
 ## Updates the status panel listed above the characters head with current information
@@ -490,6 +494,7 @@ func RemoveFromCombatList():
 ## completes the action and turn of the dead character
 ## this is exclusively called from within the Death animation player
 func Die():
+	character_stats_changed.emit()
 	action_finished.emit()
 	print(self.name, " died")
 

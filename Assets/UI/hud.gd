@@ -23,6 +23,9 @@ extends Control
 @onready var defender_cover_icon: TextureRect = $DefenderInfoPanel/CoverIcon
 
 var cachedChanceCalculations : Dictionary
+var _currentAttacker : BaseCharacter
+var _currentDefender : BaseCharacter
+var _currentAttackType : String
 
 func _ready():
 	player_choose_action.connect("hud_combat_state_changed", _on_hud_state_change)
@@ -31,63 +34,78 @@ func ResetHUD():
 	_on_hud_state_change(null, null, "")
 	
 func _on_hud_state_change(attacker : BaseCharacter, defender : BaseCharacter, attackType : String):
+	if _currentAttacker: _currentAttacker.disconnect("character_stats_changed", UpdateAttackerInfo)
+	if _currentDefender: _currentDefender.disconnect("character_stats_changed", UpdateDefenderInfo)
+	_currentAttacker = attacker
+	_currentDefender = defender
+	_currentAttackType = attackType
 	if not attacker and not defender:
 		attacker_info_panel.visible = false
 		defender_info_panel.visible = false
 		cachedChanceCalculations = {}
 	if attacker:
-		attacker_info_panel.visible = true
-		attacker_name.text = attacker.characterAlias
-		attacker_health_bar.value = ceil((attacker.currentHealth as float / attacker.maxHealth) * 100)
-		attacker_ap_bar.value = attacker.currentActionPoints
-		attacker_cover_icon.visible = true if attacker.hasCover > 0 else false
-		attacker_aim_icon.visible = true if attacker.aimModifier != 0 else false
-		var goodColor = Color("#91ff7e")
-		var badColor = Color("#d31f41")
-		attacker_aim_icon.self_modulate = goodColor if attacker.aimModifier > 0 else badColor
-		attacker_ammo_bar.value = ceil((attacker.currentWeaponAmmo as float / attacker.maxWeaponAmmo) * 100)
-		attacker_data_1.text = "\n" + str(attacker.weaponSkill) + "\n" \
-				+ str(attacker.weaponDamage) + "\n" \
-				+ str(attacker.weaponAccuracy)
-		attacker_data_2.text = str(attacker.currentHealth) + "/" + str(attacker.maxHealth) + "\n" \
-				+ str(attacker.getHealthPenalty()) + "\n" \
-				+ str(attacker.armor) + "\n" \
-				+ str(attacker.moveSpeed)
-		var coverText = "YES" if attacker.hasCover > 0 else "NO"
-		var aimPlus = "+" if attacker.aimModifier > 0 else ""
-		attacker_data_3.text = coverText + "\n" \
-				+ aimPlus + str(attacker.aimModifier) + "\n" \
-				+ str(attacker.currentWeaponAmmo) + "/" + str(attacker.maxWeaponAmmo) + "\n" \
-				+ str(attacker.grenadeAmmo)
+		_currentAttacker.connect("character_stats_changed", UpdateAttackerInfo)
+		UpdateAttackerInfo()
 	else:
 		attacker_info_panel.visible = false
 		defender_info_panel.visible = false
 		return
 	if defender:
-		defender_info_panel.visible = true
-		defender_name.text = defender.characterAlias
-		var distancePenalty = attacker.CalculateDistancePenalty(defender)
-		defender_range.text = (
-				"SHORT" if distancePenalty == 0
-				else "MEDIUM" if distancePenalty == -2
-				else "LONG" if distancePenalty == -4
-				else "EXTRM"
-		)
-		defender_range.text += "(" + str(distancePenalty) + ")"
-		defender_health_bar.value = ceil((defender.currentHealth as float / defender.maxHealth) * 100)
-		defender_cover_icon.visible = true if defender.hasCover > 0 else false
-		var chanceToHitDefender = 0
-		var ap = attacker.currentActionPoints
-		if cachedChanceCalculations.has(defender.name + attackType + str(ap)):
-			print("found cached chance calc for " + defender.name)
-			chanceToHitDefender = cachedChanceCalculations[defender.name + attackType + str(ap)]
-		else:
-			print("creating cached chance calc for " + defender.name)
-			chanceToHitDefender = CalculateHitChance(attacker, defender, attackType)
-			cachedChanceCalculations[defender.name + attackType + str(ap)] = chanceToHitDefender
-		defender_chance.text = str(chanceToHitDefender) + "%"
+		_currentDefender.connect("character_stats_changed", UpdateDefenderInfo)
+		UpdateDefenderInfo()
 	else:
 		defender_info_panel.visible = false
+
+func UpdateAttackerInfo():
+	print("attacker HUD updated")
+	attacker_info_panel.visible = true
+	attacker_name.text = _currentAttacker.characterAlias
+	attacker_health_bar.value = ceil((_currentAttacker.currentHealth as float / _currentAttacker.maxHealth) * 100)
+	attacker_ap_bar.value = _currentAttacker.currentActionPoints
+	attacker_cover_icon.visible = true if _currentAttacker.hasCover > 0 else false
+	attacker_aim_icon.visible = true if _currentAttacker.aimModifier != 0 else false
+	var goodColor = Color("#91ff7e")
+	var badColor = Color("#d31f41")
+	attacker_aim_icon.self_modulate = goodColor if _currentAttacker.aimModifier > 0 else badColor
+	attacker_ammo_bar.value = ceil((_currentAttacker.currentWeaponAmmo as float / _currentAttacker.maxWeaponAmmo) * 100)
+	attacker_data_1.text = "\n" + str(_currentAttacker.weaponSkill) + "\n" \
+			+ str(_currentAttacker.weaponDamage) + "\n" \
+			+ str(_currentAttacker.weaponAccuracy)
+	attacker_data_2.text = str(_currentAttacker.currentHealth) + "/" + str(_currentAttacker.maxHealth) + "\n" \
+			+ str(_currentAttacker.getHealthPenalty()) + "\n" \
+			+ str(_currentAttacker.armor) + "\n" \
+			+ str(_currentAttacker.moveSpeed)
+	var coverText = "YES" if _currentAttacker.hasCover > 0 else "NO"
+	var aimPlus = "+" if _currentAttacker.aimModifier > 0 else ""
+	attacker_data_3.text = coverText + "\n" \
+			+ aimPlus + str(_currentAttacker.aimModifier) + "\n" \
+			+ str(_currentAttacker.currentWeaponAmmo) + "/" + str(_currentAttacker.maxWeaponAmmo) + "\n" \
+			+ str(_currentAttacker.grenadeAmmo)
+
+func UpdateDefenderInfo():
+	print("defender HUD updated")
+	defender_info_panel.visible = true
+	defender_name.text = _currentDefender.characterAlias
+	var distancePenalty = _currentAttacker.CalculateDistancePenalty(_currentDefender)
+	defender_range.text = (
+			"SHORT" if distancePenalty == 0
+			else "MEDIUM" if distancePenalty == -2
+			else "LONG" if distancePenalty == -4
+			else "EXTRM"
+	)
+	defender_range.text += "(" + str(distancePenalty) + ")"
+	defender_health_bar.value = ceil((_currentDefender.currentHealth as float / _currentDefender.maxHealth) * 100)
+	defender_cover_icon.visible = true if _currentDefender.hasCover > 0 else false
+	var chanceToHitDefender = 0
+	var ap = _currentAttacker.currentActionPoints
+	if cachedChanceCalculations.has(_currentDefender.name + _currentAttackType + str(ap)):
+		print("found cached chance calc for " + _currentDefender.name)
+		chanceToHitDefender = cachedChanceCalculations[_currentDefender.name + _currentAttackType + str(ap)]
+	else:
+		print("creating cached chance calc for " + _currentDefender.name)
+		chanceToHitDefender = CalculateHitChance(_currentAttacker, _currentDefender, _currentAttackType)
+		cachedChanceCalculations[_currentDefender.name + _currentAttackType + str(ap)] = chanceToHitDefender
+	defender_chance.text = str(chanceToHitDefender) + "%"
 
 func CalculateHitChance(attacker : BaseCharacter, defender : BaseCharacter, attackType : String) -> int:
 	var successCount = 0
